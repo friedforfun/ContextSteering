@@ -4,9 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System.Collections.Concurrent;
 using System.Linq;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+
 
 public class BaseContextSteering2D : MonoBehaviour
 {
@@ -73,10 +71,15 @@ public class BaseContextSteering2D : MonoBehaviour
     {
         ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
 
-        Parallel.ForEach(SteeringBehaviours, behaviour =>
+        /*Parallel.ForEach(SteeringBehaviours, behaviour =>
         {
             contextMaps.Add(behaviour.BuildContextMap());
-        });
+        });*/
+
+        foreach (SteeringBehaviour behaviour in SteeringBehaviours)
+        {
+            contextMaps.Add(behaviour.BuildContextMap());
+        }
         
         return mergeMaps(contextMaps);
     }
@@ -89,10 +92,15 @@ public class BaseContextSteering2D : MonoBehaviour
     {
         ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
 
-        Parallel.ForEach(SteeringMasks, behaviour =>
+        /*Parallel.ForEach(SteeringMasks, behaviour =>
         {
             contextMaps.Add(behaviour.BuildMaskMap());
-        });
+        });*/
+
+        foreach (SteeringMask mask in SteeringMasks)
+        {
+            contextMaps.Add(mask.BuildMaskMap());
+        }
 
         return mergeMaps(contextMaps);
     }
@@ -105,30 +113,19 @@ public class BaseContextSteering2D : MonoBehaviour
     private float[] mergeMaps(ConcurrentBag<float[]> maps)
     {
         float[] contextMap = new float[ContextMapResolution];
+        for (int i = 0; i < ContextMapResolution; i++)
+        {
+            contextMap[i] = 0f;
+        }
 
         foreach (float[] map in maps)
         {
-            contextMap.Zip(map, (x, y) => x + y);
+            var newMap = contextMap.Zip(map, (x, y) => x + y);
+            contextMap = newMap.ToArray();
         }
 
         return contextMap;
     }
 
 
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        Vector3 position = transform.position;
-        Vector3 direction = Vector3.forward;
-
-        for (int i = 0; i < ContextMapResolution; i++)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawRay(transform.position, direction);
-            direction = Quaternion.Euler(0f, resolutionAngle, 0) * direction;
-        }
-
-        Handles.DrawWireDisc(position, Vector3.up, DebugRadius);
-    }
-#endif
 }

@@ -35,7 +35,7 @@ public static class MapOperations
     }
 
     /// <summary>
-    /// Normalise context map between highest and lowext value in map
+    /// Normalise context map between 0 and 1
     /// </summary>
     /// <param name="contextMap"></param>
     /// <returns></returns>
@@ -47,6 +47,42 @@ public static class MapOperations
         for (int i = 0; i < contextMap.Length; i++)
         {
             normMap[i] = (contextMap[i] - minVal) / (maxVal - minVal);
+        }
+        return normMap;
+    }
+
+
+
+    /// <summary>
+    /// Normalise context map between 0 and max
+    /// </summary>
+    /// <param name="contextMap"></param>
+    /// <returns></returns>
+    public static float[] NormaliseMap(float[] contextMap, float max)
+    {
+        float[] normMap = new float[contextMap.Length];
+        float minVal = contextMap.Min();
+        float maxVal = contextMap.Max();
+        for (int i = 0; i < contextMap.Length; i++)
+        {
+            normMap[i] = ((contextMap[i] - minVal) / (maxVal - minVal)) * max;
+        }
+        return normMap;
+    }
+
+    /// <summary>
+    /// Normalise context map between min and max
+    /// </summary>
+    /// <param name="contextMap"></param>
+    /// <returns></returns>
+    public static float[] NormaliseMap(float[] contextMap, float min, float max)
+    {
+        float[] normMap = new float[contextMap.Length];
+        float minVal = contextMap.Min();
+        float maxVal = contextMap.Max();
+        for (int i = 0; i < contextMap.Length; i++)
+        {
+            normMap[i] = ((contextMap[i] - minVal) / (maxVal - minVal)) * max + min;
         }
         return normMap;
     }
