@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DotToTagAttractor : SteeringBehaviour
+public class DotToTagRepulsor : SteeringBehaviour
 {
-    [Header("Attractor Properties")]
+    [Header("Repulsor Properties")]
     [SerializeField] float weight = 1f;
-    [SerializeField] string[] AttractTags;
+    [SerializeField] string[] RepulseTags;
 
 
     public override float[] BuildContextMap()
     {
         steeringMap = new float[resolution];
-        foreach (string tag in AttractTags)
+        foreach (string tag in RepulseTags)
         {
             foreach (GameObject target in GameObject.FindGameObjectsWithTag(tag))
             {
@@ -30,6 +30,7 @@ public class DotToTagAttractor : SteeringBehaviour
                 }
             }
         }
+        steeringMap = MapOperations.ReverseMap(steeringMap);
         return steeringMap;
     }
 

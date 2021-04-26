@@ -16,9 +16,6 @@ public class BaseContextSteering2D : MonoBehaviour
     protected ICombineContext ContextCombinator; // strategy for combining steering and mask maps
     protected IDecideDirection DirectionDecider; // strategy for selecting the direction to move in based on the context map
 
-    [Header("Debug")]
-    [SerializeField] private float DebugRadius;
-
     private float resolutionAngle;
     private float[] contextMap;
     private Vector3 lastVector;
