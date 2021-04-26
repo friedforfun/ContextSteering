@@ -11,7 +11,8 @@ using UnityEditor;
 public class BaseContextSteering2D : MonoBehaviour
 {
     [Header("Behaviours")]
-    public int ContextMapResolution = 8; // Number of directions the context map represents
+    [Range(4, 32)]
+    public int ContextMapResolution = 12; // Number of directions the context map represents
     public SteeringBehaviour[] SteeringBehaviours; // Attractor and Repulsor strategies
     public SteeringMask[] SteeringMasks; // Mask strategies
     protected ICombineContext ContextCombinator; // strategy for combining steering and mask maps
@@ -31,7 +32,7 @@ public class BaseContextSteering2D : MonoBehaviour
     public Vector3 MoveDirection()
     {
         contextMap = ContextCombinator.CombineContext(buildSteeringBehaviours(), buildSteeringMasks());
-        lastVector = DirectionDecider.GetDirection(contextMap, resolutionAngle, lastVector);
+        lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
         return lastVector.normalized;
     }
 
@@ -43,7 +44,7 @@ public class BaseContextSteering2D : MonoBehaviour
     public Vector3 MoveVector()
     {
         contextMap = ContextCombinator.CombineContext(buildSteeringBehaviours(), buildSteeringMasks());
-        lastVector = DirectionDecider.GetDirection(contextMap, resolutionAngle, lastVector);
+        lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
         return lastVector;
     }
 

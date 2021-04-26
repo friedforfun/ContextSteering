@@ -9,6 +9,14 @@ public class BasicContextCombinator : ICombineContext
 
     public float[] CombineContext(float[] steeringMap, float[] maskMap)
     {
+        for (int i = 0; i < maskMap.Length; i++)
+        {
+            if (maskMap[i] <= 0f)
+            {
+                maskMap[i] = 0f;
+            }
+        }
+
         float[] contextMap = new float[steeringMap.Length];
         float lowestDanger = maskMap.Min();
         for (int i = 0; i < maskMap.Length; i++)

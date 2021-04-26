@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class BasicDirectionPicker : IDecideDirection
 {
-    public Vector3 GetDirection(float[] contextMap, float resolutionAngle, Vector3 lastVector)
+    public Vector3 GetDirection(float[] contextMap, Vector3 lastVector)
     {
+        float resolutionAngle = 360 / (float)contextMap.Length;
+
         float maxValue = 0f;
         int maxIndex = 0;
         for (int i = 0; i < contextMap.Length; i++)
