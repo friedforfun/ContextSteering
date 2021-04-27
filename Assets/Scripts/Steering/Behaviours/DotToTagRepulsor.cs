@@ -16,7 +16,7 @@ public class DotToTagRepulsor : SteeringBehaviour
         {
             foreach (GameObject target in GameObject.FindGameObjectsWithTag(tag))
             {
-                Vector3 targetVector = VectorToTarget(gameObject, target);
+                Vector3 targetVector = MapOperations.VectorToTarget(gameObject, target);
                 float distance = targetVector.magnitude;
                 if (distance < Range)
                 {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5963115849462208840}
   - component: {fileID: 3141855088961976342}
   - component: {fileID: 8808136449837741945}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Low Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,6 +310,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}

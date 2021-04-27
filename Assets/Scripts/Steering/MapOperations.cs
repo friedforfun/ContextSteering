@@ -1,7 +1,31 @@
 using System.Linq;
+using UnityEngine;
 
 public static class MapOperations
 {
+
+    /// <summary>
+    /// Returns vector representing direction and magnitute from self to the target
+    /// </summary>
+    /// <param name="self"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public static Vector3 VectorToTarget(GameObject self, GameObject target)
+    {
+        return target.transform.position - self.transform.position;
+    }
+
+    /// <summary>
+    /// Returns vector representing direction and magnitute from self to the target
+    /// </summary>
+    /// <param name="self"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public static Vector3 VectorToTarget(Vector3 self, Vector3 target)
+    {
+        return target - self;
+    }
+
     /// <summary>
     /// Reverse a context maps magnitudes, so it points in the opposite directions as input
     /// </summary>

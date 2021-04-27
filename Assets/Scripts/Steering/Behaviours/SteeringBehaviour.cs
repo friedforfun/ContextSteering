@@ -6,13 +6,13 @@ using UnityEditor;
 
 public abstract class SteeringBehaviour: MonoBehaviour
 {
-    [Space(1, order = 0)]
+
     [SerializeField] protected float Range;
     protected int resolution { get; private set; } // The number of directions we compute weights for.
     protected float[] steeringMap = null; // The map of weights, each element represents our degree of interest in the direction that element corresponds to.
     protected float resolutionAngle { get; private set; } // Each point is seperated by a some degrees rotation (360/steeringMap.Length)
 
-    [Header("Debug", order = 99)]
+    [Header("Debug")]
     [SerializeField] private bool ShowDebug = false;
     [SerializeField] private float MapSize = 2f;
     [SerializeField] private Color DebugColor = Color.green;
@@ -33,17 +33,6 @@ public abstract class SteeringBehaviour: MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public abstract float[] BuildContextMap();
-
-    /// <summary>
-    /// Returns vector representing direction and magnitute from self to the target
-    /// </summary>
-    /// <param name="self"></param>
-    /// <param name="target"></param>
-    /// <returns></returns>
-    public static Vector3 VectorToTarget(GameObject self, GameObject target)
-    {
-        return target.transform.position - self.transform.position;
-    }
 
 
 #if UNITY_EDITOR
