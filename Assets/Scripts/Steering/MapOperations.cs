@@ -106,7 +106,7 @@ public static class MapOperations
         float maxVal = contextMap.Max();
         for (int i = 0; i < contextMap.Length; i++)
         {
-            normMap[i] = ((contextMap[i] - minVal) / (maxVal - minVal)) * max + min;
+            normMap[i] = ((contextMap[i] - minVal) / (maxVal - minVal)) * (max-min) + min;
         }
         return normMap;
     }
