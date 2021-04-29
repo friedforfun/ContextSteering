@@ -10,9 +10,13 @@ public abstract class SteeringMask : MonoBehaviour
     protected float[] maskMap; // The map of weights, each element represents our degree of interest in the direction that element corresponds to.
     protected float resolutionAngle; // Each point is seperated by a some degrees rotation (360/contextMap.Length)
 
+
     [Header("Debug")]
     [SerializeField] private bool ShowDebug = false;
+    
+    //[ConditionalHide("ShowDebug", true)]
     [SerializeField] private float MapSize = 2f;
+    //[ConditionalHide("ShowDebug", true)]
     [SerializeField] private Color DebugColor = Color.red;
 
     /// <summary>
