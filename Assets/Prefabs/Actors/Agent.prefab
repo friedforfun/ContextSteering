@@ -9,7 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7791424202774911591}
+  - component: {fileID: 2008178078}
+  - component: {fileID: 2008178075}
   - component: {fileID: 3009988206055542063}
+  - component: {fileID: 2008178072}
+  - component: {fileID: 2008178074}
+  - component: {fileID: 4399432791447258308}
+  - component: {fileID: 2008178076}
+  - component: {fileID: 2008178077}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Agent
@@ -32,6 +39,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &2008178078
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81881418840601777}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 0
+  m_StepOffset: 0
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2008178075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81881418840601777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7abfbb6606b8d63419d2ee7673a85a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steer: {fileID: 3009988206055542063}
+  control: {fileID: 2008178078}
+  Speed: 5
 --- !u!114 &3009988206055542063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,10 +84,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1080b9a172c99e4b99752b96d798096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ContextMapResolution: 0
-  SteeringBehaviours: []
-  SteeringMasks: []
-  DebugRadius: 0
+  ContextMapResolution: 24
+  SteeringBehaviours:
+  - {fileID: 2008178072}
+  - {fileID: 2008178074}
+  - {fileID: 2008178074}
+  SteeringMasks:
+  - {fileID: 2008178077}
+  - {fileID: 2008178076}
+--- !u!114 &2008178072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81881418840601777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7f46a1b396452488bb135aefb948cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 25
+  ShowDebug: 0
+  MapSize: 2
+  DebugColor: {r: 0, g: 1, b: 0, a: 1}
+  weight: 1
+  AttractTags:
+  - Target
+--- !u!114 &2008178074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81881418840601777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f33c8bbf879a4485d5029f2c4e9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 4
+  ShowDebug: 1
+  MapSize: 2
+  DebugColor: {r: 1, g: 0.5795523, b: 0, a: 1}
+  weight: 0.8
+  RepulseTags:
+  - Projectile
+--- !u!114 &4399432791447258308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81881418840601777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f33c8bbf879a4485d5029f2c4e9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 1.3
+  ShowDebug: 0
+  MapSize: 2
+  DebugColor: {r: 1, g: 0.4273501, b: 0, a: 1}
+  weight: 4
+  RepulseTags: []
+--- !u!114 &2008178076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81881418840601777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c51ca3be47667045b7d014859c569ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 2.5
+  ShowDebug: 1
+  MapSize: 1.5
+  DebugColor: {r: 0.85471106, g: 0, b: 1, a: 1}
+  Tags:
+  - Projectile
+  weight: 1
+--- !u!114 &2008178077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81881418840601777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2291939acf5fa74391f0c2e1b9976f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 2
+  ShowDebug: 1
+  MapSize: 2
+  DebugColor: {r: 1, g: 0, b: 0, a: 1}
+  LayersForSteeringMask:
+    serializedVersion: 2
+    m_Bits: 64
+  weight: 0.5
 --- !u!1 &740507983514282643
 GameObject:
   m_ObjectHideFlags: 0
