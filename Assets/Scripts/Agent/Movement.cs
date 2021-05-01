@@ -8,13 +8,19 @@ using UnityEditor;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private BaseContextSteering2D steer;
-
+    [SerializeField] private CharacterController control;
+    [Range(0.1f, 20f)]
+    [SerializeField] private float Speed = 1f;
     private Vector3 LastDirection = Vector3.zero;
 
     void Update()
     {
         LastDirection = steer.MoveDirection();
+        control.SimpleMove(LastDirection * Speed);
+        transform.rotation = Quaternion.LookRotation(LastDirection);
     }
+
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
