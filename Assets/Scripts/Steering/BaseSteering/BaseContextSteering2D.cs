@@ -5,7 +5,9 @@ using UnityEngine;
 using System.Collections.Concurrent;
 using System.Linq;
 
-
+/// <summary>
+/// Base Class for context steering in 2D
+/// </summary>
 public class BaseContextSteering2D : MonoBehaviour
 {
     [Header("Behaviours")]
@@ -44,7 +46,7 @@ public class BaseContextSteering2D : MonoBehaviour
     }
 
 
-    private void Start()
+    protected void Awake()
     {
         resolutionAngle = 360 / (float)ContextMapResolution;
 
