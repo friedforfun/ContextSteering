@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2008178075}
   - component: {fileID: 3009988206055542063}
   - component: {fileID: 2008178072}
-  - component: {fileID: 2008178074}
+  - component: {fileID: 1745444774648812679}
   - component: {fileID: 4399432791447258308}
   - component: {fileID: 2008178076}
   - component: {fileID: 2008178077}
@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steer: {fileID: 3009988206055542063}
   control: {fileID: 2008178078}
+  childRenderer: {fileID: 0}
   Speed: 5
 --- !u!114 &3009988206055542063
 MonoBehaviour:
@@ -87,8 +88,8 @@ MonoBehaviour:
   ContextMapResolution: 24
   SteeringBehaviours:
   - {fileID: 2008178072}
-  - {fileID: 2008178074}
-  - {fileID: 2008178074}
+  - {fileID: 0}
+  - {fileID: 0}
   SteeringMasks:
   - {fileID: 2008178077}
   - {fileID: 2008178076}
@@ -111,7 +112,7 @@ MonoBehaviour:
   weight: 1
   AttractTags:
   - Target
---- !u!114 &2008178074
+--- !u!114 &1745444774648812679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,15 +121,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 81881418840601777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7f33c8bbf879a4485d5029f2c4e9b9, type: 3}
+  m_Script: {fileID: 11500000, guid: a1b8c8cfcafa3e846b9e1ff4cf8b3d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 4
-  ShowDebug: 1
+  ShowDebug: 0
   MapSize: 2
-  DebugColor: {r: 1, g: 0.5795523, b: 0, a: 1}
-  weight: 0.8
-  RepulseTags:
+  DebugColor: {r: 1, g: 0.707537, b: 0, a: 1}
+  direction: 1
+  InvertScale: 1
+  weight: 1
+  Tags:
   - Projectile
 --- !u!114 &4399432791447258308
 MonoBehaviour:

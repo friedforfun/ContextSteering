@@ -1,6 +1,10 @@
 using System.Linq;
 using UnityEngine;
 
+
+/// <summary>
+/// Convienience operations for context maps
+/// </summary>
 public static class MapOperations
 {
 
@@ -10,9 +14,9 @@ public static class MapOperations
     /// <param name="self"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    public static Vector3 VectorToTarget(GameObject self, GameObject target)
+    public static Vector3 VectorToTarget(GameObject self, GameObject other)
     {
-        return target.transform.position - self.transform.position;
+        return other.transform.position - self.transform.position;
     }
 
     /// <summary>
@@ -21,9 +25,9 @@ public static class MapOperations
     /// <param name="self"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    public static Vector3 VectorToTarget(Vector3 self, Vector3 target)
+    public static Vector3 VectorToTarget(Vector3 self, Vector3 other)
     {
-        return target - self;
+        return other - self;
     }
 
     /// <summary>
