@@ -9,17 +9,45 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private BaseContextSteering2D steer;
     [SerializeField] private CharacterController control;
+    [SerializeField] private GameObject LookTarget;
+    [SerializeField] private Renderer childRenderer;
+    
     [Range(0.1f, 20f)]
     [SerializeField] private float Speed = 1f;
     private Vector3 LastDirection = Vector3.zero;
+
+    private Color baseSpecColour;
+
+    private void Start()
+    {
+        baseSpecColour = childRenderer.material.GetColor("_SpecColor");
+    }
 
     void Update()
     {
         LastDirection = steer.MoveDirection();
         control.SimpleMove(LastDirection * Speed);
-        transform.rotation = Quaternion.LookRotation(LastDirection);
+        
+        transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, LookTarget).normalized);
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Contact");
+        childRenderer.material.SetColor("_SpecColor", Color.red);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        StartCoroutine(resetColour());
+    }
+
+    IEnumerator resetColour()
+    {
+        yield return new WaitForSeconds(0.5f);
+        childRenderer.material.SetColor("_SpecColor", baseSpecColour);
+    }
 
 
 #if UNITY_EDITOR
