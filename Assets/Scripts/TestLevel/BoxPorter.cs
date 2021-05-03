@@ -15,7 +15,7 @@ public class BoxPorter : MonoBehaviour
             {
                 jumpIndex = 0;
             }
-            transform.position = jumpPoints[jumpIndex];
+            transform.localPosition = jumpPoints[jumpIndex];
             jumpIndex++;
         }
     }

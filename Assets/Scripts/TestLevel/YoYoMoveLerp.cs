@@ -15,6 +15,6 @@ public class YoYoMoveLerp : MonoBehaviour
     void Update()
     {
         lerpVal = 0.5f * (1 + Mathf.Sin(TAU * frequency * Time.time));
-        transform.position = Vector3.Lerp(StartPos, EndPos, lerpVal);
+        transform.localPosition = Vector3.Lerp(StartPos, EndPos, lerpVal);
     }
 }
