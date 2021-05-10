@@ -25,9 +25,13 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        // Get the movement direction from the steering module
         LastDirection = steer.MoveDirection();
+
+        // Apply movement based on direction obtained
         control.SimpleMove(LastDirection * Speed);
         
+        // Look towards target
         transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, LookTarget).normalized);
     }
 

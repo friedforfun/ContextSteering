@@ -45,7 +45,7 @@ public class BaseContextSteering2D : MonoBehaviour
         return lastVector;
     }
 
-
+    //! TODO: Refactor awake out, ideally we want to update the context maps if the resolution is changed at runtime
     protected void Awake()
     {
         resolutionAngle = 360 / (float)ContextMapResolution;
@@ -91,6 +91,7 @@ public class BaseContextSteering2D : MonoBehaviour
     {
         ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
 
+        // Cant use Parallel foreach with FindGameObjectsWithTag method
         /*Parallel.ForEach(SteeringMasks, behaviour =>
         {
             contextMaps.Add(behaviour.BuildMaskMap());

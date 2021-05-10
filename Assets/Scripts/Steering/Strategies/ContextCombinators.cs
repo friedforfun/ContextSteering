@@ -11,7 +11,7 @@ public class BasicContextCombinator : ICombineContext
     {
         for (int i = 0; i < maskMap.Length; i++)
         {
-            if (maskMap[i] <= 0f)
+            if (maskMap[i] < 0f)
             {
                 maskMap[i] = 0f;
             }
