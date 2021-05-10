@@ -20,15 +20,15 @@ public class DotToTagScaledWeight : SteeringBehaviour
     [SerializeField] string[] Tags;
 
     private float invertScalef { get { return InvertScale ? 1f : 0f; } }
+
     public override float[] BuildContextMap()
     {
         steeringMap = new float[resolution];
         foreach (string tag in Tags)
         {
+            // Inefficient - should cache tagged gameobjects
             foreach (GameObject target in GameObject.FindGameObjectsWithTag(tag))
             {
-
-                
                 Vector3 targetVector = MapOperations.VectorToTarget(gameObject, target);
                 float distance = targetVector.magnitude;
                 if (distance <= Range)
@@ -37,7 +37,7 @@ public class DotToTagScaledWeight : SteeringBehaviour
                     Vector3 mapVector = Vector3.forward;
                     for (int i = 0; i < steeringMap.Length; i++)
                     {
-                        // 
+                        // Branchless scale inversion
                         steeringMap[i] += Vector3.Dot(mapVector, targetVector.normalized) * Mathf.Abs((invertScalef * 1f) - (distance / Range)) * weight;
                         mapVector = Quaternion.Euler(0f, resolutionAngle, 0f) * mapVector;
                     }
