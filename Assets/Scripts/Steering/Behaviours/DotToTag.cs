@@ -13,7 +13,7 @@ public class DotToTag : SteeringBehaviour
     public override float[] BuildContextMap()
     {
         steeringMap = new float[resolution];
-        foreach (string tag in AttractTags)
+        foreach (string tag in Tags)
         {
             // Inefficient - should cache tagged gameobjects
             foreach (GameObject target in GameObject.FindGameObjectsWithTag(tag))
