@@ -10,21 +10,26 @@ public class Movement : MonoBehaviour
     [SerializeField] private BaseContextSteering2D steer;
     [SerializeField] private CharacterController control;
     [SerializeField] private GameObject LookTarget;
+
+
     [SerializeField] private Renderer childRenderer;
-    
+    [SerializeField] private Material impactMaterial;
+    private Material baseMaterial;
+
     [Range(0.1f, 20f)]
     [SerializeField] private float Speed = 1f;
-    private Vector3 LastDirection = Vector3.zero;
+    private Vector3 LastDirection = Vector3.forward;
 
-    private Color baseSpecColour;
+
 
     private void Start()
     {
-        baseSpecColour = childRenderer.material.GetColor("_SpecColor");
+        baseMaterial = childRenderer.material;
     }
 
     void Update()
     {
+
         // Get the movement direction from the steering module
         LastDirection = steer.MoveDirection();
 
@@ -39,7 +44,7 @@ public class Movement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Contact");
-        childRenderer.material.SetColor("_SpecColor", Color.red);
+        childRenderer.material = impactMaterial;
     }
 
     private void OnCollisionExit(Collision collision)
@@ -50,7 +55,7 @@ public class Movement : MonoBehaviour
     IEnumerator resetColour()
     {
         yield return new WaitForSeconds(0.5f);
-        childRenderer.material.SetColor("_SpecColor", baseSpecColour);
+        childRenderer.material = baseMaterial;
     }
 
 
