@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7164804104516909935}
   - component: {fileID: 9118685762301980314}
   - component: {fileID: 9118685762301980313}
-  - component: {fileID: 9118685762301980312}
+  - component: {fileID: 1750535349094303781}
   - component: {fileID: 9118685762301980316}
   - component: {fileID: 242089566551712363}
   - component: {fileID: 2887461485239648358}
@@ -202,13 +202,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContextMapResolution: 12
   SteeringBehaviours:
-  - {fileID: 9118685762301980312}
+  - {fileID: 1750535349094303781}
   - {fileID: 2887461485239648358}
   - {fileID: 2887461485239648358}
   SteeringMasks:
   - {fileID: 9118685762301980316}
   - {fileID: 242089566551712363}
---- !u!114 &9118685762301980312
+--- !u!114 &1750535349094303781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778ab05956b92694e99c9df772a54c78, type: 3}
+  m_Script: {fileID: 11500000, guid: 100fd01ade97a4e44addc5273f528ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 21
@@ -228,6 +228,7 @@ MonoBehaviour:
   weight: 1
   Tags:
   - Target
+  TargetUpdateInterval: 0.5
 --- !u!114 &9118685762301980316
 MonoBehaviour:
   m_ObjectHideFlags: 0
