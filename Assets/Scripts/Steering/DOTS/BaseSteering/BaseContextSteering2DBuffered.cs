@@ -4,22 +4,28 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System.Collections.Concurrent;
 using System.Linq;
+using Unity.Collections;
 
 /// <summary>
 /// Base Class for context steering in 2D
 /// </summary>
-public class BaseContextSteering2D : MonoBehaviour
+public class BaseContextSteering2DBuffered : MonoBehaviour
 {
     [Header("Behaviours")]
     [Range(4, 32)]
     public int ContextMapResolution = 12; // Number of directions the context map represents
     public SteeringBehaviour[] SteeringBehaviours; // Attractor and Repulsor strategies
+    private IBehaviourJob[] SteeringBehaviourJobs; // Structs used for each 
+
     public SteeringMask[] SteeringMasks; // Mask strategies
+    //private IMaskJob[] SteeringMaskJobs;
+    
     protected ICombineContext ContextCombinator; // strategy for combining steering and mask maps
     protected IDecideDirection DirectionDecider; // strategy for selecting the direction to move in based on the context map
 
     private float resolutionAngle;
     private float[] contextMap;
+    private float[] nextContextMap;
     private Vector3 lastVector;
 
     /// <summary>
@@ -28,8 +34,6 @@ public class BaseContextSteering2D : MonoBehaviour
     /// <returns></returns>
     public Vector3 MoveDirection()
     {
-        contextMap = ContextCombinator.CombineContext(buildSteeringBehaviours(), buildSteeringMasks());
-        lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
         return lastVector.normalized;
     }
 
@@ -40,8 +44,6 @@ public class BaseContextSteering2D : MonoBehaviour
     /// <returns></returns>
     public Vector3 MoveVector()
     {
-        contextMap = ContextCombinator.CombineContext(buildSteeringBehaviours(), buildSteeringMasks());
-        lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
         return lastVector;
     }
 
@@ -61,7 +63,35 @@ public class BaseContextSteering2D : MonoBehaviour
         }
     }
 
-    
+    public ContextSteeringStruct CreateJob()
+    {
+
+
+        // this stuff needs to happen inside a job
+        contextMap = ContextCombinator.CombineContext(buildSteeringBehaviours(), buildSteeringMasks());
+        lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
+        // ------------------------------------------------
+
+        // access each steering behaviour and create job struct that will be added to a native array of jobs to be run by the steering scheduler
+        return new ContextSteeringStruct();
+    }
+
+
+    private void computeMap()
+    {
+
+
+        // swap once job is complete
+        swap();
+    }
+
+    private void swap()
+    {
+        float[] temp = contextMap;
+        contextMap = nextContextMap;
+        nextContextMap = temp;
+    }
+
     /// <summary>
     /// Builds all steering behaviours and sums each weight elementwise, to determine the most desirable direction to move in.
     /// </summary>
@@ -69,11 +99,6 @@ public class BaseContextSteering2D : MonoBehaviour
     private float[] buildSteeringBehaviours()
     {
         ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
-
-        /*Parallel.ForEach(SteeringBehaviours, behaviour =>
-        {
-            contextMaps.Add(behaviour.BuildContextMap());
-        });*/
 
         foreach (SteeringBehaviour behaviour in SteeringBehaviours)
         {
@@ -90,12 +115,6 @@ public class BaseContextSteering2D : MonoBehaviour
     private float[] buildSteeringMasks()
     {
         ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
-
-        // Cant use Parallel foreach with FindGameObjectsWithTag method
-        /*Parallel.ForEach(SteeringMasks, behaviour =>
-        {
-            contextMaps.Add(behaviour.BuildMaskMap());
-        });*/
 
         foreach (SteeringMask mask in SteeringMasks)
         {
@@ -127,5 +146,10 @@ public class BaseContextSteering2D : MonoBehaviour
         return contextMap;
     }
 
+
+}
+
+public struct ContextSteeringStruct
+{
 
 }

@@ -8,6 +8,8 @@ TagManager:
   - Agent
   - Projectile
   - Target1
+  - TargetPlate
+  - Floor
   layers:
   - Default
   - TransparentFX

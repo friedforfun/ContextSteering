@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-public class Movement : MonoBehaviour
+public class SwarmDemo : MonoBehaviour
 {
     [SerializeField] private BaseContextSteering2D steer;
     [SerializeField] private CharacterController control;
-    [SerializeField] private GameObject LookTarget;
+    [SerializeField] private GameObject target;
 
 
     [SerializeField] private Renderer childRenderer;
@@ -19,12 +16,12 @@ public class Movement : MonoBehaviour
     [Range(0.1f, 20f)]
     [SerializeField] private float Speed = 1f;
     private Vector3 LastDirection = Vector3.forward;
-
-
+    private bool blockCollision = true;
 
     private void Start()
     {
         baseMaterial = childRenderer.material;
+        StartCoroutine(collisionDelay());
     }
 
     void Update()
@@ -35,17 +32,24 @@ public class Movement : MonoBehaviour
 
         // Apply movement based on direction obtained
         control.SimpleMove(LastDirection * Speed);
-        
-        // Look towards target
-        transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, LookTarget).normalized);
+
+        if (target != null)
+            // Look towards target
+            transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, target).normalized);
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("Contact");
+        if (blockCollision)
+            return;
+
         if (collision.gameObject.tag != "Floor")
+        {
             childRenderer.material = impactMaterial;
+            //Debug.Log($"Collided with: {collision.gameObject.name}");
+        }
+
     }
 
     private void OnCollisionExit(Collision collision)
@@ -59,13 +63,11 @@ public class Movement : MonoBehaviour
         childRenderer.material = baseMaterial;
     }
 
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
+    IEnumerator collisionDelay()
     {
-
-        Handles.color = Color.magenta;
-        Handles.ArrowHandleCap(0, transform.position, Quaternion.LookRotation(LastDirection, Vector3.up), 2f, EventType.Repaint);
+        yield return new WaitForSeconds(0.5f);
+        blockCollision = false;
     }
-#endif
+
+
 }

@@ -107,15 +107,15 @@ GameObject:
   - component: {fileID: 9118685762301980295}
   - component: {fileID: 9118685762301980315}
   - component: {fileID: 7164804104516909935}
-  - component: {fileID: 9118685762301980314}
+  - component: {fileID: 4121207508804205930}
   - component: {fileID: 9118685762301980313}
   - component: {fileID: 9118685762301980316}
   - component: {fileID: 242089566551712363}
   - component: {fileID: 2887461485239648358}
   - component: {fileID: 1425279832}
-  - component: {fileID: 4705001545915806764}
+  - component: {fileID: 8152059374414848115}
   m_Layer: 0
-  m_Name: Agent
+  m_Name: AgentSwarm
   m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &9118685762301980314
+--- !u!114 &4121207508804205930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,15 +179,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ed9d22e1a0eceb478f3f243146f39ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b6bb475e27cb8b47bf2111b1e41573e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   steer: {fileID: 9118685762301980313}
   control: {fileID: 9118685762301980315}
-  LookTarget: {fileID: 0}
+  target: {fileID: 0}
   childRenderer: {fileID: 9118685761035116511}
   impactMaterial: {fileID: 2100000, guid: 5bd05608cc22ebe46a3c370361b74ec9, type: 2}
-  Speed: 9.1
+  Speed: 1
 --- !u!114 &9118685762301980313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContextMapResolution: 12
   SteeringBehaviours:
-  - {fileID: 0}
+  - {fileID: 8152059374414848115}
   - {fileID: 2887461485239648358}
   - {fileID: 2887461485239648358}
   SteeringMasks:
@@ -246,6 +246,7 @@ MonoBehaviour:
   DebugColor: {r: 0.3962264, g: 0.19624421, b: 0.19624421, a: 1}
   Tags:
   - Projectile
+  - Agent
   weight: 1
 --- !u!114 &2887461485239648358
 MonoBehaviour:
@@ -268,6 +269,7 @@ MonoBehaviour:
   weight: 2
   Tags:
   - Projectile
+  - Agent
 --- !u!114 &1425279832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +291,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   weight: 1
---- !u!114 &4705001545915806764
+--- !u!114 &8152059374414848115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,14 +300,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778ab05956b92694e99c9df772a54c78, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d6a8a09c0ed02f4c977c5eb4030b845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 21
+  Range: 40
   ShowDebug: 0
   MapSize: 2
   DebugColor: {r: 0, g: 1, b: 0, a: 1}
   direction: 0
   weight: 1
-  Tags:
-  - Target
+  positions: []
