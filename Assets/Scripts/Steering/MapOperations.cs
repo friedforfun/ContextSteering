@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 
 
@@ -60,6 +61,38 @@ public static class MapOperations
         }
 
         return reverseMap;
+    }
+
+    public static NativeArray<float> ReverseMap(NativeArray<float> contextMap)
+    {
+        int clen = contextMap.Length;
+        int half_clen = clen / 2;
+
+        NativeArray<float> reverseMap = new NativeArray<float>(contextMap.Length, Allocator.Temp);
+        for (int i = 0; i < contextMap.Length; i++)
+        {
+
+
+            if (i < half_clen)
+            {
+                reverseMap[i + (half_clen)] = contextMap[i];
+            }
+            else if (i == half_clen)
+            {
+                reverseMap[0] = contextMap[i];
+            }
+            else if (i > half_clen)
+            {
+                reverseMap[i - (half_clen)] = contextMap[i];
+            }
+        }
+
+        for (int i = 0; i < contextMap.Length; i++)
+        {
+            contextMap[i] = reverseMap[i];
+        }
+        reverseMap.Dispose();
+        return contextMap;
     }
 
     /// <summary>

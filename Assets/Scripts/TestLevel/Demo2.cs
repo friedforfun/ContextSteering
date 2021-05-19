@@ -9,5 +9,6 @@ public class Demo2 : MonoBehaviour
     private void Start()
     {
         spawner.Spawn();
+        FindObjectOfType<SteeringScheduler>().RepopulateSteerers();
     }
 }

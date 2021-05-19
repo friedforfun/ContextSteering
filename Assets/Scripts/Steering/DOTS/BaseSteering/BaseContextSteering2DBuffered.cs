@@ -14,11 +14,9 @@ public class BaseContextSteering2DBuffered : MonoBehaviour
     [Header("Behaviours")]
     [Range(4, 32)]
     public int ContextMapResolution = 12; // Number of directions the context map represents
-    public SteeringBehaviour[] SteeringBehaviours; // Attractor and Repulsor strategies
-    private IBehaviourJob[] SteeringBehaviourJobs; // Structs used for each 
-
+    public BufferedSteeringBehaviour[] SteeringBehaviours; // Attractor and Repulsor strategies
+   
     public SteeringMask[] SteeringMasks; // Mask strategies
-    //private IMaskJob[] SteeringMaskJobs;
     
     protected ICombineContext ContextCombinator; // strategy for combining steering and mask maps
     protected IDecideDirection DirectionDecider; // strategy for selecting the direction to move in based on the context map
@@ -52,7 +50,7 @@ public class BaseContextSteering2DBuffered : MonoBehaviour
     {
         resolutionAngle = 360 / (float)ContextMapResolution;
 
-        foreach (SteeringBehaviour behaviour in SteeringBehaviours)
+        foreach (BufferedSteeringBehaviour behaviour in SteeringBehaviours)
         {
             behaviour.InstantiateContextMap(ContextMapResolution);
         }
@@ -63,7 +61,43 @@ public class BaseContextSteering2DBuffered : MonoBehaviour
         }
     }
 
-    public ContextSteeringStruct CreateJob()
+
+    public void ScheduleJobs()
+    {
+        foreach (BufferedSteeringBehaviour b in SteeringBehaviours)
+        {
+            b.ScheduleJob();
+        }
+    }
+
+
+    public void CompleteJobs()
+    {
+        ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
+
+        foreach (BufferedSteeringBehaviour b in SteeringBehaviours)
+        {
+            b.CompleteJob();
+            // load each new context map into a collection, and then combine context
+            contextMaps.Add(b.GetContextMap());
+        }
+
+        float[] steeringMap = mergeMaps(contextMaps);
+
+        // do same as above for masks
+        //ConcurrentBag<float[]> maskMaps = new ConcurrentBag<float[]>();
+
+        float[] maskMap = buildSteeringMasks();//mergeMaps(maskMaps);
+
+        nextContextMap = ContextCombinator.CombineContext(steeringMap, maskMap);
+        swap();
+        lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
+
+        
+    }
+
+
+   /* public ContextSteeringStruct CreateJob()
     {
 
 
@@ -74,16 +108,8 @@ public class BaseContextSteering2DBuffered : MonoBehaviour
 
         // access each steering behaviour and create job struct that will be added to a native array of jobs to be run by the steering scheduler
         return new ContextSteeringStruct();
-    }
+    }*/
 
-
-    private void computeMap()
-    {
-
-
-        // swap once job is complete
-        swap();
-    }
 
     private void swap()
     {
@@ -100,9 +126,9 @@ public class BaseContextSteering2DBuffered : MonoBehaviour
     {
         ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
 
-        foreach (SteeringBehaviour behaviour in SteeringBehaviours)
+        foreach (BufferedSteeringBehaviour behaviour in SteeringBehaviours)
         {
-            contextMaps.Add(behaviour.BuildContextMap());
+            //contextMaps.Add(behaviour.BuildContextMap());
         }
         
         return mergeMaps(contextMaps);
@@ -146,10 +172,5 @@ public class BaseContextSteering2DBuffered : MonoBehaviour
         return contextMap;
     }
 
-
 }
 
-public struct ContextSteeringStruct
-{
-
-}
