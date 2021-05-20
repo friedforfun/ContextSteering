@@ -17,27 +17,38 @@ public class BufferedDotToTag : BufferedSteeringBehaviour
     private JobHandle jobHandle;
 
 
+    private void Awake()
+    {
+        nextMap = new NativeArray<float>(resolution, Allocator.Persistent);
+    }
+
+    private void OnDisable()
+    {
+        nextMap.Dispose();
+    }
+
     private Vector3[] getTargetVectors()
     {
         int oldLen = 0;
         Vector3[] targets = null;
         foreach (string tag in Tags)
         {
-            var y = GameObject.FindGameObjectsWithTag(tag);
+            Vector3[] tempTargets = TagRegistry.GetVector3sByTag(tag);
+
             if (targets == null)
             {
-                targets = new Vector3[y.Length];
+                targets = new Vector3[tempTargets.Length];
 
             }
             else
             {
                 oldLen = targets.Length;
-                Array.Resize(ref targets, targets.Length + y.Length);
+                Array.Resize(ref targets, targets.Length + tempTargets.Length);
             }
-            for (int i = oldLen; i < targets.Length; i++)
-            {
-                targets[i] = y[i - oldLen].transform.position;
-            }
+
+            // Copy new elements into the start of the space added by Array.Resize, or the start of the array if its empty
+            Array.Copy(tempTargets, 0, targets, oldLen, tempTargets.Length);
+
         }
         return targets;
     }
@@ -45,7 +56,7 @@ public class BufferedDotToTag : BufferedSteeringBehaviour
 
     public override void ScheduleJob()
     {
-        nextMap = new NativeArray<float>(resolution, Allocator.TempJob);
+        //nextMap = new NativeArray<float>(resolution, Allocator.TempJob);
         Vector3[] targetArr = getTargetVectors();
 
         targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.TempJob);
@@ -78,7 +89,7 @@ public class BufferedDotToTag : BufferedSteeringBehaviour
             next[i] = nextMap[i];
         }
 
-        nextMap.Dispose();
+
         targetPositions.Dispose();
 
 

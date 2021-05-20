@@ -11,6 +11,16 @@ public class YoYoMoveLerp : MonoBehaviour
     const float TAU = 2 * Mathf.PI;
     private float lerpVal;
 
+    private void Awake()
+    {
+        TagRegistry.Register(gameObject);
+    }
+
+
+    private void OnDisable()
+    {
+        TagRegistry.DeRegister(gameObject);
+    }
 
     void Update()
     {

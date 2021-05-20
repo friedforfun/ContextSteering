@@ -19,4 +19,16 @@ public class BoxPorter : MonoBehaviour
             jumpIndex++;
         }
     }
+
+    private void Awake()
+    {
+        TagRegistry.Register(gameObject);
+    }
+
+
+    private void OnDisable()
+    {
+        TagRegistry.DeRegister(gameObject);
+    }
+
 }

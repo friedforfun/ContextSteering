@@ -9,23 +9,16 @@ public class SwarmDemoBuffered : MonoBehaviour
     [SerializeField] private GameObject target;
 
 
-    [SerializeField] private Renderer childRenderer;
-    [SerializeField] private Material impactMaterial;
-    private Material baseMaterial;
-
     private SteeringScheduler steeringScheduler;
 
     [Range(0.1f, 20f)]
     [SerializeField] private float Speed = 1f;
     private Vector3 LastDirection = Vector3.forward;
-    private bool blockCollision = true;
+
 
     private void Start()
     {
         steeringScheduler = FindObjectOfType<SteeringScheduler>();
-
-        baseMaterial = childRenderer.material;
-        StartCoroutine(collisionDelay());
 
         steeringScheduler.duringContextUpdate += SchedulerUpdate;
     }
@@ -58,35 +51,7 @@ public class SwarmDemoBuffered : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (blockCollision)
-            return;
 
-        if (collision.gameObject.tag != "Floor")
-        {
-            childRenderer.material = impactMaterial;
-            //Debug.Log($"Collided with: {collision.gameObject.name}");
-        }
-
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        StartCoroutine(resetColour());
-    }
-
-    IEnumerator resetColour()
-    {
-        yield return new WaitForSeconds(0.5f);
-        childRenderer.material = baseMaterial;
-    }
-
-    IEnumerator collisionDelay()
-    {
-        yield return new WaitForSeconds(0.5f);
-        blockCollision = false;
-    }
 
 
 }
