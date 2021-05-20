@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 9118685762301980295}
   - component: {fileID: 9118685762301980315}
   - component: {fileID: 7164804104516909935}
+  - component: {fileID: 8435231929103940686}
   - component: {fileID: 9118685762301980314}
   - component: {fileID: 9118685762301980313}
   - component: {fileID: 9118685762301980316}
@@ -170,6 +171,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &8435231929103940686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9118685762301980294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67f176d49b2799428aefe80d1ac24bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childRenderer: {fileID: 9118685761035116511}
+  impactMaterial: {fileID: 2100000, guid: 5bd05608cc22ebe46a3c370361b74ec9, type: 2}
 --- !u!114 &9118685762301980314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,8 +200,6 @@ MonoBehaviour:
   steer: {fileID: 9118685762301980313}
   control: {fileID: 9118685762301980315}
   LookTarget: {fileID: 0}
-  childRenderer: {fileID: 9118685761035116511}
-  impactMaterial: {fileID: 2100000, guid: 5bd05608cc22ebe46a3c370361b74ec9, type: 2}
   Speed: 9.1
 --- !u!114 &9118685762301980313
 MonoBehaviour:
@@ -202,9 +215,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContextMapResolution: 12
   SteeringBehaviours:
-  - {fileID: 0}
+  - {fileID: 4705001545915806764}
   - {fileID: 2887461485239648358}
-  - {fileID: 2887461485239648358}
+  - {fileID: 1425279832}
   SteeringMasks:
   - {fileID: 9118685762301980316}
   - {fileID: 242089566551712363}

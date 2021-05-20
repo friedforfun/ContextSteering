@@ -1204,9 +1204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ea543b5fe63e54b80c54c9da24ee75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 360
-  spawnAreaSize: 4
-  minion: {fileID: 9118685762301980294, guid: 8c05ad1f106158945970d027a34c6695, type: 3}
+  spawnCount: 180
+  spawnAreaSize: 17
+  minion: {fileID: 9118685762301980294, guid: a651bc8e283804a4680f7a2636e6f585, type: 3}
   minionOffset: 2
 --- !u!43 &85708760
 Mesh:

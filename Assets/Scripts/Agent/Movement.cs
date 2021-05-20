@@ -11,21 +11,10 @@ public class Movement : MonoBehaviour
     [SerializeField] private CharacterController control;
     [SerializeField] private GameObject LookTarget;
 
-
-    [SerializeField] private Renderer childRenderer;
-    [SerializeField] private Material impactMaterial;
-    private Material baseMaterial;
-
     [Range(0.1f, 20f)]
     [SerializeField] private float Speed = 1f;
     private Vector3 LastDirection = Vector3.forward;
 
-
-
-    private void Start()
-    {
-        baseMaterial = childRenderer.material;
-    }
 
     void Update()
     {
@@ -40,24 +29,6 @@ public class Movement : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, LookTarget).normalized);
     }
 
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //Debug.Log("Contact");
-        if (collision.gameObject.tag != "Floor")
-            childRenderer.material = impactMaterial;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        StartCoroutine(resetColour());
-    }
-
-    IEnumerator resetColour()
-    {
-        yield return new WaitForSeconds(0.5f);
-        childRenderer.material = baseMaterial;
-    }
 
 
 #if UNITY_EDITOR
