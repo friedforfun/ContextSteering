@@ -10,7 +10,7 @@ public class BufferedDotToLayer : BufferedSteeringBehaviour
     [Header("Behaviour Properties")]
     [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
     [SerializeField] float Weight = 1f;
-    [SerializeField] string[] Tags;
+    [SerializeField] LayerMask Layers;
 
     private NativeArray<float> nextMap;
     private NativeArray<Vector3> targetPositions;
@@ -19,24 +19,16 @@ public class BufferedDotToLayer : BufferedSteeringBehaviour
 
     private Vector3[] getTargetVectors()
     {
-        int oldLen = 0;
-        Vector3[] targets = null;
-        foreach (string tag in Tags)
-        {
-            var y = GameObject.FindGameObjectsWithTag(tag);
-            if (targets == null)
-            {
-                targets = new Vector3[y.Length];
 
-            }
-            else
+        Vector3[] targets = null;
+
+        Collider[] checkLayers = Physics.OverlapSphere(transform.position, Range, Layers);
+        if (checkLayers != null)
+        {
+            targets = new Vector3[checkLayers.Length];
+            for (int i = 0; i < checkLayers.Length; i++)
             {
-                oldLen = targets.Length;
-                Array.Resize(ref targets, targets.Length + y.Length);
-            }
-            for (int i = oldLen; i < targets.Length; i++)
-            {
-                targets[i] = y[i - oldLen].transform.position;
+                targets[i] = checkLayers[i].ClosestPoint(transform.position);       
             }
         }
         return targets;
@@ -55,7 +47,7 @@ public class BufferedDotToLayer : BufferedSteeringBehaviour
             targetPositions[i] = targetArr[i];
         }
 
-        BufferedDotToTagJob job = new BufferedDotToTagJob()
+        BufferedDotToLayerJob job = new BufferedDotToLayerJob()
         {
             targets = targetPositions,
             position = transform.position,
@@ -87,7 +79,7 @@ public class BufferedDotToLayer : BufferedSteeringBehaviour
     }
 
     [BurstCompile]
-    public struct BufferedDotToTagJob : IJob
+    private struct BufferedDotToLayerJob : IJob
     {
         [ReadOnly]
         public NativeArray<Vector3> targets;
