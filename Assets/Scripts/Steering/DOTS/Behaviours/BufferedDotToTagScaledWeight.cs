@@ -5,13 +5,12 @@ using Unity.Jobs;
 using Unity.Burst;
 using UnityEngine;
 
-public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviour
+public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviourFromTags
 {
     [Header("Behaviour Properties")]
     [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
     [SerializeField] bool InvertScale = true;
     [SerializeField] float Weight = 1f;
-    [SerializeField] string[] Tags;
 
     private float invertScalef { get { return InvertScale ? 1f : 0f; } }
 
@@ -27,32 +26,6 @@ public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviour
     private void OnDisable()
     {
         nextMap.Dispose();
-    }
-
-    private Vector3[] getTargetVectors()
-    {
-        int oldLen = 0;
-        Vector3[] targets = null;
-        foreach (string tag in Tags)
-        {
-            Vector3[] tempTargets = TagRegistry.GetVector3sByTag(tag);
-
-            if (targets == null)
-            {
-                targets = new Vector3[tempTargets.Length];
-
-            }
-            else
-            {
-                oldLen = targets.Length;
-                Array.Resize(ref targets, targets.Length + tempTargets.Length);
-            }
-
-            // Copy new elements into the start of the space added by Array.Resize, or the start of the array if its empty
-            Array.Copy(tempTargets, 0, targets, oldLen, tempTargets.Length);
-
-        }
-        return targets;
     }
 
 
@@ -101,7 +74,7 @@ public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviour
 
 
     [BurstCompile]
-    public struct BufferedDotToTagScaledWeightJob : IJob
+    private struct BufferedDotToTagScaledWeightJob : IJob
     {
         [ReadOnly]
         public NativeArray<Vector3> targets;

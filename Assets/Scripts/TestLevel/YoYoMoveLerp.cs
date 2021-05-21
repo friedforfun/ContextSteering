@@ -13,13 +13,13 @@ public class YoYoMoveLerp : MonoBehaviour
 
     private void Awake()
     {
-        TagRegistry.Register(gameObject);
+        ReferencePool.Register(gameObject);
     }
 
 
     private void OnDisable()
     {
-        TagRegistry.DeRegister(gameObject);
+        ReferencePool.DeRegister(gameObject);
     }
 
     void Update()
