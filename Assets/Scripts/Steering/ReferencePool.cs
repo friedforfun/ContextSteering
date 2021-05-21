@@ -7,31 +7,31 @@ using UnityEngine;
 /// Singleton registry of gameobjects, use instead of FindObjectByTag
 /// GameObjects need to register themselves
 /// </summary>
-public class ReferencePool //: MonoBehaviour
+public class ReferencePool : MonoBehaviour
 {
 
     private static readonly Lazy<ReferencePool> singleton = new Lazy<ReferencePool>(() => Init(), LazyThreadSafetyMode.ExecutionAndPublication);
     private static ReferencePool instance { get { return singleton.Value;  } }
     private static ReferencePool Init()
     {
-        /*ReferencePool tagRegistry = FindObjectOfType(typeof(ReferencePool)) as ReferencePool;
+        ReferencePool tagRegistry = FindObjectOfType(typeof(ReferencePool)) as ReferencePool;
         if (!tagRegistry)
         {
             Debug.LogError("Attempted to access instance of ReferencePool but it cannot be found in the scene");
         }
-        else */
-        ReferencePool tagRegistry = new ReferencePool();
-
-        if (tagRegistry.registeredTags == null)
+        else
         {
-            tagRegistry.registeredTags = new Dictionary<string, List<GameObject>>();
-        }
+            if (tagRegistry.registeredTags == null)
+            {
+                tagRegistry.registeredTags = new Dictionary<string, List<GameObject>>();
+            }
 
-        if (tagRegistry.positionCache == null)
-        {
-            tagRegistry.positionCache = new Dictionary<string, Vector3[]>();
+            if (tagRegistry.positionCache == null)
+            {
+                tagRegistry.positionCache = new Dictionary<string, Vector3[]>();
+            }
         }
-
+        
         return tagRegistry;
 
     }
@@ -83,6 +83,19 @@ public class ReferencePool //: MonoBehaviour
         instance.positionCache.Clear();
     }
 
+    private void Start()
+    {
+        List<GameObject> targets = null;
+        if (instance.registeredTags.TryGetValue("Target", out targets))
+        {
+            Debug.Log($"Got {targets.Count} targets in list with following:");
+            foreach (GameObject t in targets)
+            {
+                Debug.Log($"Target: {t.name}, Position: {t.transform.position}");
+            }
+        }
+    }
+
     /// <summary>
     /// Get position vectors for all GameObjects of this tag, caches result for this frame.
     /// </summary>
@@ -93,15 +106,48 @@ public class ReferencePool //: MonoBehaviour
         Vector3[] pos_arr = null;
         if (!instance.positionCache.TryGetValue(tag, out pos_arr))
         {
-            int oldLen = 0;
 
             GameObject[] tempTargets = GetGameObjectsByTag(tag);
             
             pos_arr = new Vector3[tempTargets.Length];
 
-            for (int i = oldLen; i < pos_arr.Length; i++)
+            for (int i = 0; i < pos_arr.Length; i++)
             {
-                pos_arr[i] = tempTargets[i - oldLen].transform.position;
+                pos_arr[i] = tempTargets[i].transform.position;
+            }
+
+            instance.positionCache[tag] = pos_arr;
+        }
+
+        return pos_arr;
+    }
+
+    /// <summary>
+    /// Get position vectors for all GameObjects of this tag, caches result for this frame. Self is excluded in array of Vector3s
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <returns></returns>
+    public static Vector3[] GetVector3sByTag(string tag, GameObject self)
+    {
+        Vector3[] pos_arr = null;
+        if (!instance.positionCache.TryGetValue(tag, out pos_arr))
+        {
+
+
+            GameObject[] tempTargets = GetGameObjectsByTag(tag);
+            if (self.CompareTag(tag))
+            {
+                pos_arr = new Vector3[tempTargets.Length-1];
+            }
+            else
+            {
+                pos_arr = new Vector3[tempTargets.Length];
+            }
+
+            for (int i = 0; i < pos_arr.Length; i++)
+            {
+                if (!self.Equals(tempTargets[i]))
+                    pos_arr[i] = tempTargets[i].transform.position;
             }
 
             instance.positionCache[tag] = pos_arr;
