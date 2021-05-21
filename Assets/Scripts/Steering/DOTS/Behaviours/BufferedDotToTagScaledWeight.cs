@@ -41,7 +41,7 @@ public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviourFromTags
             targetPositions[i] = targetArr[i];
         }
 
-        BufferedDotToTagScaledWeightJob job = new BufferedDotToTagScaledWeightJob()
+        DotToVecJob job = new DotToVecJob()
         {
             targets = targetPositions,
             position = transform.position,
@@ -50,6 +50,7 @@ public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviourFromTags
             angle = resolutionAngle,
             Weights = nextMap,
             direction = direction,
+            scaled = true,
             invertScale = invertScalef
         };
         jobHandle = job.Schedule();
@@ -69,44 +70,6 @@ public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviourFromTags
         targetPositions.Dispose();
 
         steeringMap = next;
-    }
-
-
-
-    [BurstCompile]
-    private struct BufferedDotToTagScaledWeightJob : IJob
-    {
-        [ReadOnly]
-        public NativeArray<Vector3> targets;
-
-        public Vector3 position;
-        public float range, weight, angle, invertScale;
-
-        public NativeArray<float> Weights;
-
-        public SteerDirection direction;
-
-        public void Execute()
-        {
-            foreach (Vector3 target in targets)
-            {
-                Vector3 targetVector = MapOperations.VectorToTarget(position, target);
-                float distance = targetVector.magnitude;
-                if (distance < range)
-                {
-                    Vector3 mapVector = Vector3.forward;
-                    for (int i = 0; i < Weights.Length; i++)
-                    {
-                        Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * Mathf.Abs((invertScale * 1f) - (distance / range)) * weight;
-                        mapVector = Quaternion.Euler(0f, angle, 0f) * mapVector;
-                    }
-                }
-            }
-
-            if (direction == SteerDirection.REPULSE)
-                Weights = MapOperations.ReverseMap(Weights);
-
-        }
     }
 
 }

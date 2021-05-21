@@ -10,7 +10,7 @@ public class BufferedDotToPosition : BufferedSteeringBehaviour
     [Header("Behaviour Properties")]
     [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
     [SerializeField] float Weight = 1f;
-    [SerializeField] string[] Tags;
+    [SerializeField] Transform[] Positions;
 
     private NativeArray<float> nextMap;
     private NativeArray<Vector3> targetPositions;
@@ -19,25 +19,10 @@ public class BufferedDotToPosition : BufferedSteeringBehaviour
 
     private Vector3[] getTargetVectors()
     {
-        int oldLen = 0;
-        Vector3[] targets = null;
-        foreach (string tag in Tags)
+        Vector3[] targets = new Vector3[Positions.Length];
+        for (int i = 0; i < Positions.Length; i++)
         {
-            var y = GameObject.FindGameObjectsWithTag(tag);
-            if (targets == null)
-            {
-                targets = new Vector3[y.Length];
-
-            }
-            else
-            {
-                oldLen = targets.Length;
-                Array.Resize(ref targets, targets.Length + y.Length);
-            }
-            for (int i = oldLen; i < targets.Length; i++)
-            {
-                targets[i] = y[i - oldLen].transform.position;
-            }
+            targets[i] = Positions[i].position;
         }
         return targets;
     }
@@ -55,7 +40,7 @@ public class BufferedDotToPosition : BufferedSteeringBehaviour
             targetPositions[i] = targetArr[i];
         }
 
-        BufferedDotToTagJob job = new BufferedDotToTagJob()
+        DotToVecJob job = new DotToVecJob()
         {
             targets = targetPositions,
             position = transform.position,
@@ -63,8 +48,11 @@ public class BufferedDotToPosition : BufferedSteeringBehaviour
             weight = Weight,
             angle = resolutionAngle,
             Weights = nextMap,
-            direction = direction
+            direction = direction,
+            scaled = false,
+            invertScale = 0f
         };
+
         jobHandle = job.Schedule();
     }
 
@@ -84,42 +72,6 @@ public class BufferedDotToPosition : BufferedSteeringBehaviour
 
 
         steeringMap = next;
-    }
-
-    [BurstCompile]
-    public struct BufferedDotToTagJob : IJob
-    {
-        [ReadOnly]
-        public NativeArray<Vector3> targets;
-
-        public Vector3 position;
-        public float range, weight, angle;
-
-        public NativeArray<float> Weights;
-
-        public SteerDirection direction;
-
-        public void Execute()
-        {
-            foreach (Vector3 target in targets)
-            {
-                Vector3 targetVector = MapOperations.VectorToTarget(position, target);
-                float distance = targetVector.magnitude;
-                if (distance < range)
-                {
-                    Vector3 mapVector = Vector3.forward;
-                    for (int i = 0; i < Weights.Length; i++)
-                    {
-                        Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * weight;
-                        mapVector = Quaternion.Euler(0f, angle, 0f) * mapVector;
-                    }
-                }
-            }
-
-            if (direction == SteerDirection.REPULSE)
-                Weights = MapOperations.ReverseMap(Weights);
-
-        }
     }
 
 }
