@@ -7,22 +7,31 @@ using UnityEngine;
 /// Singleton registry of gameobjects, use instead of FindObjectByTag
 /// GameObjects need to register themselves
 /// </summary>
-public class TagRegistry : MonoBehaviour
+public class ReferencePool //: MonoBehaviour
 {
 
-    private static readonly Lazy<TagRegistry> singleton = new Lazy<TagRegistry>(() => Init(), LazyThreadSafetyMode.ExecutionAndPublication);
-    private static TagRegistry instance { get { return singleton.Value;  } }
-    private static TagRegistry Init()
+    private static readonly Lazy<ReferencePool> singleton = new Lazy<ReferencePool>(() => Init(), LazyThreadSafetyMode.ExecutionAndPublication);
+    private static ReferencePool instance { get { return singleton.Value;  } }
+    private static ReferencePool Init()
     {
-        TagRegistry tagRegistry = FindObjectOfType(typeof(TagRegistry)) as TagRegistry;
+        /*ReferencePool tagRegistry = FindObjectOfType(typeof(ReferencePool)) as ReferencePool;
         if (!tagRegistry)
         {
-            Debug.LogError("Attempted to access instance of TagRegistry but it cannot be found in the scene");
+            Debug.LogError("Attempted to access instance of ReferencePool but it cannot be found in the scene");
         }
-        else if (tagRegistry.registeredTags == null)
+        else */
+        ReferencePool tagRegistry = new ReferencePool();
+
+        if (tagRegistry.registeredTags == null)
         {
             tagRegistry.registeredTags = new Dictionary<string, List<GameObject>>();
         }
+
+        if (tagRegistry.positionCache == null)
+        {
+            tagRegistry.positionCache = new Dictionary<string, Vector3[]>();
+        }
+
         return tagRegistry;
 
     }
@@ -53,7 +62,7 @@ public class TagRegistry : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"{go.name} attempted to deregister itself, but it is not in the TagRegistry");
+            Debug.LogWarning($"{go.name} attempted to deregister itself, but it is not in the ReferencePool");
         }
     }
 
@@ -62,7 +71,7 @@ public class TagRegistry : MonoBehaviour
         List<GameObject> go_list = null;
         if (!instance.registeredTags.TryGetValue(tag, out go_list))
         {
-            Debug.Log("(Remove this from TagRegistry.cs) No gameobjects found for this tag");
+            Debug.Log("(Remove this from ReferencePool.cs) No gameobjects found for this tag");
             go_list = new List<GameObject>();
         }
 
