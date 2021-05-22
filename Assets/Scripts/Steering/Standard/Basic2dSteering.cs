@@ -8,9 +8,10 @@ using UnityEngine;
 ///</Summary>
 public class Basic2dSteering : BaseContextSteering2D
 {
+    [SerializeField] bool AllowVectorZero = true;
     public Basic2dSteering()
     {
         ContextCombinator = new BasicContextCombinator();
-        DirectionDecider = new BasicDirectionPicker();
+        DirectionDecider = new BasicDirectionPicker(AllowVectorZero);
     }
 }

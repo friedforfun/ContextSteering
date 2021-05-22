@@ -5,6 +5,13 @@ using UnityEngine;
 ///</Summary>
 public class BasicDirectionPicker : IDecideDirection
 {
+    private bool allowVectorZero = true;
+
+    public BasicDirectionPicker(bool allowZero)
+    {
+        this.allowVectorZero = allowZero;
+    }
+
     public Vector3 GetDirection(float[] contextMap, Vector3 lastVector)
     {
         float resolutionAngle = 360 / (float)contextMap.Length;
@@ -25,6 +32,9 @@ public class BasicDirectionPicker : IDecideDirection
 
         if (maxValue == 0f)
         {
+            if (allowVectorZero)
+                return Vector3.zero;
+
             return lastVector; // Keep last direction if no better direction is found
         }
 
@@ -35,7 +45,7 @@ public class BasicDirectionPicker : IDecideDirection
 
 ///<Summary>
 /// This strategy picks a direction, that direction is limited by the maximum change in direction each time the method is called.
-/// Should only be called at a fixed rate.
+/// Should be called at a fixed rate.
 ///</Summary>
 public class DirectionSimpleSmoothing : IDecideDirection
 {
@@ -131,6 +141,7 @@ public class BackProjectedDirectionPicker : IDecideDirection
 
     private float GetGradient(float a, float b) 
     {
+       
         return 0f;
     }
 }

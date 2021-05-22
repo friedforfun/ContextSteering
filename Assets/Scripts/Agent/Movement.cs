@@ -15,21 +15,36 @@ public class Movement : MonoBehaviour
     [SerializeField] private float Speed = 1f;
     private Vector3 LastDirection = Vector3.forward;
 
+    private bool allowDirectionChange = true;
 
     void Update()
     {
 
-        // Get the movement direction from the steering module
-        LastDirection = steer.MoveDirection();
-
         // Apply movement based on direction obtained
         control.SimpleMove(LastDirection * Speed);
-        
+
         // Look towards target
         transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, LookTarget).normalized);
     }
 
+    private void FixedUpdate()
+    {
+        // Get the movement direction from the steering module
+        if (allowDirectionChange)
+        {
+            allowDirectionChange = false;
+            LastDirection = steer.MoveDirection();
+            StartCoroutine(resetDirectionBlocker());
+        }
 
+    }
+
+
+    IEnumerator resetDirectionBlocker()
+    {
+        yield return new WaitForSeconds(0.1f);
+        allowDirectionChange = true;
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

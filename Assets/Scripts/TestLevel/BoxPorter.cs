@@ -22,6 +22,8 @@ public class BoxPorter : MonoBehaviour
 
     private void Awake()
     {
+        //Debug.Log($"Registered Box under tag: {gameObject.tag}, at position: {transform.position}");
+
         ReferencePool.Register(gameObject);
     }
 

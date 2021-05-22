@@ -64,6 +64,7 @@ public class BaseContextSteering2DBuffered : MonoBehaviour
 
     public void ScheduleJobs()
     {
+
         foreach (BufferedSteeringBehaviour b in SteeringBehaviours)
         {
             b.ScheduleJob();
@@ -118,21 +119,7 @@ public class BaseContextSteering2DBuffered : MonoBehaviour
         nextContextMap = temp;
     }
 
-    /// <summary>
-    /// Builds all steering behaviours and sums each weight elementwise, to determine the most desirable direction to move in.
-    /// </summary>
-    /// <returns></returns>
-    private float[] buildSteeringBehaviours()
-    {
-        ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
 
-        foreach (BufferedSteeringBehaviour behaviour in SteeringBehaviours)
-        {
-            //contextMaps.Add(behaviour.BuildContextMap());
-        }
-        
-        return mergeMaps(contextMaps);
-    }
 
     /// <summary>
     /// Build a context mask of directions to block movement in this direction

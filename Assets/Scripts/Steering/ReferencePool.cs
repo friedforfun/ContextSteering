@@ -83,19 +83,6 @@ public class ReferencePool : MonoBehaviour
         instance.positionCache.Clear();
     }
 
-    private void Start()
-    {
-        List<GameObject> targets = null;
-        if (instance.registeredTags.TryGetValue("Target", out targets))
-        {
-            Debug.Log($"Got {targets.Count} targets in list with following:");
-            foreach (GameObject t in targets)
-            {
-                Debug.Log($"Target: {t.name}, Position: {t.transform.position}");
-            }
-        }
-    }
-
     /// <summary>
     /// Get position vectors for all GameObjects of this tag, caches result for this frame.
     /// </summary>

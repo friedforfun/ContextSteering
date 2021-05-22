@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 9130712809095325372}
   - component: {fileID: 7663127309317368701}
   - component: {fileID: 6808892635466277565}
+  - component: {fileID: -3354671705114166014}
   - component: {fileID: 3019051023686194971}
   m_Layer: 0
   m_Name: AgentSwarmBuffered
@@ -214,6 +215,7 @@ MonoBehaviour:
   SteeringBehaviours:
   - {fileID: 6808892635466277565}
   - {fileID: 3019051023686194971}
+  - {fileID: -3354671705114166014}
   SteeringMasks: []
 --- !u!114 &6808892635466277565
 MonoBehaviour:
@@ -231,10 +233,31 @@ MonoBehaviour:
   ShowDebug: 0
   MapSize: 2
   DebugColor: {r: 0, g: 1, b: 0, a: 1}
-  direction: 0
-  Weight: 1
   Tags:
   - Target
+  direction: 0
+  Weight: 1
+--- !u!114 &-3354671705114166014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9118685762301980294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8cf9ce00da8b4541947e102280688ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 1.5
+  ShowDebug: 1
+  MapSize: 2
+  DebugColor: {r: 1, g: 0.41159213, b: 0, a: 1}
+  direction: 1
+  Weight: 1
+  Layers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &3019051023686194971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,9 +274,9 @@ MonoBehaviour:
   ShowDebug: 1
   MapSize: 2
   DebugColor: {r: 0, g: 0.8367305, b: 1, a: 1}
-  direction: 1
-  InvertScale: 1
-  Weight: 2
   Tags:
   - Agent
   - Projectile
+  direction: 1
+  InvertScale: 1
+  Weight: 2

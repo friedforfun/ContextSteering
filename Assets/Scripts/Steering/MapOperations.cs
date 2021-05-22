@@ -68,8 +68,8 @@ public static class MapOperations
         int clen = contextMap.Length;
         int half_clen = clen / 2;
 
-        NativeArray<float> reverseMap = new NativeArray<float>(contextMap.Length, Allocator.Temp);
-        for (int i = 0; i < contextMap.Length; i++)
+        NativeArray<float> reverseMap = new NativeArray<float>(clen, Allocator.Temp);
+        for (int i = 0; i < clen; i++)
         {
 
 
@@ -83,11 +83,11 @@ public static class MapOperations
             }
             else if (i > half_clen)
             {
-                reverseMap[i - (half_clen)] = contextMap[i];
+                reverseMap[i - half_clen] = contextMap[i];
             }
         }
 
-        for (int i = 0; i < contextMap.Length; i++)
+        for (int i = 0; i < clen; i++)
         {
             contextMap[i] = reverseMap[i];
         }

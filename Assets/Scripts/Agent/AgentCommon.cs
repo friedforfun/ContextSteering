@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AgentCommon : MonoBehaviour
@@ -15,16 +14,18 @@ public class AgentCommon : MonoBehaviour
     {
         baseMaterial = childRenderer.material;
         StartCoroutine(collisionDelay());
+        SteeringScheduler.RepopulateSteerers();
     }
 
     private void Awake()
     {
-        TagRegistry.Register(gameObject);
+        ReferencePool.Register(gameObject);
+        //Debug.Log("Registered Self");
     }
 
     private void OnDisable()
     {
-        TagRegistry.DeRegister(gameObject);
+        ReferencePool.DeRegister(gameObject);
     }
 
 
