@@ -13,16 +13,15 @@ public class SteeringScheduler : MonoBehaviour
 
     private static SteeringScheduler Init()
     {
-        SteeringScheduler[] steeringSchedulers = FindObjectsOfType(typeof(SteeringScheduler)) as SteeringScheduler[];
-        SteeringScheduler steeringScheduler = null;
-        if (steeringSchedulers.Length != 1)
+        SteeringScheduler steeringScheduler = FindObjectOfType(typeof(SteeringScheduler)) as SteeringScheduler;
+        if (!steeringScheduler)
         {
             // could refactor to non-singleton pattern, depends on usecase
-            Debug.LogError("Incorrect number of instances of SteeringScheduler found in scene. Should only be 1");
+            Debug.LogError("No instances of SteeringScheduler found in scene.");
         }
         else
         {
-            steeringScheduler = steeringSchedulers[0];
+            //steeringScheduler.fps =  new FPSCounter();
         }
 
         return steeringScheduler;
@@ -34,11 +33,19 @@ public class SteeringScheduler : MonoBehaviour
 
     BaseContextSteering2DBuffered[] Steerers;
 
+    [SerializeField] int ScheduleRatePerSecond = 10;
+    bool evaluateGroups = true;
+    int currentGroupIndex = 0;
+    int numberPerGroup = instance.Steerers.Length;
+
+   // FPSCounter fps;
+    int CurrentFPS = 0;
     // Needs to tell all the steerers to schedules their jobs
 
     private void Start()
     {
         RepopulateSteerers();
+        numberPerGroup = instance.Steerers.Length;
     }
 
     public static void RepopulateSteerers()
@@ -46,26 +53,44 @@ public class SteeringScheduler : MonoBehaviour
         instance.Steerers = FindObjectsOfType<BaseContextSteering2DBuffered>();
     }
 
+
     private static void ScheduleBehaviours()
     {
-        foreach (BaseContextSteering2DBuffered s in instance.Steerers)
+        if (instance.evaluateGroups)
+            instance.numberPerGroup = (int)Mathf.Ceil((instance.Steerers.Length / instance.CurrentFPS) * instance.ScheduleRatePerSecond);
+
+        instance.evaluateGroups = false;
+
+        for (int i = instance.currentGroupIndex * instance.numberPerGroup; i < (i+1) * instance.numberPerGroup; i++)
         {
-            //Debug.Log($"Scheduling steering on: {s.gameObject.name}");
-            s.ScheduleJobs();
+            if (i < instance.Steerers.Length)
+            {
+                instance.Steerers[i].ScheduleJobs();
+            }
         }
     }
 
     // needs to tell all the steerers to complete their jobs
-    private void CompleteBehaviours()
+    private static void CompleteBehaviours()
     {
-        foreach (BaseContextSteering2DBuffered s in Steerers)
+        for (int i = instance.currentGroupIndex * instance.numberPerGroup; i < (i + 1) * instance.numberPerGroup; i++)
         {
-            s.CompleteJobs();
+            if (i < instance.Steerers.Length)
+            {
+                instance.Steerers[i].CompleteJobs();
+            }
+        }
+        instance.currentGroupIndex++;
+        if (instance.currentGroupIndex*instance.numberPerGroup > instance.Steerers.Length)
+        {
+            instance.currentGroupIndex = 0;
+            instance.evaluateGroups = true;
         }
     }
 
     private void Update()
     {
+        CurrentFPS = Measure();
         ScheduleBehaviours();
 
         // onUpdate
@@ -73,6 +98,45 @@ public class SteeringScheduler : MonoBehaviour
 
         CompleteBehaviours();
     }
+
+    const float fpsMeasurePeriod = 0.5f;
+    private int m_FpsAccumulator = 0;
+    private float m_FpsNextPeriod = 0;
+    private int m_CurrentFps = 0;
+
+    public int Measure()
+    {
+        // measure average frames per second
+        m_FpsAccumulator++;
+        if (Time.realtimeSinceStartup > m_FpsNextPeriod)
+        {
+            m_CurrentFps = (int)(m_FpsAccumulator / fpsMeasurePeriod);
+            m_FpsAccumulator = 0;
+            m_FpsNextPeriod += fpsMeasurePeriod;
+        }
+        return m_CurrentFps;
+    }
+
+    /*private class FPSCounter
+    {
+        const float fpsMeasurePeriod = 0.5f;
+        private int m_FpsAccumulator = 0;
+        private float m_FpsNextPeriod = 0;
+        private int m_CurrentFps = 0;
+
+        public int Measure()
+        {
+            // measure average frames per second
+            m_FpsAccumulator++;
+            if (Time.realtimeSinceStartup > m_FpsNextPeriod)
+            {
+                m_CurrentFps = (int)(m_FpsAccumulator / fpsMeasurePeriod);
+                m_FpsAccumulator = 0;
+                m_FpsNextPeriod += fpsMeasurePeriod;
+            }
+            return m_CurrentFps;
+        }
+    }*/
 
 
 }
