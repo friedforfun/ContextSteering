@@ -36,9 +36,9 @@ public class SteeringScheduler : MonoBehaviour
     [SerializeField] int ScheduleRatePerSecond = 10;
     bool evaluateGroups = true;
     int currentGroupIndex = 0;
-    int numberPerGroup = instance.Steerers.Length;
+    int numberPerGroup;
 
-   // FPSCounter fps;
+    // FPSCounter fps;
     int CurrentFPS = 0;
     // Needs to tell all the steerers to schedules their jobs
 
@@ -54,7 +54,7 @@ public class SteeringScheduler : MonoBehaviour
     }
 
 
-    private static void ScheduleBehaviours()
+    private static void ScheduleBehavioursTest()
     {
         if (instance.evaluateGroups)
             instance.numberPerGroup = (int)Mathf.Ceil((instance.Steerers.Length / instance.CurrentFPS) * instance.ScheduleRatePerSecond);
@@ -71,7 +71,7 @@ public class SteeringScheduler : MonoBehaviour
     }
 
     // needs to tell all the steerers to complete their jobs
-    private static void CompleteBehaviours()
+    private static void CompleteBehavioursTest()
     {
         for (int i = instance.currentGroupIndex * instance.numberPerGroup; i < (i + 1) * instance.numberPerGroup; i++)
         {
@@ -87,6 +87,25 @@ public class SteeringScheduler : MonoBehaviour
             instance.evaluateGroups = true;
         }
     }
+
+    private static void ScheduleBehaviours()
+    {
+        foreach (BaseContextSteering2DBuffered s in instance.Steerers)
+        {
+            //Debug.Log($"Scheduling steering on: {s.gameObject.name}");
+            s.ScheduleJobs();
+        }
+    }
+
+    // needs to tell all the steerers to complete their jobs
+    private void CompleteBehaviours()
+    {
+        foreach (BaseContextSteering2DBuffered s in Steerers)
+        {
+            s.CompleteJobs();
+        }
+    }
+
 
     private void Update()
     {
