@@ -1040,8 +1040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ea543b5fe63e54b80c54c9da24ee75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 700
-  spawnAreaSize: 27
+  spawnCount: 300
+  spawnAreaSize: 8
   minion: {fileID: 9118685762301980294, guid: 8c05ad1f106158945970d027a34c6695, type: 3}
   minionOffset: 2
 --- !u!43 &87703103
@@ -3320,6 +3320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91488272b38b5f043b6db3ae02f30048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SchedulingGroups: 2
 --- !u!43 &391899295
 Mesh:
   m_ObjectHideFlags: 0

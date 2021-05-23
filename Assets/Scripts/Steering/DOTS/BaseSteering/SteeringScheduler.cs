@@ -33,7 +33,7 @@ public class SteeringScheduler : MonoBehaviour
 
     BaseContextSteering2DBuffered[] Steerers;
 
-    [SerializeField] int ScheduleRatePerSecond = 10;
+    [SerializeField] int SchedulingGroups = 1;
     bool evaluateGroups = true;
     int currentGroupIndex = 0;
     int numberPerGroup;
@@ -56,36 +56,24 @@ public class SteeringScheduler : MonoBehaviour
 
     private static void ScheduleBehavioursTest()
     {
-        if (instance.evaluateGroups)
-            instance.numberPerGroup = (int)Mathf.Ceil((instance.Steerers.Length / instance.CurrentFPS) * instance.ScheduleRatePerSecond);
-
-        instance.evaluateGroups = false;
-
-        for (int i = instance.currentGroupIndex * instance.numberPerGroup; i < (i+1) * instance.numberPerGroup; i++)
+        for (int i = instance.currentGroupIndex * instance.SchedulingGroups; i < (instance.Steerers.Length / instance.SchedulingGroups) * (instance.currentGroupIndex + 1); i++)
         {
             if (i < instance.Steerers.Length)
-            {
                 instance.Steerers[i].ScheduleJobs();
-            }
         }
     }
 
     // needs to tell all the steerers to complete their jobs
     private static void CompleteBehavioursTest()
     {
-        for (int i = instance.currentGroupIndex * instance.numberPerGroup; i < (i + 1) * instance.numberPerGroup; i++)
+        for (int i = instance.currentGroupIndex * instance.SchedulingGroups; i < (instance.Steerers.Length / instance.SchedulingGroups) * (instance.currentGroupIndex + 1); i++)
         {
             if (i < instance.Steerers.Length)
-            {
                 instance.Steerers[i].CompleteJobs();
-            }
         }
         instance.currentGroupIndex++;
-        if (instance.currentGroupIndex*instance.numberPerGroup > instance.Steerers.Length)
-        {
+        if (instance.currentGroupIndex == instance.SchedulingGroups)
             instance.currentGroupIndex = 0;
-            instance.evaluateGroups = true;
-        }
     }
 
     private static void ScheduleBehaviours()
@@ -109,13 +97,16 @@ public class SteeringScheduler : MonoBehaviour
 
     private void Update()
     {
-        CurrentFPS = Measure();
-        ScheduleBehaviours();
+        //CurrentFPS = Measure();
 
-        // onUpdate
-        //duringContextUpdate();
+            ScheduleBehavioursTest();
 
-        CompleteBehaviours();
+            // onUpdate
+            //duringContextUpdate();
+
+            CompleteBehavioursTest();
+        
+
     }
 
     const float fpsMeasurePeriod = 0.5f;
