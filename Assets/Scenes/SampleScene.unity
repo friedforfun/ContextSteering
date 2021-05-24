@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ea543b5fe63e54b80c54c9da24ee75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 300
+  spawnCount: 20
   spawnAreaSize: 8
   minion: {fileID: 9118685762301980294, guid: 8c05ad1f106158945970d027a34c6695, type: 3}
   minionOffset: 2
@@ -3320,7 +3320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91488272b38b5f043b6db3ae02f30048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SchedulingGroups: 2
+  SchedulingGroups: 4
 --- !u!43 &391899295
 Mesh:
   m_ObjectHideFlags: 0
@@ -8411,7 +8411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9118685762301980295, guid: 8c05ad1f106158945970d027a34c6695, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9118685762301980295, guid: 8c05ad1f106158945970d027a34c6695, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11375,7 +11375,7 @@ Transform:
   - {fileID: 646784258}
   - {fileID: 76979935}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1399986070
 MonoBehaviour:
@@ -11983,7 +11983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5429121152966211893, guid: e6034146db945824c94f5e759d6462fa, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5429121152966211893, guid: e6034146db945824c94f5e759d6462fa, type: 3}
       propertyPath: m_LocalPosition.x

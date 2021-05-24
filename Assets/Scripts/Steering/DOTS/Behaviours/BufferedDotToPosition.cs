@@ -28,6 +28,11 @@ public class BufferedDotToPosition : BufferedSteeringBehaviour
     }
 
 
+    public void UpdatePositions(Transform[] positions)
+    {
+        Positions = positions;
+    }
+
     public override void ScheduleJob()
     {
         nextMap = new NativeArray<float>(resolution, Allocator.TempJob);

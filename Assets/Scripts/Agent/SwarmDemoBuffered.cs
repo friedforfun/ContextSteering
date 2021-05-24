@@ -15,12 +15,40 @@ public class SwarmDemoBuffered : MonoBehaviour
     [SerializeField] private float Speed = 1f;
     private Vector3 LastDirection = Vector3.forward;
 
-    private bool allowDirectionChange = true;
+    private Demo2 demoController;
+    private BufferedDotToPosition dotToPosition;
+
     private void Start()
     {
         steeringScheduler = FindObjectOfType<SteeringScheduler>();
 
         steeringScheduler.duringContextUpdate += SchedulerUpdate;
+
+        dotToPosition = gameObject.GetComponent<BufferedDotToPosition>();
+
+        demoController = FindObjectOfType<Demo2>();
+
+        target = demoController.GetTarget();
+        Transform[] positions = new Transform[1];
+        positions[0] = target.transform;
+        dotToPosition.UpdatePositions(positions);
+    }
+
+    public void ReaquireTarget(GameObject caller)
+    {
+        if (caller.Equals(target))
+        {
+            GameObject tempTarget = demoController.GetTarget();
+
+            demoController.ReturnToPool(target);
+
+            target = tempTarget;
+
+            Transform[] positions = new Transform[1];
+            positions[0] = target.transform;
+
+            dotToPosition.UpdatePositions(positions);
+        }
     }
 
     private void OnDisable()
@@ -30,32 +58,21 @@ public class SwarmDemoBuffered : MonoBehaviour
 
     void Update()
     {
+        LastDirection = steer.MoveDirection();
         // Apply movement based on direction obtained
         control.SimpleMove(LastDirection * Speed);
 
         if (target != null)
-            // Look towards target
-            transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, target).normalized);
-    }
-
-    private void FixedUpdate()
-    {
-        // Get the movement direction from the steering module
-        if (allowDirectionChange)
         {
-            allowDirectionChange = false;
-            LastDirection = steer.MoveDirection();
-            StartCoroutine(resetDirectionBlocker());
+            // Look towards target
+
+            Vector3 toTarget = MapOperations.VectorToTarget(gameObject, target);
+            toTarget.y = 0f;
+            transform.rotation = Quaternion.LookRotation(toTarget);
         }
-
+            
     }
 
-
-    IEnumerator resetDirectionBlocker()
-    {
-        yield return new WaitForSeconds(0.1f);
-        allowDirectionChange = true;
-    }
 
     public void SchedulerUpdate()
     {

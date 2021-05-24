@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 9130712809095325372}
   - component: {fileID: 7663127309317368701}
   - component: {fileID: 6808892635466277565}
+  - component: {fileID: 3681680149742742503}
   - component: {fileID: -3354671705114166014}
   - component: {fileID: 3019051023686194971}
   m_Layer: 0
@@ -216,7 +217,9 @@ MonoBehaviour:
   - {fileID: 6808892635466277565}
   - {fileID: 3019051023686194971}
   - {fileID: -3354671705114166014}
+  - {fileID: 3681680149742742503}
   SteeringMasks: []
+  AllowVectorZero: 1
 --- !u!114 &6808892635466277565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +240,25 @@ MonoBehaviour:
   - Target
   direction: 0
   Weight: 1
+--- !u!114 &3681680149742742503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9118685762301980294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c67ddb594cf1c94888b5d9c1803adaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 40
+  ShowDebug: 0
+  MapSize: 10
+  DebugColor: {r: 0.94135094, g: 0, b: 1, a: 1}
+  direction: 0
+  Weight: 1
+  Positions: []
 --- !u!114 &-3354671705114166014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 1.5
-  ShowDebug: 1
+  ShowDebug: 0
   MapSize: 2
   DebugColor: {r: 1, g: 0.41159213, b: 0, a: 1}
   direction: 1
@@ -271,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 4
-  ShowDebug: 1
+  ShowDebug: 0
   MapSize: 2
   DebugColor: {r: 0, g: 0.8367305, b: 1, a: 1}
   Tags:

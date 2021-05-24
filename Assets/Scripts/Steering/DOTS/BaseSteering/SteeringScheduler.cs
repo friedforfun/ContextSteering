@@ -56,7 +56,7 @@ public class SteeringScheduler : MonoBehaviour
 
     private static void ScheduleBehavioursTest()
     {
-        for (int i = instance.currentGroupIndex * instance.SchedulingGroups; i < (instance.Steerers.Length / instance.SchedulingGroups) * (instance.currentGroupIndex + 1); i++)
+        for (int i = instance.currentGroupIndex * instance.SchedulingGroups; i < Mathf.Ceil(instance.Steerers.Length / instance.SchedulingGroups) * (instance.currentGroupIndex + 1); i++)
         {
             if (i < instance.Steerers.Length)
                 instance.Steerers[i].ScheduleJobs();
@@ -66,7 +66,7 @@ public class SteeringScheduler : MonoBehaviour
     // needs to tell all the steerers to complete their jobs
     private static void CompleteBehavioursTest()
     {
-        for (int i = instance.currentGroupIndex * instance.SchedulingGroups; i < (instance.Steerers.Length / instance.SchedulingGroups) * (instance.currentGroupIndex + 1); i++)
+        for (int i = instance.currentGroupIndex * instance.SchedulingGroups; i < Mathf.Ceil(instance.Steerers.Length / instance.SchedulingGroups) * (instance.currentGroupIndex + 1); i++)
         {
             if (i < instance.Steerers.Length)
                 instance.Steerers[i].CompleteJobs();
