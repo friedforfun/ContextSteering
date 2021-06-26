@@ -1,53 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
+using Friedforfun.SteeringBehaviours.Utilities;
 using UnityEngine;
 
-public enum SteerDirection
+namespace Friedforfun.SteeringBehaviours.Core2D
 {
-    ATTRACT,
-    REPULSE
-}
-
-/// <summary>
-/// Build attractor or repulsor context map with scaling based on the distance to the target
-/// </summary>
-public class DotToTagScaledWeight : SteeringBehaviour
-{
-    [Header("Behaviour Properties")]
-    [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
-    [SerializeField] bool InvertScale = true;
-    [SerializeField] float weight = 1f;
-    [SerializeField] string[] Tags;
-
-    private float invertScalef { get { return InvertScale ? 1f : 0f; } }
-
-    public override float[] BuildContextMap()
+    public enum SteerDirection
     {
-        steeringMap = new float[resolution];
-        foreach (string tag in Tags)
+        ATTRACT,
+        REPULSE
+    }
+
+    /// <summary>
+    /// Build attractor or repulsor context map with scaling based on the distance to the target
+    /// </summary>
+    public class DotToTagScaledWeight : SteeringBehaviour
+    {
+        [Header("Behaviour Properties")]
+        [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
+        [SerializeField] bool InvertScale = true;
+        [SerializeField] float weight = 1f;
+        [SerializeField] string[] Tags;
+
+        private float invertScalef { get { return InvertScale ? 1f : 0f; } }
+
+        public override float[] BuildContextMap()
         {
-            // Inefficient - should cache tagged gameobjects
-            foreach (GameObject target in GameObject.FindGameObjectsWithTag(tag))
+            steeringMap = new float[resolution];
+            foreach (string tag in Tags)
             {
-                Vector3 targetVector = MapOperations.VectorToTarget(gameObject, target);
-                float distance = targetVector.magnitude;
-                if (distance <= Range)
+                // Inefficient - should cache tagged gameobjects
+                foreach (GameObject target in GameObject.FindGameObjectsWithTag(tag))
                 {
-                    Debug.DrawLine(transform.position, target.transform.position, Color.red);
-                    Vector3 mapVector = Vector3.forward;
-                    for (int i = 0; i < steeringMap.Length; i++)
+                    Vector3 targetVector = MapOperations.VectorToTarget(gameObject, target);
+                    float distance = targetVector.magnitude;
+                    if (distance <= Range)
                     {
-                        // Branchless scale inversion
-                        steeringMap[i] += Vector3.Dot(mapVector, targetVector.normalized) * Mathf.Abs((invertScalef * 1f) - (distance / Range)) * weight;
-                        mapVector = Quaternion.Euler(0f, resolutionAngle, 0f) * mapVector;
+                        Debug.DrawLine(transform.position, target.transform.position, Color.red);
+                        Vector3 mapVector = InitialVector;
+                        for (int i = 0; i < steeringMap.Length; i++)
+                        {
+                            // Branchless scale inversion
+                            steeringMap[i] += Vector3.Dot(mapVector, targetVector.normalized) * Mathf.Abs((invertScalef * 1f) - (distance / Range)) * weight;
+                            mapVector = rotateAroundAxis(resolutionAngle) * mapVector;
+                        }
                     }
                 }
             }
+
+            if (direction == SteerDirection.REPULSE)
+                steeringMap = MapOperations.ReverseMap(steeringMap);
+
+            return steeringMap;
         }
-
-        if (direction == SteerDirection.REPULSE)
-            steeringMap = MapOperations.ReverseMap(steeringMap);
-
-        return steeringMap;
     }
+
 }

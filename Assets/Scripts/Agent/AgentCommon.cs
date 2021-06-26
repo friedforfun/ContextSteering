@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.SteeringBehaviours.Core2D.Buffered;
 
 public class AgentCommon : MonoBehaviour
 {

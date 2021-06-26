@@ -1,84 +1,85 @@
-using System;
-using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
-using Unity.Burst;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Core2D;
 
-public class BufferedDotToLayer : BufferedSteeringBehaviour
+namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 {
-    [Header("Behaviour Properties")]
-    [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
-    [SerializeField] float Weight = 1f;
-    [SerializeField] LayerMask Layers;
-
-    private NativeArray<float> nextMap;
-    private NativeArray<Vector3> targetPositions;
-    private JobHandle jobHandle;
-
-
-    private Vector3[] getTargetVectors()
+    public class BufferedDotToLayer : BufferedSteeringBehaviour
     {
+        [Header("Behaviour Properties")]
+        [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
+        [SerializeField] float Weight = 1f;
+        [SerializeField] LayerMask Layers;
 
-        Vector3[] targets = null;
+        private NativeArray<float> nextMap;
+        private NativeArray<Vector3> targetPositions;
+        private JobHandle jobHandle;
 
-        Collider[] checkLayers = Physics.OverlapSphere(transform.position, Range, Layers);
-        if (checkLayers != null)
+
+        private Vector3[] getTargetVectors()
         {
-            targets = new Vector3[checkLayers.Length];
-            for (int i = 0; i < checkLayers.Length; i++)
+
+            Vector3[] targets = null;
+
+            Collider[] checkLayers = Physics.OverlapSphere(transform.position, Range, Layers);
+            if (checkLayers != null)
             {
-                targets[i] = checkLayers[i].ClosestPoint(transform.position);       
+                targets = new Vector3[checkLayers.Length];
+                for (int i = 0; i < checkLayers.Length; i++)
+                {
+                    targets[i] = checkLayers[i].ClosestPoint(transform.position);
+                }
             }
-        }
-        return targets;
-    }
-
-
-    public override void ScheduleJob()
-    {
-        nextMap = new NativeArray<float>(resolution, Allocator.TempJob);
-        Vector3[] targetArr = getTargetVectors();
-
-        targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.TempJob);
-
-        for (int i = 0; i < targetArr.Length; i++)
-        {
-            targetPositions[i] = targetArr[i];
+            return targets;
         }
 
-        DotToVecJob job = new DotToVecJob()
+
+        public override void ScheduleJob()
         {
-            targets = targetPositions,
-            position = transform.position,
-            range = Range,
-            weight = Weight,
-            angle = resolutionAngle,
-            Weights = nextMap,
-            direction = direction,
-            scaled = false,
-            invertScale = 0f
-        };
+            nextMap = new NativeArray<float>(resolution, Allocator.TempJob);
+            Vector3[] targetArr = getTargetVectors();
 
-        jobHandle = job.Schedule();
-    }
+            targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.TempJob);
 
-    public override void CompleteJob()
-    {
-        jobHandle.Complete();
+            for (int i = 0; i < targetArr.Length; i++)
+            {
+                targetPositions[i] = targetArr[i];
+            }
 
-        float[] next = new float[resolution];
-        for (int i = 0; i < nextMap.Length; i++)
-        {
-            next[i] = nextMap[i];
+            DotToVecJob job = new DotToVecJob()
+            {
+                targets = targetPositions,
+                position = transform.position,
+                range = Range,
+                weight = Weight,
+                angle = resolutionAngle,
+                Weights = nextMap,
+                direction = direction,
+                scaled = false,
+                invertScale = 0f
+            };
+
+            jobHandle = job.Schedule();
         }
 
-        nextMap.Dispose();
-        targetPositions.Dispose();
+        public override void CompleteJob()
+        {
+            jobHandle.Complete();
+
+            float[] next = new float[resolution];
+            for (int i = 0; i < nextMap.Length; i++)
+            {
+                next[i] = nextMap[i];
+            }
+
+            nextMap.Dispose();
+            targetPositions.Dispose();
 
 
 
-        steeringMap = next;
+            steeringMap = next;
+        }
+
     }
-
 }

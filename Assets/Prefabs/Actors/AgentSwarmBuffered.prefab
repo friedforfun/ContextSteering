@@ -212,7 +212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d586611b5d0bd24599383a6ff1736b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ContextMapResolution: 12
+  steeringParameters:
+    ContextMapResolution: 12
+    ContextMapRotationAxis: 1
+    InitialVector: {x: 0, y: 0, z: 1}
   SteeringBehaviours:
   - {fileID: 6808892635466277565}
   - {fileID: 3019051023686194971}

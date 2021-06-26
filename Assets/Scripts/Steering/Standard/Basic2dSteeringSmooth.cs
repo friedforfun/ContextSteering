@@ -1,17 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-///<Summary>
-/// Basic sample steering with smoothing over direction changing.
-///</Summary>
-public class Basic2dSteeringSmooth : BaseContextSteering2D
+namespace Friedforfun.SteeringBehaviours.Core2D
 {
-    [Range(-1, 1)]
-    [SerializeField] float DotChangeThreshold = 0.3f;
-    public Basic2dSteeringSmooth()
+    ///<Summary>
+    /// Basic simple steering with smoothing over direction changing, depending on the frequency that the direction is computed.
+    ///</Summary>
+    public class Basic2dSteeringSmooth : BaseContextSteering2D
     {
-        ContextCombinator = new BasicContextCombinator();
-        DirectionDecider = new DirectionSimpleSmoothing(DotChangeThreshold);
+        [Range(-1, 1)]
+        [SerializeField] float DotChangeThreshold = 0.3f;
+        public Basic2dSteeringSmooth()
+        {
+            ContextCombinator = new BasicContextCombinator();
+            DirectionDecider = new DirectionSimpleSmoothing(DotChangeThreshold);
+        }
     }
+
 }

@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-///<Summary>
-/// Basic sample steering no smoothing over direction changing.
-///</Summary>
-public class Basic2dSteering : BaseContextSteering2D
+namespace Friedforfun.SteeringBehaviours.Core2D
 {
-    [SerializeField] bool AllowVectorZero = true;
-    public Basic2dSteering()
+    ///<Summary>
+    /// Basic sample steering no smoothing over direction changing.
+    ///</Summary>
+    public class Basic2dSteering : BaseContextSteering2D
     {
-        ContextCombinator = new BasicContextCombinator();
-        DirectionDecider = new BasicDirectionPicker(AllowVectorZero);
+        [SerializeField] bool AllowVectorZero = true;
+        public Basic2dSteering()
+        {
+            ContextCombinator = new BasicContextCombinator();
+            DirectionDecider = new BasicDirectionPicker(AllowVectorZero);
+        }
     }
+
 }

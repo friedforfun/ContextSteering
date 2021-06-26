@@ -1,5 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
+using Friedforfun.SteeringBehaviours.Core2D;
+using Friedforfun.SteeringBehaviours.Utilities;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -51,7 +52,8 @@ public class Movement : MonoBehaviour
     {
 
         Handles.color = Color.magenta;
-        Handles.ArrowHandleCap(0, transform.position, Quaternion.LookRotation(LastDirection, Vector3.up), 2f, EventType.Repaint);
+        if (LastDirection != Vector3.zero)
+            Handles.ArrowHandleCap(0, transform.position, Quaternion.LookRotation(LastDirection, Vector3.up), 2f, EventType.Repaint);
     }
 #endif
 }

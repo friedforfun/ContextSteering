@@ -4,75 +4,80 @@ using Unity.Collections;
 using Unity.Jobs;
 using Unity.Burst;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Core2D;
+using Friedforfun.SteeringBehaviours.Utilities;
 
-public class BufferedDotToTag : BufferedSteeringBehaviourFromTags
+namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 {
-    [Header("Behaviour Properties")]
-    [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
-    [SerializeField] float Weight = 1f;
-
-    private NativeArray<float> nextMap;
-    private NativeArray<Vector3> targetPositions;
-    private JobHandle jobHandle;
-
-
-    private void Awake()
+    public class BufferedDotToTag : BufferedSteeringBehaviourFromTags
     {
-        nextMap = new NativeArray<float>(resolution, Allocator.Persistent);
-    }
+        [Header("Behaviour Properties")]
+        [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
+        [SerializeField] float Weight = 1f;
 
-    private void OnDisable()
-    {
-        nextMap.Dispose();
-    }
+        private NativeArray<float> nextMap;
+        private NativeArray<Vector3> targetPositions;
+        private JobHandle jobHandle;
 
 
-    public override void ScheduleJob()
-    {
-        //nextMap = new NativeArray<float>(resolution, Allocator.TempJob);
-        Vector3[] targetArr = getTargetVectors();
-
-        targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.TempJob);
-
-        for (int i = 0; i < targetArr.Length; i++)
+        private void Awake()
         {
-            targetPositions[i] = targetArr[i];
-            if (MapOperations.VectorToTarget(transform.position, targetPositions[i]).magnitude < Range)
-                Debug.DrawLine(transform.position, targetPositions[i], Color.red);
+            nextMap = new NativeArray<float>(resolution, Allocator.Persistent);
         }
 
-        DotToVecJob job = new DotToVecJob()
+        private void OnDisable()
         {
-            targets = targetPositions,
-            position = transform.position,
-            range = Range,
-            weight = Weight,
-            angle = resolutionAngle,
-            Weights = nextMap,
-            direction = direction,
-            scaled = false,
-            invertScale = 0
-        };
-
-        jobHandle = job.Schedule();
-    }
-
-    public override void CompleteJob()
-    {
-        jobHandle.Complete();
-
-        float[] next = new float[resolution];
-        for (int i = 0; i < nextMap.Length; i++)
-        {
-            next[i] = nextMap[i];
+            nextMap.Dispose();
         }
 
 
-        targetPositions.Dispose();
+        public override void ScheduleJob()
+        {
+            //nextMap = new NativeArray<float>(resolution, Allocator.TempJob);
+            Vector3[] targetArr = getTargetVectors();
 
-        steeringMap = next;
+            targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.TempJob);
+
+            for (int i = 0; i < targetArr.Length; i++)
+            {
+                targetPositions[i] = targetArr[i];
+                if (MapOperations.VectorToTarget(transform.position, targetPositions[i]).magnitude < Range)
+                    Debug.DrawLine(transform.position, targetPositions[i], Color.red);
+            }
+
+            DotToVecJob job = new DotToVecJob()
+            {
+                targets = targetPositions,
+                position = transform.position,
+                range = Range,
+                weight = Weight,
+                angle = resolutionAngle,
+                Weights = nextMap,
+                direction = direction,
+                scaled = false,
+                invertScale = 0
+            };
+
+            jobHandle = job.Schedule();
+        }
+
+        public override void CompleteJob()
+        {
+            jobHandle.Complete();
+
+            float[] next = new float[resolution];
+            for (int i = 0; i < nextMap.Length; i++)
+            {
+                next[i] = nextMap[i];
+            }
+
+
+            targetPositions.Dispose();
+
+            steeringMap = next;
+        }
+
+
+
     }
-
-   
-
 }

@@ -1,30 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
+using Friedforfun.SteeringBehaviours.Utilities;
 using UnityEngine;
 
-public class DotToLayerMask : SteeringMask
+namespace Friedforfun.SteeringBehaviours.Core2D
 {
-    [SerializeField] LayerMask LayersForSteeringMask;
-    [SerializeField] float weight = 1f;
-
-    public override float[] BuildMaskMap()
+    public class DotToLayerMask : SteeringMask
     {
-        maskMap = new float[resolution];
+        [SerializeField] LayerMask LayersForSteeringMask;
+        [SerializeField] float weight = 1f;
 
-        Collider[] checkLayers = Physics.OverlapSphere(transform.position, Range, LayersForSteeringMask);
-        if (checkLayers != null)
+        public override float[] BuildMaskMap()
         {
-            foreach (Collider collision in checkLayers)
+            maskMap = new float[resolution];
+
+            Collider[] checkLayers = Physics.OverlapSphere(transform.position, Range, LayersForSteeringMask);
+            if (checkLayers != null)
             {
-                Vector3 direction = MapOperations.VectorToTarget(transform.position, collision.ClosestPoint(transform.position));
-                Vector3 mapVector = Vector3.forward;
-                for (int i = 0; i < maskMap.Length; i++)
+                foreach (Collider collision in checkLayers)
                 {
-                    maskMap[i] += Vector3.Dot(mapVector, direction.normalized) * weight;
-                    mapVector = Quaternion.Euler(0f, resolutionAngle, 0f) * mapVector;
+                    Vector3 direction = MapOperations.VectorToTarget(transform.position, collision.ClosestPoint(transform.position));
+                    Vector3 mapVector = InitialVector;
+                    for (int i = 0; i < maskMap.Length; i++)
+                    {
+                        maskMap[i] += Vector3.Dot(mapVector, direction.normalized) * weight;
+                        mapVector = rotateAroundAxis(resolutionAngle) * mapVector;
+                    }
                 }
             }
+            return maskMap;
         }
-        return maskMap;
     }
 }
+

@@ -1040,10 +1040,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ea543b5fe63e54b80c54c9da24ee75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 20
-  spawnAreaSize: 8
+  spawnCount: 30
+  spawnAreaSize: 5
   minion: {fileID: 9118685762301980294, guid: 8c05ad1f106158945970d027a34c6695, type: 3}
-  minionOffset: 2
+  minionOffset: 1.5
 --- !u!43 &87703103
 Mesh:
   m_ObjectHideFlags: 0
@@ -7902,7 +7902,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.35812408, y: -0, z: -0, w: 0.9336741}
-  m_LocalPosition: {x: 26.87, y: 10.56, z: -5.76}
+  m_LocalPosition: {x: 35.18, y: 10.56, z: -5.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11367,7 +11367,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399986068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: 0, z: 0}
+  m_LocalPosition: {x: 46, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1544210599}

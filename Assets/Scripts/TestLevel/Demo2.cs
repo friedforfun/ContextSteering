@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using Friedforfun.SteeringBehaviours.Core2D.Buffered;
 
 public class Demo2 : MonoBehaviour
 {
@@ -17,11 +17,15 @@ public class Demo2 : MonoBehaviour
         indexPool = Enumerable.Range(0, targetPlates.Length).ToList();
         indexPool = Shuffle<int>.Fisher_Yates_CardDeck_Shuffle(indexPool);
         spawner.Spawn();
+
+        StartCoroutine(rebuildDelay());
     }
 
-    private void Start()
-    {
 
+    private IEnumerator rebuildDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        SteeringScheduler.RepopulateSteerers();
     }
 
     public GameObject GetTarget()

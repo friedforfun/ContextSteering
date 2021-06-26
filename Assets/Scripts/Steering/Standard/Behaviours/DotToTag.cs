@@ -1,43 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Utilities;
 
-public class DotToTag : SteeringBehaviour
+namespace Friedforfun.SteeringBehaviours.Core2D
 {
-    [Header("Behaviour Properties")]
-    [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
-    [SerializeField] float weight = 1f;
-    [SerializeField] string[] Tags;
-
-
-    public override float[] BuildContextMap()
+    public class DotToTag : SteeringBehaviour
     {
-        steeringMap = new float[resolution];
-        foreach (string tag in Tags)
+        [Header("Behaviour Properties")]
+        [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
+        [SerializeField] float weight = 1f;
+        [SerializeField] string[] Tags;
+
+
+        public override float[] BuildContextMap()
         {
-            // Inefficient - should cache tagged gameobjects
-            foreach (GameObject target in GameObject.FindGameObjectsWithTag(tag))
+            steeringMap = new float[resolution];
+            foreach (string tag in Tags)
             {
-                Vector3 targetVector = MapOperations.VectorToTarget(gameObject, target);
-                float distance = targetVector.magnitude;
-                if (distance < Range)
+                // Inefficient - should cache tagged gameobjects
+                foreach (GameObject target in GameObject.FindGameObjectsWithTag(tag))
                 {
-                    Vector3 mapVector = Vector3.forward;
-                    for (int i = 0; i < steeringMap.Length; i++)
+                    Vector3 targetVector = MapOperations.VectorToTarget(gameObject, target);
+                    float distance = targetVector.magnitude;
+                    if (distance < Range)
                     {
-                        steeringMap[i] += Vector3.Dot(mapVector, targetVector.normalized) * weight;
-                        mapVector = Quaternion.Euler(0f, resolutionAngle, 0f) * mapVector;
+                        Vector3 mapVector = InitialVector;
+                        for (int i = 0; i < steeringMap.Length; i++)
+                        {
+                            steeringMap[i] += Vector3.Dot(mapVector, targetVector.normalized) * weight;
+                            mapVector = rotateAroundAxis(resolutionAngle) * mapVector;
+                        }
                     }
                 }
             }
+
+            if (direction == SteerDirection.REPULSE)
+                steeringMap = MapOperations.ReverseMap(steeringMap);
+
+            return steeringMap;
         }
 
-        if (direction == SteerDirection.REPULSE)
-            steeringMap = MapOperations.ReverseMap(steeringMap);
 
-        return steeringMap;
+
     }
-
-
-
 }

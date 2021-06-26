@@ -1,75 +1,76 @@
-using System;
-using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
-using Unity.Burst;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Core2D;
 
-public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviourFromTags
+namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 {
-    [Header("Behaviour Properties")]
-    [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
-    [SerializeField] bool InvertScale = true;
-    [SerializeField] float Weight = 1f;
-
-    private float invertScalef { get { return InvertScale ? 1f : 0f; } }
-
-    private NativeArray<float> nextMap;
-    private NativeArray<Vector3> targetPositions;
-    private JobHandle jobHandle;
-
-    private void Awake()
+    public class BufferedDotToTagScaledWeight : BufferedSteeringBehaviourFromTags
     {
-        nextMap = new NativeArray<float>(resolution, Allocator.Persistent);
-    }
+        [Header("Behaviour Properties")]
+        [SerializeField] SteerDirection direction = SteerDirection.ATTRACT;
+        [SerializeField] bool InvertScale = true;
+        [SerializeField] float Weight = 1f;
 
-    private void OnDisable()
-    {
-        nextMap.Dispose();
-    }
+        private float invertScalef { get { return InvertScale ? 1f : 0f; } }
 
+        private NativeArray<float> nextMap;
+        private NativeArray<Vector3> targetPositions;
+        private JobHandle jobHandle;
 
-    public override void ScheduleJob()
-    {
-        
-        Vector3[] targetArr = getTargetVectors();
-
-        targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.TempJob);
-
-        for (int i = 0; i < targetArr.Length; i++)
+        private void Awake()
         {
-            targetPositions[i] = targetArr[i];
+            nextMap = new NativeArray<float>(resolution, Allocator.Persistent);
         }
 
-        DotToVecJob job = new DotToVecJob()
+        private void OnDisable()
         {
-            targets = targetPositions,
-            position = transform.position,
-            range = Range,
-            weight = Weight,
-            angle = resolutionAngle,
-            Weights = nextMap,
-            direction = direction,
-            scaled = true,
-            invertScale = invertScalef
-        };
-        jobHandle = job.Schedule();
-    }
-
-    public override void CompleteJob()
-    {
-        jobHandle.Complete();
-
-        float[] next = new float[resolution];
-        for (int i = 0; i < nextMap.Length; i++)
-        {
-            next[i] = nextMap[i];
+            nextMap.Dispose();
         }
 
 
-        targetPositions.Dispose();
+        public override void ScheduleJob()
+        {
 
-        steeringMap = next;
+            Vector3[] targetArr = getTargetVectors();
+
+            targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.TempJob);
+
+            for (int i = 0; i < targetArr.Length; i++)
+            {
+                targetPositions[i] = targetArr[i];
+            }
+
+            DotToVecJob job = new DotToVecJob()
+            {
+                targets = targetPositions,
+                position = transform.position,
+                range = Range,
+                weight = Weight,
+                angle = resolutionAngle,
+                Weights = nextMap,
+                direction = direction,
+                scaled = true,
+                invertScale = invertScalef
+            };
+            jobHandle = job.Schedule();
+        }
+
+        public override void CompleteJob()
+        {
+            jobHandle.Complete();
+
+            float[] next = new float[resolution];
+            for (int i = 0; i < nextMap.Length; i++)
+            {
+                next[i] = nextMap[i];
+            }
+
+
+            targetPositions.Dispose();
+
+            steeringMap = next;
+        }
+
     }
-
 }

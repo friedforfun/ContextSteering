@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Core2D;
+using Friedforfun.SteeringBehaviours.Utilities;
 
 public class SwarmDemo : MonoBehaviour
 {

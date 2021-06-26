@@ -1,35 +1,40 @@
 using System.Linq;
 
-/// <summary>
-/// Zeros out all directions with more than the least danger + a threshold
-/// </summary>
-public class BasicContextCombinator : ICombineContext
+namespace Friedforfun.SteeringBehaviours.Core2D
 {
-    private float dangerThreshold = 0.1f; // Allow steering towards a small degree of danger
-
-    public float[] CombineContext(float[] steeringMap, float[] maskMap)
+    /// <summary>
+    /// Zeros out all directions with more than the least danger + a threshold
+    /// </summary>
+    public class BasicContextCombinator : ICombineContext
     {
-        for (int i = 0; i < maskMap.Length; i++)
-        {
-            if (maskMap[i] < 0f)
-            {
-                maskMap[i] = 0f;
-            }
-        }
+        private float dangerThreshold = 0.1f; // Allow steering towards a small degree of danger
 
-        float[] contextMap = new float[steeringMap.Length];
-        float lowestDanger = maskMap.Min();
-        for (int i = 0; i < maskMap.Length; i++)
+        public float[] CombineContext(float[] steeringMap, float[] maskMap)
         {
-            if (maskMap[i] > lowestDanger + dangerThreshold)
+            for (int i = 0; i < maskMap.Length; i++)
             {
-                contextMap[i] = 0;
+                if (maskMap[i] < 0f)
+                {
+                    maskMap[i] = 0f;
+                }
             }
-            else
+
+            float[] contextMap = new float[steeringMap.Length];
+            float lowestDanger = maskMap.Min();
+            for (int i = 0; i < maskMap.Length; i++)
             {
-                contextMap[i] = steeringMap[i];
+                if (maskMap[i] > lowestDanger + dangerThreshold)
+                {
+                    contextMap[i] = 0;
+                }
+                else
+                {
+                    contextMap[i] = steeringMap[i];
+                }
             }
+            return contextMap;
         }
-        return contextMap;
     }
+
 }
+

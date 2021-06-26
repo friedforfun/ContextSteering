@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Core2D;
 
-public class Basic2dSteeringBuffered : BaseContextSteering2DBuffered
+namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 {
-    [SerializeField] bool AllowVectorZero = true;
-
-    public Basic2dSteeringBuffered()
+    public class Basic2dSteeringBuffered : BaseContextSteering2DBuffered
     {
-        ContextCombinator = new BasicContextCombinator();
-        DirectionDecider = new BasicDirectionPicker(AllowVectorZero);
+        [SerializeField] bool AllowVectorZero = true;
+
+        public Basic2dSteeringBuffered()
+        {
+            ContextCombinator = new BasicContextCombinator();
+            DirectionDecider = new BasicDirectionPicker(AllowVectorZero);
+        }
     }
 }
 
