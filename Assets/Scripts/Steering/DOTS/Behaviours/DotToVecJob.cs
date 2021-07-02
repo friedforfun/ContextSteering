@@ -22,13 +22,51 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 
         public SteerDirection direction;
 
+
+        private float sqrRange;
         public void Execute()
         {
+            
+
             for (int i = 0; i < Weights.Length; i++)
             {
                 Weights[i] = 0f;
             }
 
+            if (!scaled)
+                standardMap();
+            else
+                scaledMap();
+
+            if (direction == SteerDirection.REPULSE)
+                Weights = MapOperations.ReverseMap(Weights);
+
+        }
+
+        private void standardMap()
+        {
+            sqrRange = range * range;
+
+            foreach (Vector3 target in targets)
+            {
+                Vector3 targetVector = MapOperations.VectorToTarget(position, target);
+                float distance = targetVector.sqrMagnitude;
+                if (distance < sqrRange)
+                {
+                    Vector3 mapVector = Vector3.forward;
+                    for (int i = 0; i < Weights.Length; i++)
+                    {
+
+                        Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * weight;
+
+                        mapVector = Quaternion.Euler(0f, angle, 0f) * mapVector;
+                    }
+                }
+            }
+        }
+
+        private void scaledMap()
+        {
             foreach (Vector3 target in targets)
             {
                 Vector3 targetVector = MapOperations.VectorToTarget(position, target);
@@ -38,18 +76,13 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
                     Vector3 mapVector = Vector3.forward;
                     for (int i = 0; i < Weights.Length; i++)
                     {
-                        if (!scaled)
-                            Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * weight;
-                        else
-                            Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * Mathf.Abs((invertScale * 1f) - (distance / range)) * weight;
+                        Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * Mathf.Abs((invertScale * 1f) - (distance / range)) * weight;
                         mapVector = Quaternion.Euler(0f, angle, 0f) * mapVector;
                     }
                 }
             }
-
-            if (direction == SteerDirection.REPULSE)
-                Weights = MapOperations.ReverseMap(Weights);
-
         }
+
+
     }
 }
