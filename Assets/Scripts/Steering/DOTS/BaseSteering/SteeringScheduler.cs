@@ -6,9 +6,6 @@ using UnityEngine;
 
 namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 {
-
-    public delegate void DuringContextUpdate();
-
     public class SteeringScheduler : MonoBehaviour
     {
         private static readonly Lazy<SteeringScheduler> singleton = new Lazy<SteeringScheduler>(() => Init(), LazyThreadSafetyMode.ExecutionAndPublication);
@@ -29,11 +26,9 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 
         }
 
-
-        public DuringContextUpdate duringContextUpdate;
-
         BaseContextSteering2DBuffered[] Steerers;
 
+        [Tooltip("How many ways to split up the behaviour updates, higher values will make the agents change direction less frequently but reduce the burden on the system.")]
         [SerializeField] int SchedulingGroups = 1;
         int currentGroupIndex = 0;
 
@@ -46,19 +41,13 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
         
         }
 
-        public static int AmIInSteerers(BaseContextSteering2DBuffered self)
-        {
-            List<BaseContextSteering2DBuffered> steeringList = instance.Steerers.ToList();
-            return steeringList.IndexOf(self);
-        }
-
         public static void RepopulateSteerers()
         {
             instance.Steerers = FindObjectsOfType<BaseContextSteering2DBuffered>();
         }
 
 
-        private static void ScheduleBehavioursTest()
+        private static void ScheduleBehavioursGrouped()
         {
 
             int gSize = instance.groupSize;
@@ -71,7 +60,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
         }
 
 
-        private static void CompleteBehavioursTest()
+        private static void CompleteBehavioursGrouped()
         {
             int gSize = instance.groupSize;
 
@@ -117,9 +106,9 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
         {
             computeGroupSize();
 
-            ScheduleBehavioursTest();
+            ScheduleBehavioursGrouped();
 
-            CompleteBehavioursTest();
+            CompleteBehavioursGrouped();
         }
 
     }

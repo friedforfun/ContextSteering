@@ -64,6 +64,12 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
             {
                 mask.InstantiateMaskMap(steeringParameters);
             }
+
+            SteeringScheduler s = FindObjectOfType<SteeringScheduler>();
+            if (!s)
+            {
+                Debug.LogError("No SteeringScheduler found in the scene, this is required to use buffered steering");
+            }
         }
 
 
@@ -101,20 +107,6 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 
         
         }
-
-
-       /* public ContextSteeringStruct CreateJob()
-        {
-
-
-            // this stuff needs to happen inside a job
-            contextMap = ContextCombinator.CombineContext(buildSteeringBehaviours(), buildSteeringMasks());
-            lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
-            // ------------------------------------------------
-
-            // access each steering behaviour and create job struct that will be added to a native array of jobs to be run by the steering scheduler
-            return new ContextSteeringStruct();
-        }*/
 
 
         private void swap()

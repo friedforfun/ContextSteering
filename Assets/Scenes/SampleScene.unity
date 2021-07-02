@@ -3320,7 +3320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91488272b38b5f043b6db3ae02f30048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SchedulingGroups: 2
+  SchedulingGroups: 4
 --- !u!43 &391899295
 Mesh:
   m_ObjectHideFlags: 0

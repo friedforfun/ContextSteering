@@ -16,6 +16,8 @@ public class AgentCommon : MonoBehaviour
     {
         baseMaterial = childRenderer.material;
         StartCoroutine(collisionDelay());
+
+        // It is essential that repopulate steerers is called when we add a new agent to the scene
         SteeringScheduler.RepopulateSteerers();
     }
 
