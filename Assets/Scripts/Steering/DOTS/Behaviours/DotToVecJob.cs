@@ -2,7 +2,6 @@ using Unity.Jobs;
 using Unity.Burst;
 using UnityEngine;
 using Unity.Collections;
-using Friedforfun.SteeringBehaviours.Core2D;
 using Friedforfun.SteeringBehaviours.Utilities;
 
 namespace Friedforfun.SteeringBehaviours.Core2D.Buffered

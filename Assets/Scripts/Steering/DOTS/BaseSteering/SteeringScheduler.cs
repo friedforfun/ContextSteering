@@ -23,11 +23,8 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
                 // could refactor to non-singleton pattern, depends on usecase
                 Debug.LogError("No instances of SteeringScheduler found in scene.");
             }
-            else
-            {
-                //steeringScheduler.fps =  new FPSCounter();
-            }
 
+            DontDestroyOnLoad(steeringScheduler);
             return steeringScheduler;
 
         }
@@ -40,8 +37,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
         [SerializeField] int SchedulingGroups = 1;
         int currentGroupIndex = 0;
 
-        // FPSCounter fps;
-        int CurrentFPS = 0;
+        int groupSize;
         // Needs to tell all the steerers to schedules their jobs
 
         private void Start()
@@ -64,26 +60,38 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 
         private static void ScheduleBehavioursTest()
         {
-            // need to fix this logic
-            for (int i = instance.currentGroupIndex * instance.SchedulingGroups; i < Mathf.Ceil(instance.Steerers.Length / instance.SchedulingGroups) * (instance.currentGroupIndex + 1); i++)
+
+            int gSize = instance.groupSize;
+
+            for (int i = instance.currentGroupIndex * gSize; i < (gSize * (instance.currentGroupIndex + 1)); i++)
             {
                 if (i < instance.Steerers.Length)
                     instance.Steerers[i].ScheduleJobs();
             }
         }
 
-        // needs to tell all the steerers to complete their jobs
+
         private static void CompleteBehavioursTest()
         {
-            // need to fix this logic so it iterates over 100% of the steering behaviours
-            for (int i = instance.currentGroupIndex * instance.SchedulingGroups; i < Mathf.Ceil(instance.Steerers.Length / instance.SchedulingGroups) * (instance.currentGroupIndex + 1); i++)
+            int gSize = instance.groupSize;
+
+
+            for (int i = instance.currentGroupIndex * gSize; i < gSize * (instance.currentGroupIndex + 1); i++)
             {
                 if (i < instance.Steerers.Length)
                     instance.Steerers[i].CompleteJobs();
             }
             instance.currentGroupIndex++;
             if (instance.currentGroupIndex == instance.SchedulingGroups)
+            {
                 instance.currentGroupIndex = 0;
+            }
+                
+        }
+
+        private static void computeGroupSize()
+        {
+            instance.groupSize = (int) Mathf.Ceil((instance.Steerers.Length + 1.0f) / instance.SchedulingGroups);
         }
 
         private static void ScheduleBehaviours()
@@ -105,18 +113,13 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
         }
 
 
-        private void Update()
+        private void FixedUpdate()
         {
-            //CurrentFPS = Measure();
+            computeGroupSize();
 
-                ScheduleBehavioursTest();
+            ScheduleBehavioursTest();
 
-                // onUpdate
-                //duringContextUpdate();
-
-                CompleteBehavioursTest();
-        
-
+            CompleteBehavioursTest();
         }
 
         const float fpsMeasurePeriod = 0.5f;
@@ -136,28 +139,6 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
             }
             return m_CurrentFps;
         }
-
-        /*private class FPSCounter
-        {
-            const float fpsMeasurePeriod = 0.5f;
-            private int m_FpsAccumulator = 0;
-            private float m_FpsNextPeriod = 0;
-            private int m_CurrentFps = 0;
-
-            public int Measure()
-            {
-                // measure average frames per second
-                m_FpsAccumulator++;
-                if (Time.realtimeSinceStartup > m_FpsNextPeriod)
-                {
-                    m_CurrentFps = (int)(m_FpsAccumulator / fpsMeasurePeriod);
-                    m_FpsAccumulator = 0;
-                    m_FpsNextPeriod += fpsMeasurePeriod;
-                }
-                return m_CurrentFps;
-            }
-        }*/
-
 
     }
 
