@@ -3,6 +3,7 @@ using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
 using Friedforfun.SteeringBehaviours.Core2D.Buffered;
 
+[SelectionBase]
 public class AgentCommon : MonoBehaviour
 {
 
