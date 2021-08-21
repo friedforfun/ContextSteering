@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 2
-  ShowDebug: 1
+  ShowDebug: 0
   MapSize: 2
   DebugColor: {r: 1, g: 0, b: 0, a: 1}
   LayersForSteeringMask:
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 2
-  ShowDebug: 1
+  ShowDebug: 0
   MapSize: 2
   DebugColor: {r: 0.3962264, g: 0.19624421, b: 0.19624421, a: 1}
   Tags:
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 4
-  ShowDebug: 1
+  ShowDebug: 0
   MapSize: 4
   DebugColor: {r: 0, g: 0.7911868, b: 1, a: 1}
   direction: 1

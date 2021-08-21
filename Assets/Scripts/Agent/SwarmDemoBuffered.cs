@@ -22,7 +22,7 @@ public class SwarmDemoBuffered : MonoBehaviour
     {
         steeringScheduler = FindObjectOfType<SteeringScheduler>();
 
-        steeringScheduler.duringContextUpdate += SchedulerUpdate;
+        //steeringScheduler.duringContextUpdate += SchedulerUpdate;
 
         dotToPosition = gameObject.GetComponent<BufferedDotToPosition>();
 
@@ -53,7 +53,7 @@ public class SwarmDemoBuffered : MonoBehaviour
 
     private void OnDisable()
     {
-        steeringScheduler.duringContextUpdate -= SchedulerUpdate;
+        //steeringScheduler.duringContextUpdate -= SchedulerUpdate;
     }
 
     void Update()
