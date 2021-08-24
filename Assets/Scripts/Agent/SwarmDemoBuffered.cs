@@ -11,7 +11,7 @@ namespace Friedforfun.SteeringBehaviours.Demo
         [SerializeField] private GameObject target;
 
 
-        private SteeringScheduler steeringScheduler;
+        //private SteeringScheduler steeringScheduler;
 
         [Range(0.1f, 20f)]
         [SerializeField] private float Speed = 1f;
@@ -22,7 +22,7 @@ namespace Friedforfun.SteeringBehaviours.Demo
 
         private void Start()
         {
-            steeringScheduler = FindObjectOfType<SteeringScheduler>();
+            //steeringScheduler = FindObjectOfType<SteeringScheduler>();
 
             //steeringScheduler.duringContextUpdate += SchedulerUpdate;
 
