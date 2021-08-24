@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core2D.Buffered;
+using Friedforfun.SteeringBehaviours.Utilities;
 
 namespace Friedforfun.SteeringBehaviours.Demo
 {
