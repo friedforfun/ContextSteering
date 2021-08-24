@@ -1,35 +1,39 @@
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
 
-public class BoxPorter : MonoBehaviour
+namespace Friedforfun.SteeringBehaviours.Demo
 {
-    [SerializeField] private Vector3[] jumpPoints;
-    private int jumpIndex = 0;
-
-    private void OnTriggerEnter(Collider other)
+    public class BoxPorter : MonoBehaviour
     {
-        if (other.CompareTag("Agent"))
+        [SerializeField] private Vector3[] jumpPoints;
+        private int jumpIndex = 0;
+
+        private void OnTriggerEnter(Collider other)
         {
-            if (jumpIndex == jumpPoints.Length)
+            if (other.CompareTag("Agent"))
             {
-                jumpIndex = 0;
+                if (jumpIndex == jumpPoints.Length)
+                {
+                    jumpIndex = 0;
+                }
+                transform.localPosition = jumpPoints[jumpIndex];
+                jumpIndex++;
             }
-            transform.localPosition = jumpPoints[jumpIndex];
-            jumpIndex++;
         }
-    }
 
-    private void Awake()
-    {
-        //Debug.Log($"Registered Box under tag: {gameObject.tag}, at position: {transform.position}");
+        private void Awake()
+        {
+            //Debug.Log($"Registered Box under tag: {gameObject.tag}, at position: {transform.position}");
 
-        ReferencePool.Register(gameObject);
-    }
+            ReferencePool.Register(gameObject);
+        }
 
 
-    private void OnDisable()
-    {
-        ReferencePool.DeRegister(gameObject);
+        private void OnDisable()
+        {
+            ReferencePool.DeRegister(gameObject);
+        }
+
     }
 
 }

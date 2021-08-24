@@ -3,65 +3,69 @@ using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
 using Friedforfun.SteeringBehaviours.Core2D.Buffered;
 
-[SelectionBase]
-public class AgentCommon : MonoBehaviour
+namespace Friedforfun.SteeringBehaviours.Demo
 {
-
-    [SerializeField] private Renderer childRenderer;
-    [SerializeField] private Material impactMaterial;
-
-    private Material baseMaterial;
-    private bool blockCollision = true;
-
-    private void Start()
+    [SelectionBase]
+    public class AgentCommon : MonoBehaviour
     {
-        baseMaterial = childRenderer.material;
-        StartCoroutine(collisionDelay());
 
-        // It is essential that repopulate steerers is called when we add a new agent to the scene
-        SteeringScheduler.RepopulateSteerers();
-    }
+        [SerializeField] private Renderer childRenderer;
+        [SerializeField] private Material impactMaterial;
 
-    private void Awake()
-    {
-        ReferencePool.Register(gameObject);
-        //Debug.Log("Registered Self");
-    }
+        private Material baseMaterial;
+        private bool blockCollision = true;
 
-    private void OnDisable()
-    {
-        ReferencePool.DeRegister(gameObject);
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (blockCollision)
-            return;
-
-        if (collision.gameObject.tag != "Floor")
+        private void Start()
         {
-            childRenderer.material = impactMaterial;
-            //Debug.Log($"Collided with: {collision.gameObject.name}");
+            baseMaterial = childRenderer.material;
+            StartCoroutine(collisionDelay());
+
+            // It is essential that repopulate steerers is called when we add a new agent to the scene
+            SteeringScheduler.RepopulateSteerers();
         }
 
-    }
+        private void Awake()
+        {
+            ReferencePool.Register(gameObject);
+            //Debug.Log("Registered Self");
+        }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        StartCoroutine(resetColour());
-    }
+        private void OnDisable()
+        {
+            ReferencePool.DeRegister(gameObject);
+        }
 
-    IEnumerator resetColour()
-    {
-        yield return new WaitForSeconds(0.5f);
-        childRenderer.material = baseMaterial;
-    }
 
-    IEnumerator collisionDelay()
-    {
-        yield return new WaitForSeconds(0.5f);
-        blockCollision = false;
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (blockCollision)
+                return;
+
+            if (collision.gameObject.tag != "Floor")
+            {
+                childRenderer.material = impactMaterial;
+                //Debug.Log($"Collided with: {collision.gameObject.name}");
+            }
+
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            StartCoroutine(resetColour());
+        }
+
+        IEnumerator resetColour()
+        {
+            yield return new WaitForSeconds(0.5f);
+            childRenderer.material = baseMaterial;
+        }
+
+        IEnumerator collisionDelay()
+        {
+            yield return new WaitForSeconds(0.5f);
+            blockCollision = false;
+        }
+
     }
 
 }

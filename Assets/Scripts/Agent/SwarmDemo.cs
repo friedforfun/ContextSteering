@@ -4,51 +4,55 @@ using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core2D;
 using Friedforfun.SteeringBehaviours.Utilities;
 
-public class SwarmDemo : MonoBehaviour
+namespace Friedforfun.SteeringBehaviours.Demo
 {
-    [SerializeField] private BaseContextSteering2D steer;
-    [SerializeField] private CharacterController control;
-    [SerializeField] private GameObject target;
-
-
-    [Range(0.1f, 20f)]
-    [SerializeField] private float Speed = 1f;
-    private Vector3 LastDirection = Vector3.forward;
-
-
-    private bool allowDirectionChange = true;
-
-    void Update()
+    public class SwarmDemo : MonoBehaviour
     {
-        // Apply movement based on direction obtained
-        control.SimpleMove(LastDirection * Speed);
-
-        if (target != null)
-            // Look towards target
-            transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, target).normalized);
-    }
+        [SerializeField] private BaseContextSteering2D steer;
+        [SerializeField] private CharacterController control;
+        [SerializeField] private GameObject target;
 
 
+        [Range(0.1f, 20f)]
+        [SerializeField] private float Speed = 1f;
+        private Vector3 LastDirection = Vector3.forward;
 
-    private void FixedUpdate()
-    {
-        // Get the movement direction from the steering module
-        if (allowDirectionChange)
+
+        private bool allowDirectionChange = true;
+
+        void Update()
         {
-            allowDirectionChange = false;
-            LastDirection = steer.MoveDirection();
-            StartCoroutine(resetDirectionBlocker());
+            // Apply movement based on direction obtained
+            control.SimpleMove(LastDirection * Speed);
+
+            if (target != null)
+                // Look towards target
+                transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, target).normalized);
         }
 
+
+
+        private void FixedUpdate()
+        {
+            // Get the movement direction from the steering module
+            if (allowDirectionChange)
+            {
+                allowDirectionChange = false;
+                LastDirection = steer.MoveDirection();
+                StartCoroutine(resetDirectionBlocker());
+            }
+
+        }
+
+
+        IEnumerator resetDirectionBlocker()
+        {
+            yield return new WaitForSeconds(0.1f);
+            allowDirectionChange = true;
+        }
+
+
+
     }
-
-
-    IEnumerator resetDirectionBlocker()
-    {
-        yield return new WaitForSeconds(0.1f);
-        allowDirectionChange = true;
-    }
-
-
-
 }
+

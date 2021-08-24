@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Demo;
 
-public class TargetPlate : MonoBehaviour
+namespace Friedforfun.SteeringBehaviours.Demo
 {
-    private void OnTriggerEnter(Collider other)
+    public class TargetPlate : MonoBehaviour
     {
-        SwarmDemoBuffered swarmdemo = other.GetComponent<SwarmDemoBuffered>();
-
-        if (swarmdemo != null)
+        private void OnTriggerEnter(Collider other)
         {
-            swarmdemo.ReaquireTarget(gameObject);
+            SwarmDemoBuffered swarmdemo = other.GetComponent<SwarmDemoBuffered>();
+
+            if (swarmdemo != null)
+            {
+                swarmdemo.ReaquireTarget(gameObject);
+            }
         }
     }
 }
+
