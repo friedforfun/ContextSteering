@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Concurrent;
 using System.Linq;
 using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.SteeringBehaviours.Core;
 
 
 namespace Friedforfun.SteeringBehaviours.Core2D
