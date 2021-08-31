@@ -3,6 +3,7 @@ using Friedforfun.SteeringBehaviours.Utilities;
 using UnityEngine;
 using System.Collections.Concurrent;
 using System.Linq;
+using Friedforfun.SteeringBehaviours.Core;
 
 namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 {
@@ -57,7 +58,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 
             foreach (BufferedSteeringBehaviour behaviour in SteeringBehaviours)
             {
-                behaviour.InstantiateContextMap(steeringParameters.ContextMapResolution);
+                behaviour.InstantiateContextMap(steeringParameters);
             }
 
             foreach(SteeringMask mask in SteeringMasks)

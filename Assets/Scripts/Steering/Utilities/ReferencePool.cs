@@ -11,16 +11,16 @@ namespace Friedforfun.SteeringBehaviours.Utilities
     public class ReferencePool : Singleton<ReferencePool>
     {
 
-        private Dictionary<string, List<GameObject>> registeredTags = new Dictionary<string, List<GameObject>>();
-        private Dictionary<string, Vector3[]> positionCache = new Dictionary<string, Vector3[]>();
+        private static Dictionary<string, List<GameObject>> registeredTags = new Dictionary<string, List<GameObject>>();
+        private static Dictionary<string, Vector3[]> positionCache = new Dictionary<string, Vector3[]>();
 
         public static void Register(GameObject go)
         {
             List<GameObject> go_list = null;
-            if (!Instance.registeredTags.TryGetValue(go.tag, out go_list))
+            if (!registeredTags.TryGetValue(go.tag, out go_list))
             {
                 go_list = new List<GameObject>();
-                Instance.registeredTags[go.tag] = go_list;
+                registeredTags[go.tag] = go_list;
             }
 
             if (!go_list.Contains(go))
@@ -30,7 +30,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         public static void DeRegister(GameObject go)
         {
             List<GameObject> go_list = null;
-            if (Instance.registeredTags.TryGetValue(go.tag, out go_list))
+            if (registeredTags.TryGetValue(go.tag, out go_list))
             {
                 go_list.Remove(go);
             }
@@ -43,7 +43,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         public static GameObject[] GetGameObjectsByTag(string tag)
         {
             List<GameObject> go_list = null;
-            if (!Instance.registeredTags.TryGetValue(tag, out go_list))
+            if (!registeredTags.TryGetValue(tag, out go_list))
             {
                 Debug.Log("(Remove this from ReferencePool.cs) No gameobjects found for this tag");
                 go_list = new List<GameObject>();
@@ -54,7 +54,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
 
         private void LateUpdate()
         {
-            Instance.positionCache.Clear();
+            positionCache.Clear();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         public static Vector3[] GetVector3sByTag(string tag)
         {
             Vector3[] pos_arr = null;
-            if (!Instance.positionCache.TryGetValue(tag, out pos_arr))
+            if (!positionCache.TryGetValue(tag, out pos_arr))
             {
 
                 GameObject[] tempTargets = GetGameObjectsByTag(tag);
@@ -77,7 +77,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
                     pos_arr[i] = tempTargets[i].transform.position;
                 }
 
-                Instance.positionCache[tag] = pos_arr;
+                positionCache[tag] = pos_arr;
             }
 
             return pos_arr;
