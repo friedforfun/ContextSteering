@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Friedforfun.SteeringBehaviours.Core2D
+namespace Friedforfun.SteeringBehaviours.Core
 {
     public interface IDecideDirection
     {
