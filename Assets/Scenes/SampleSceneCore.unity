@@ -21287,10 +21287,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 21
-  MapDebugger:
-    ShowDebug: 0
-    MapSize: 2
-    DebugColor: {r: 1, g: 0, b: 0, a: 1}
+  ShowDebug: 0
+  MapSize: 2
+  DebugColor: {r: 0, g: 1, b: 0, a: 1}
   direction: 0
   weight: 1
   Tags:
@@ -29007,10 +29006,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1509669014}
     m_Modifications:
-    - target: {fileID: 242089566551712363, guid: cdfb864c060a86747975107d17df2299, type: 3}
-      propertyPath: ShowDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7164804104516909935, guid: cdfb864c060a86747975107d17df2299, type: 3}
       propertyPath: m_Mass
       value: 10
@@ -29105,10 +29100,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9118685762301980315, guid: cdfb864c060a86747975107d17df2299, type: 3}
       propertyPath: m_StepOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118685762301980316, guid: cdfb864c060a86747975107d17df2299, type: 3}
-      propertyPath: ShowDebug
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -3,6 +3,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.SteeringBehaviours.Core;
 
 namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.SteeringBehaviours.Core;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

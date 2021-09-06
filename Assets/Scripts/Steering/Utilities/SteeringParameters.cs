@@ -1,14 +1,8 @@
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Core;
 
 namespace Friedforfun.SteeringBehaviours.Utilities
 {
-    public enum RotationAxis
-    {
-        XAxis,
-        YAxis,
-        ZAxis
-    }
-
     [System.Serializable]
     public class SteeringParameters
     {

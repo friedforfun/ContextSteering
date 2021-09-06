@@ -1,8 +1,6 @@
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+using Friedforfun.SteeringBehaviours.Core;
 
 namespace Friedforfun.SteeringBehaviours.Core2D
 {

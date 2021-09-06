@@ -1,6 +1,7 @@
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.Core;
 
 namespace Friedforfun.SteeringBehaviours.Utilities
 {
