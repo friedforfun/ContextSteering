@@ -1,4 +1,4 @@
-using System.Linq;
+
 using System.Collections.Generic;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
@@ -10,14 +10,7 @@ namespace Friedforfun.SteeringBehaviours.Core
     /// </summary>
     public class CoreSteeringController : MonoBehaviour
     {
-        [Header("Behaviours")]
-        public SteeringParameters steeringParameters;
 
-        [Tooltip("Attractor and Repulsor strategies (directions in which we will move towards or away from.)")]
-        public CoreSteeringBehaviour[] SteeringBehaviours;
-
-        [Tooltip("Masking strategies (directions in which to block movement).")]
-        public CoreSteeringMask[] SteeringMasks;
 
         [Tooltip("A strategy for combining steering and mask maps.")]
         protected ICombineContext ContextCombinator;
@@ -25,8 +18,7 @@ namespace Friedforfun.SteeringBehaviours.Core
         [Tooltip("A strategy for selecting the final output direction from the context map.")]
         protected IDecideDirection DirectionDecider;
 
-        private float[] contextMap; // The weights of each direction in the context map itself
-        private Vector3 lastVector; // The previous vector output.
+        protected Vector3 outputVector; // The vector output. Update this value when a new movement direction has been calculated.
 
         /// <summary>
         /// Gets the most desired direction to move in. Normalised.
@@ -34,7 +26,7 @@ namespace Friedforfun.SteeringBehaviours.Core
         /// <returns></returns>
         public Vector3 MoveDirection()
         {
-            return lastVector.normalized;
+            return outputVector.normalized;
         }
 
         /// <summary>
@@ -45,30 +37,9 @@ namespace Friedforfun.SteeringBehaviours.Core
         /// <returns></returns>
         public Vector3 MoveVector()
         {
-            return lastVector;
+            return outputVector;
         }
 
-        /// <summary>
-        /// Merge bag of context maps by summing each element
-        /// </summary>
-        /// <param name="maps"></param>
-        /// <returns></returns>
-        protected float[] mergeMaps(ICollection<float[]> maps)
-        {
-            float[] contextMap = new float[steeringParameters.ContextMapResolution];
-            for (int i = 0; i < steeringParameters.ContextMapResolution; i++)
-            {
-                contextMap[i] = 0f;
-            }
-
-            foreach (float[] map in maps)
-            {
-                var newMap = contextMap.Zip(map, (x, y) => x + y);
-                contextMap = newMap.ToArray();
-            }
-
-            return contextMap;
-        }
 
     }
 
