@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
 using Friedforfun.SteeringBehaviours.Utilities;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -15,8 +12,8 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected float resolutionAngle; // Each point is seperated by a some degrees rotation (360/contextMap.Length)
         protected RotationAxis ContextMapAxis;
 
-        [SerializeField] public MapVisualiserParameters MapDebugger;
-        private MapVisualiser2D MapDebugVis = new MapVisualiser2D();
+        [SerializeField] public PlanarMapVisualiserParameters MapDebugger;
+        private MapVisualiserPlanar MapDebugVis = new MapVisualiserPlanar();
 
 
         /// <summary>

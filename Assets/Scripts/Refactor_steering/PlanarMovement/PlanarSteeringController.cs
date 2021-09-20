@@ -31,6 +31,22 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return mergeMaps(contextMaps);
         }
 
+        //! TODO: Refactor awake out, ideally we want to update the context maps if the resolution is changed at runtime
+        protected void Awake()
+        {
+            var resolutionAngle = 360 / (float)steeringParameters.ContextMapResolution;
+
+            foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
+            {
+                behaviour.InstantiateContextMap(steeringParameters);
+            }
+
+            foreach (PlanarSteeringMask mask in SteeringMasks)
+            {
+                mask.InstantiateMaskMap(steeringParameters);
+            }
+        }
+
 
         /// <summary>
         /// Merge collection of context maps by summing each element

@@ -17,8 +17,8 @@ namespace Friedforfun.SteeringBehaviours.Core2D
         protected RotationAxis ContextMapAxis;
         protected Vector3 InitialVector;
 
-        [SerializeField] public MapVisualiserParameters MapDebugger;
-        private MapVisualiser2D MapDebugVis = new MapVisualiser2D();
+        [SerializeField] public PlanarMapVisualiserParameters MapDebugger;
+        private MapVisualiserPlanar MapDebugVis = new MapVisualiserPlanar();
 
         /// <summary>
         /// Instantiates the context map weights and computes the angle between each direction

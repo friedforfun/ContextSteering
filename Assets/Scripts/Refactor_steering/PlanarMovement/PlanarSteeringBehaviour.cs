@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
 using Friedforfun.SteeringBehaviours.Utilities;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -16,8 +13,8 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected float resolutionAngle { get; private set; } // Each point is seperated by a some degrees rotation (360/steeringMap.Length)
         protected RotationAxis ContextMapAxis;
 
-        [SerializeField] public MapVisualiserParameters MapDebugger;
-        private MapVisualiser2D MapDebugVis = new MapVisualiser2D();
+        [SerializeField] public PlanarMapVisualiserParameters MapDebugger;
+        private MapVisualiserPlanar MapDebugVis = new MapVisualiserPlanar();
 
         /// <summary>
         /// Instantiates the context map weights and computes the angle between each direction
@@ -25,11 +22,14 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         /// <param name="steeringParameters"></param>
         public override void InstantiateContextMap(PlanarSteeringParameters steeringParameters)
         {
+            // refactor this data into reference to steeringParameters class
             InitialVector = steeringParameters.InitialVector;
             ContextMapAxis = steeringParameters.ContextMapRotationAxis;
             resolution = steeringParameters.ContextMapResolution;
-            resolutionAngle = 360 / (float)resolution;
-            steeringMap = new float[resolution];
+            resolutionAngle = steeringParameters.ResolutionAngle;
+            // ---- ^^^ this data ^^^ ----
+
+            steeringMap = new float[resolution]; // re-instantiate this array when resolution changes
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Friedforfun.SteeringBehaviours.Utilities
 {
     [System.Serializable]
-    public class MapVisualiserParameters
+    public class PlanarMapVisualiserParameters
     {
         [Tooltip("Enable/Disable debug visuals")]
         [SerializeField] public bool ShowDebug = false;
@@ -16,7 +16,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         [SerializeField] public Color DebugColor = Color.red;
     }
 
-    public class MapVisualiser2D 
+    public class MapVisualiserPlanar 
     {
 
 
@@ -24,7 +24,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         /// <summary>
         /// Call this inside OnDrawGizmos in the steering behaviour or mask you wish to visualise.
         /// </summary>
-        public void InDrawGizmos(MapVisualiserParameters MapParams, float[] contextMap, float range, float resolutionAngle, Transform transform)
+        public void InDrawGizmos(PlanarMapVisualiserParameters MapParams, float[] contextMap, float range, float resolutionAngle, Transform transform)
         {
             bool ShowDebug = MapParams.ShowDebug;
             float MapSize = MapParams.MapSize;

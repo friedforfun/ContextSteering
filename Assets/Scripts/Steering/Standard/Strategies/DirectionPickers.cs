@@ -115,6 +115,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D
             }
 
             // highest adjacent index to the max
+            // need to handle array out of bounds issue (maxIndex is 0 || maxIndex is array length)
             int secondaryIndex = contextMap[maxIndex - 1] > contextMap[maxIndex + 1] ? maxIndex - 1 : maxIndex + 1; 
 
         
