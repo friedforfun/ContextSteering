@@ -15,7 +15,7 @@ namespace Friedforfun.SteeringBehaviours.Core
 
         public bool scaled;
 
-        public Vector3 position;
+        public Vector3 my_position;
         public float range, weight, angle, invertScale;
 
         public NativeArray<float> Weights;
@@ -49,7 +49,7 @@ namespace Friedforfun.SteeringBehaviours.Core
 
             foreach (Vector3 target in targets)
             {
-                Vector3 targetVector = MapOperations.VectorToTarget(position, target);
+                Vector3 targetVector = MapOperations.VectorToTarget(my_position, target);
                 float distance = targetVector.sqrMagnitude;
                 if (distance < sqrRange)
                 {
@@ -69,7 +69,7 @@ namespace Friedforfun.SteeringBehaviours.Core
         {
             foreach (Vector3 target in targets)
             {
-                Vector3 targetVector = MapOperations.VectorToTarget(position, target);
+                Vector3 targetVector = MapOperations.VectorToTarget(my_position, target);
                 float distance = targetVector.magnitude;
                 if (distance < range)
                 {

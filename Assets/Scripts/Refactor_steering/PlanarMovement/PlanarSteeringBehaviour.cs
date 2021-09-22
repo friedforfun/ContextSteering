@@ -8,6 +8,13 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     public abstract class PlanarSteeringBehaviour : CoreSteeringBehaviour<PlanarSteeringParameters>
     {
+        [SerializeField] protected SteerDirection Direction = SteerDirection.ATTRACT;
+        [SerializeField] protected float Weight = 1f;
+        [SerializeField] protected bool ScaleOnDistance = false;
+        [SerializeField] bool InvertScale = true;
+
+        protected float invertScalef { get { return InvertScale ? 1f : 0f; } }
+
         protected float[] steeringMap = null; // The map of weights, each element represents our degree of interest in the direction that element corresponds to.
         protected PlanarSteeringParameters steeringParameters;
 

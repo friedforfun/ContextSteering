@@ -11,6 +11,7 @@ namespace Friedforfun.SteeringBehaviours.Core
     /// </summary> 
     public abstract class CoreSteeringBehaviour<T> : MonoBehaviour where T: CoreSteeringParameters
     {
+        [Header("Behaviour Properties")]
         [Tooltip("Range at which the behaviour has an effect.")]
         [SerializeField] protected float Range;
         
