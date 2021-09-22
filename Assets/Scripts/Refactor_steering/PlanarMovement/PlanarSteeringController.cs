@@ -11,11 +11,11 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         [Header("Behaviours")]
         public PlanarSteeringParameters steeringParameters;
 
-        [Tooltip("Attractor and Repulsor strategies (directions in which we will move towards or away from.)")]
-        public PlanarSteeringBehaviour[] SteeringBehaviours;
+        //[Tooltip("Attractor and Repulsor strategies (directions in which we will move towards or away from.)")]
+        private PlanarSteeringBehaviour[] SteeringBehaviours;
 
-        [Tooltip("Masking strategies (directions in which to block movement).")]
-        public PlanarSteeringMask[] SteeringMasks;
+        //[Tooltip("Masking strategies (directions in which to block movement).")]
+        private PlanarSteeringMask[] SteeringMasks;
 
         protected float[] contextMap; // The weights of each direction in the context map itself
 
@@ -31,15 +31,17 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return mergeMaps(contextMaps);
         }
 
-        //! TODO: Refactor awake out, ideally we want to update the context maps if the resolution is changed at runtime
+        //! TODO: Refactor awake out
         protected void Awake()
         {
-            var resolutionAngle = 360 / (float)steeringParameters.ContextMapResolution;
+            SteeringBehaviours = gameObject.GetComponentsInChildren<PlanarSteeringBehaviour>();
 
             foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
             {
                 behaviour.InstantiateContextMap(steeringParameters);
             }
+
+            SteeringMasks = gameObject.GetComponentsInChildren<PlanarSteeringMask>();
 
             foreach (PlanarSteeringMask mask in SteeringMasks)
             {

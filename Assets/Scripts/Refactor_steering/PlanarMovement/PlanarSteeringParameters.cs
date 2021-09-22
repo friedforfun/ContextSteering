@@ -31,6 +31,12 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         [HideInInspector]
         public float ResolutionAngle;
+
+        [HideInInspector]
+        public delegate void OnResolutionChangeDelegate();
+
+        [HideInInspector]
+        public event OnResolutionChangeDelegate OnResolutionChange;
               
 
     }

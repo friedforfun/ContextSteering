@@ -8,10 +8,8 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     public abstract class PlanarSteeringBehaviour : CoreSteeringBehaviour<PlanarSteeringParameters>
     {
-        protected int resolution { get; private set; } // The number of directions we compute weights for.
         protected float[] steeringMap = null; // The map of weights, each element represents our degree of interest in the direction that element corresponds to.
-        protected float resolutionAngle { get; private set; } // Each point is seperated by a some degrees rotation (360/steeringMap.Length)
-        protected RotationAxis ContextMapAxis;
+        protected PlanarSteeringParameters steeringParameters;
 
         [SerializeField] public PlanarMapVisualiserParameters MapDebugger;
         private MapVisualiserPlanar MapDebugVis = new MapVisualiserPlanar();
@@ -22,14 +20,22 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         /// <param name="steeringParameters"></param>
         public override void InstantiateContextMap(PlanarSteeringParameters steeringParameters)
         {
-            // refactor this data into reference to steeringParameters class
-            InitialVector = steeringParameters.InitialVector;
-            ContextMapAxis = steeringParameters.ContextMapRotationAxis;
-            resolution = steeringParameters.ContextMapResolution;
-            resolutionAngle = steeringParameters.ResolutionAngle;
-            // ---- ^^^ this data ^^^ ----
+            this.steeringParameters = steeringParameters;
+            this.steeringParameters.OnResolutionChange += MapResolutionChangeHandler;
+            steeringMap = new float[steeringParameters.ContextMapResolution];
+        }
 
-            steeringMap = new float[resolution]; // re-instantiate this array when resolution changes
+        /// <summary>
+        /// Runs when the context map resolution is changed at runtime
+        /// </summary>
+        private void MapResolutionChangeHandler()
+        {
+            steeringMap = new float[steeringParameters.ContextMapResolution];
+        }
+
+        private void OnDestroy()
+        {
+            steeringParameters.OnResolutionChange -= MapResolutionChangeHandler;
         }
 
         /// <summary>
@@ -38,15 +44,15 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         /// <returns></returns>
         public abstract float[] BuildContextMap();
 
-        protected Quaternion rotateAroundAxis(float resolutionAngle)
+        protected Quaternion rotateAroundAxis()
         {
-            return MapOperations.rotateAroundAxis(ContextMapAxis, resolutionAngle);
+            return MapOperations.rotateAroundAxis(steeringParameters.ContextMapRotationAxis, steeringParameters.ResolutionAngle);
         }
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            MapDebugVis.InDrawGizmos(MapDebugger, steeringMap, Range, resolutionAngle, transform);
+            MapDebugVis.InDrawGizmos(MapDebugger, steeringMap, Range, steeringParameters.ResolutionAngle, transform);
         }
 #endif
 
