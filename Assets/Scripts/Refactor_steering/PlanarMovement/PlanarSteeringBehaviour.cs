@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
 using Friedforfun.SteeringBehaviours.Utilities;
@@ -41,12 +39,24 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         }
 
         /// <summary>
-        /// Build a context map where the index of the float defines the direction we wish to move, the size of the scalar defines how much we want to move in a direction
+        /// Return a context map where the index of the float defines the direction we wish to move, the size of the scalar defines how much we want to move in a direction
         /// </summary>
         /// <returns></returns>
-        public abstract float[] BuildContextMap();
+        public virtual float[] GetContextMap()
+        {
+            return steeringMap;
+        }
 
+        /// <summary>
+        /// Get the job required to update the steering map, to be scheduled
+        /// </summary>
+        /// <returns>DotToVecJob ready to be scheduled</returns>
         public abstract DotToVecJob GetJob();
+
+        /// <summary>
+        /// swaps the completed job data into the steering map, run this when the jobs are complete before scheduling the next job
+        /// </summary>
+        public abstract void Swap();
 
 
         protected virtual void OnDestroy()

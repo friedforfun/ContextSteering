@@ -22,7 +22,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
         {
             nextMap = new NativeArray<float>(resolution, Allocator.Persistent);
         }
-
+        
         private void OnDisable()
         {
             nextMap.Dispose();

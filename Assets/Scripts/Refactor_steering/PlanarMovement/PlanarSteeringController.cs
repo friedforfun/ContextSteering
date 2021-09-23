@@ -25,7 +25,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
             foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
             {
-                contextMaps.Add(behaviour.BuildContextMap());
+                contextMaps.Add(behaviour.GetContextMap());
             }
 
             return mergeMaps(contextMaps);
@@ -45,18 +45,25 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected virtual void Awake()
         {
             SteeringBehaviours = gameObject.GetComponentsInChildren<PlanarSteeringBehaviour>();
-
-            foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
+            if (SteeringBehaviours is not null)
             {
-                behaviour.InstantiateContextMap(steeringParameters);
+                foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
+                {
+                    behaviour.InstantiateContextMap(steeringParameters);
+                }
             }
+
 
             SteeringMasks = gameObject.GetComponentsInChildren<PlanarSteeringMask>();
 
-            foreach (PlanarSteeringMask mask in SteeringMasks)
+            if (SteeringMasks is not null)
             {
-                mask.InstantiateMaskMap(steeringParameters);
+                foreach (PlanarSteeringMask mask in SteeringMasks)
+                {
+                    mask.InstantiateMaskMap(steeringParameters);
+                }
             }
+
         }
 
 

@@ -10,13 +10,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         private NativeArray<float> nextMap;
 
-        public override float[] BuildContextMap()
-        {
-
-            return steeringMap;
-        }
-
-        private void Swap()
+        public override void Swap()
         {
             float[] next = new float[steeringParameters.ContextMapResolution];
             for (int i = 0; i < nextMap.Length; i++)
