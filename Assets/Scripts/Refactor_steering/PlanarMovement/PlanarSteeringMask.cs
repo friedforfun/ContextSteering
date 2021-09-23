@@ -32,7 +32,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         protected Quaternion rotateAroundAxis(float resolutionAngle)
         {
-            return MapOperations.rotateAroundAxis(ContextMapAxis, resolutionAngle);
+            return MapOperations.RotateAroundAxis(ContextMapAxis, resolutionAngle);
         }
 
 

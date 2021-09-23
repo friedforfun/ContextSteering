@@ -31,8 +31,18 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return mergeMaps(contextMaps);
         }
 
-        //! TODO: Refactor awake out
-        protected void Awake()
+        public DotToVecJob[] GetJobs()
+        {
+            DotToVecJob[] jobs = new DotToVecJob[SteeringBehaviours.Length];
+            for (int i = 0; i < SteeringBehaviours.Length; i++)
+            {
+                jobs[i] = SteeringBehaviours[i].GetJob();
+            }
+
+            return jobs;
+        }
+
+        protected virtual void Awake()
         {
             SteeringBehaviours = gameObject.GetComponentsInChildren<PlanarSteeringBehaviour>();
 

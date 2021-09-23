@@ -42,13 +42,12 @@ namespace Friedforfun.SteeringBehaviours.Core2D
 
         protected Quaternion rotateAroundAxis(float resolutionAngle)
         {
-            return MapOperations.rotateAroundAxis(ContextMapAxis, resolutionAngle);
+            return MapOperations.RotateAroundAxis(ContextMapAxis, resolutionAngle);
         }
 
 #if UNITY_EDITOR
-        private void OnDrawGizmos()
+        protected virtual void OnDrawGizmos()
         {
-
             MapDebugVis.InDrawGizmos(MapDebugger, steeringMap, Range, resolutionAngle, transform);
         }
 #endif

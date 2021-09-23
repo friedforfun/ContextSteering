@@ -40,24 +40,22 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             steeringMap = new float[steeringParameters.ContextMapResolution];
         }
 
-        private void OnDestroy()
-        {
-            steeringParameters.OnResolutionChange -= MapResolutionChangeHandler;
-        }
-
         /// <summary>
         /// Build a context map where the index of the float defines the direction we wish to move, the size of the scalar defines how much we want to move in a direction
         /// </summary>
         /// <returns></returns>
         public abstract float[] BuildContextMap();
 
-        protected Quaternion rotateAroundAxis()
+        public abstract DotToVecJob GetJob();
+
+
+        protected virtual void OnDestroy()
         {
-            return MapOperations.rotateAroundAxis(steeringParameters.ContextMapRotationAxis, steeringParameters.ResolutionAngle);
+            steeringParameters.OnResolutionChange -= MapResolutionChangeHandler;
         }
 
 #if UNITY_EDITOR
-        private void OnDrawGizmos()
+        protected virtual void OnDrawGizmos()
         {
             MapDebugVis.InDrawGizmos(MapDebugger, steeringMap, Range, steeringParameters.ResolutionAngle, transform);
         }

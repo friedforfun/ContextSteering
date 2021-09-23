@@ -150,7 +150,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
             return normMap;
         }
 
-        public static Quaternion rotateAroundAxis(RotationAxis ContextMapAxis, float resolutionAngle)
+        public static Quaternion RotateAroundAxis(RotationAxis ContextMapAxis, float resolutionAngle)
         {
             switch (ContextMapAxis)
             {

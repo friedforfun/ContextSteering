@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Collections;
-using Unity.Jobs;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
 
@@ -40,12 +37,24 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return targets;
         }
 
-        public DotToVecJob GetJob()
+
+        protected virtual void Awake()
         {
-            nextMap = new NativeArray<float>(steeringParameters.ContextMapResolution, Allocator.TempJob);
+            nextMap = new NativeArray<float>(steeringParameters.ContextMapResolution, Allocator.Persistent);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            if (nextMap.IsCreated)
+                nextMap.Dispose();
+        }
+
+        public override DotToVecJob GetJob()
+        {
             Vector3[] targetArr = getPositionVectors();
 
-            var targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.TempJob);
+            var targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.Persistent);
 
             for (int i = 0; i < targetArr.Length; i++)
             {
@@ -62,10 +71,19 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
                 Weights = nextMap,
                 direction = Direction,
                 scaled = ScaleOnDistance,
-                invertScale = invertScalef
-
+                invertScale = invertScalef,
+                axis = steeringParameters.ContextMapRotationAxis
             };
         }
+        /*
+#if UNITY_EDITOR
+        protected override void OnDrawGizmos()
+        {
+            if (jobComplete)
+                swap();
+            base.OnDrawGizmos();
+        }
+#endif*/
 
     }
 
