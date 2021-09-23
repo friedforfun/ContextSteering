@@ -11,12 +11,15 @@ namespace Friedforfun.SteeringBehaviours.Core
     public struct DotToVecJob : IJob
     {
         [ReadOnly]
+        [DeallocateOnJobCompletion]
         public NativeArray<Vector3> targets;
 
         public bool scaled;
 
         public Vector3 my_position;
         public float range, weight, angle, invertScale;
+
+        public RotationAxis axis;
 
         public NativeArray<float> Weights;
 
@@ -59,7 +62,7 @@ namespace Friedforfun.SteeringBehaviours.Core
 
                         Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * weight;
 
-                        mapVector = Quaternion.Euler(0f, angle, 0f) * mapVector;
+                        mapVector = MapOperations.RotateAroundAxis(axis, angle) * mapVector;
                     }
                 }
             }
@@ -77,7 +80,7 @@ namespace Friedforfun.SteeringBehaviours.Core
                     for (int i = 0; i < Weights.Length; i++)
                     {
                         Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * Mathf.Abs((invertScale * 1f) - (distance / range)) * weight;
-                        mapVector = Quaternion.Euler(0f, angle, 0f) * mapVector;
+                        mapVector = MapOperations.RotateAroundAxis(axis, angle) * mapVector;
                     }
                 }
             }
