@@ -56,7 +56,7 @@ namespace Friedforfun.SteeringBehaviours.Core
                 float distance = targetVector.sqrMagnitude;
                 if (distance < sqrRange)
                 {
-                    Vector3 mapVector = Vector3.forward;
+                    Vector3 mapVector = InitialVector();
                     for (int i = 0; i < Weights.Length; i++)
                     {
 
@@ -76,7 +76,7 @@ namespace Friedforfun.SteeringBehaviours.Core
                 float distance = targetVector.magnitude;
                 if (distance < range)
                 {
-                    Vector3 mapVector = Vector3.forward;
+                    Vector3 mapVector = InitialVector();
                     for (int i = 0; i < Weights.Length; i++)
                     {
                         Weights[i] += Vector3.Dot(mapVector, targetVector.normalized) * Mathf.Abs((invertScale * 1f) - (distance / range)) * weight;
@@ -86,6 +86,21 @@ namespace Friedforfun.SteeringBehaviours.Core
             }
         }
 
+        private Vector3 InitialVector()
+        {
+            switch (axis)
+            {
+                case RotationAxis.YAxis:
+                    return Vector3.forward;
+                case RotationAxis.ZAxis:
+                    return Vector3.up;
+                case RotationAxis.XAxis:
+                    return Vector3.forward;
+                default:
+                    throw new System.NotImplementedException();
+            }
+        }
+ 
 
     }
 }

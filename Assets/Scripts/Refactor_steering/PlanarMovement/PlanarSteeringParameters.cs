@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
+using Friedforfun.SteeringBehaviours.Utilities;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {

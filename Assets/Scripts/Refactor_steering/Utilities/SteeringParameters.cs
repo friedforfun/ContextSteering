@@ -1,5 +1,4 @@
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
 
 namespace Friedforfun.SteeringBehaviours.Utilities
 {
