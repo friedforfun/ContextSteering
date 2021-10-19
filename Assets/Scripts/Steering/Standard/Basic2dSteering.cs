@@ -11,7 +11,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D
         public Basic2dSteering()
         {
             ContextCombinator = new BasicContextCombinator();
-            DirectionDecider = new BasicDirectionPicker(AllowVectorZero);
+            DirectionDecider = new BasicDirectionPicker(AllowVectorZero, null);
         }
     }
 

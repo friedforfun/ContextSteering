@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ea543b5fe63e54b80c54c9da24ee75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 34
+  spawnCount: 128
   spawnAreaSize: 5
   minion: {fileID: 9118685762301980294, guid: 8c05ad1f106158945970d027a34c6695, type: 3}
   minionOffset: 1.5
@@ -21287,9 +21287,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 21
-  ShowDebug: 0
-  MapSize: 2
-  DebugColor: {r: 0, g: 1, b: 0, a: 1}
+  MapDebugger:
+    ShowDebug: 0
+    MapSize: 2
+    DebugColor: {r: 1, g: 0, b: 0, a: 1}
   direction: 0
   weight: 1
   Tags:
@@ -29006,6 +29007,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1509669014}
     m_Modifications:
+    - target: {fileID: 2887461485239648358, guid: cdfb864c060a86747975107d17df2299, type: 3}
+      propertyPath: Tags.Array.data[0]
+      value: Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2887461485239648358, guid: cdfb864c060a86747975107d17df2299, type: 3}
+      propertyPath: MapDebugger.ShowDebug
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7164804104516909935, guid: cdfb864c060a86747975107d17df2299, type: 3}
       propertyPath: m_Mass
       value: 10

@@ -17,6 +17,7 @@ namespace Friedforfun.SteeringBehaviours.Core
         
         protected Vector3 InitialVector;
 
+        public string BehaviourName;
         public abstract void InstantiateContextMap(T steeringParameters);
 
     }

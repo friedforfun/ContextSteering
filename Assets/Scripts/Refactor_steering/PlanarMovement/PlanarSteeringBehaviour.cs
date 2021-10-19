@@ -67,7 +67,8 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 #if UNITY_EDITOR
         protected virtual void OnDrawGizmos()
         {
-            MapDebugVis.InDrawGizmos(MapDebugger, steeringMap, Range, steeringParameters.ResolutionAngle, transform);
+            if (steeringMap != null)
+                MapDebugVis.InDrawGizmos(MapDebugger, steeringMap, Range, steeringParameters.ResolutionAngle, transform);
         }
 #endif
 

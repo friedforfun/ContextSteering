@@ -9,15 +9,17 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         [SerializeField] Transform[] Positions;
 
         private NativeArray<float> nextMap;
+        private NativeArray<Vector3> targetPositions;
 
         public override void Swap()
         {
+            //targetPositions.Dispose();
             float[] next = new float[steeringParameters.ContextMapResolution];
             for (int i = 0; i < nextMap.Length; i++)
             {
                 next[i] = nextMap[i];
             }
-
+            
             steeringMap = next;
         }
 
@@ -31,15 +33,16 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return targets;
         }
 
-
-        protected virtual void Awake()
+        //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        protected virtual void Start()
         {
+            //steeringMap = new float[steeringParameters.ContextMapResolution];
+            Debug.Log($"Behaviour Init -> {BehaviourName}");
             nextMap = new NativeArray<float>(steeringParameters.ContextMapResolution, Allocator.Persistent);
         }
 
-        protected override void OnDestroy()
+        protected virtual void OnDisable()
         {
-            base.OnDestroy();
             if (nextMap.IsCreated)
                 nextMap.Dispose();
         }
@@ -48,7 +51,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         {
             Vector3[] targetArr = getPositionVectors();
 
-            var targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.Persistent);
+            targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.Persistent);
 
             for (int i = 0; i < targetArr.Length; i++)
             {
@@ -71,12 +74,12 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         }
         /*
 #if UNITY_EDITOR
-        protected override void OnDrawGizmos()
-        {
-            if (jobComplete)
-                swap();
-            base.OnDrawGizmos();
-        }
+protected override void OnDrawGizmos()
+{
+   if (jobComplete)
+       swap();
+   base.OnDrawGizmos();
+}
 #endif*/
 
     }

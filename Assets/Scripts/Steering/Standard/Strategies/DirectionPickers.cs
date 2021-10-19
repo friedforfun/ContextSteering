@@ -1,5 +1,7 @@
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
+using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.SteeringBehaviours.PlanarMovement;
 
 namespace Friedforfun.SteeringBehaviours.Core2D
 {
@@ -10,10 +12,12 @@ namespace Friedforfun.SteeringBehaviours.Core2D
     public class BasicDirectionPicker : IDecideDirection
     {
         private bool allowVectorZero = true;
+        private PlanarSteeringParameters steeringParams;
 
-        public BasicDirectionPicker(bool allowZero)
+        public BasicDirectionPicker(bool allowZero, PlanarSteeringParameters steeringParameters)
         {
             this.allowVectorZero = allowZero;
+            steeringParams = steeringParameters;
         }
 
         public Vector3 GetDirection(float[] contextMap, Vector3 lastVector)
@@ -42,8 +46,10 @@ namespace Friedforfun.SteeringBehaviours.Core2D
                 return lastVector; // Keep last direction if no better direction is found
             }
 
+            if (steeringParams == null)
+                return Quaternion.Euler(0, resolutionAngle * maxIndex, 0) * direction;
 
-            return Quaternion.Euler(0, resolutionAngle * maxIndex, 0) * direction;
+            return MapOperations.RotateAroundAxis(steeringParams.ContextMapRotationAxis, resolutionAngle * maxIndex) * direction;
         }
     }
 

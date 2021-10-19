@@ -12,14 +12,15 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         public PlanarSteeringParameters steeringParameters;
 
         //[Tooltip("Attractor and Repulsor strategies (directions in which we will move towards or away from.)")]
-        private PlanarSteeringBehaviour[] SteeringBehaviours;
+        protected PlanarSteeringBehaviour[] SteeringBehaviours;
 
         //[Tooltip("Masking strategies (directions in which to block movement).")]
-        private PlanarSteeringMask[] SteeringMasks;
+        protected PlanarSteeringMask[] SteeringMasks;
 
         protected float[] contextMap; // The weights of each direction in the context map itself
 
-        protected float[] buildSteeringBehaviours()
+
+        protected float[] MergeSteeringBehaviours()
         {
             ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
 
@@ -31,6 +32,22 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return mergeMaps(contextMaps);
         }
 
+        protected void UpdateOutput()
+        {
+            // --------------- Until masks are implemented ---------------
+            //contextMap = ContextCombinator.CombineContext(MergeSteeringBehaviours(), new float[steeringParameters.ContextMapResolution]);
+            contextMap = MergeSteeringBehaviours();
+            // -----------------------------------------------------------
+            Debug.Log("Updating Output");
+            Debug.Log($"Vec before: {outputVector}");
+            outputVector = DirectionDecider.GetDirection(contextMap, outputVector);
+            Debug.Log($"Vec after: {outputVector}");
+        }
+
+        /// <summary>
+        /// Get all the jobs from the steering behaviours
+        /// </summary>
+        /// <returns></returns>
         public DotToVecJob[] GetJobs()
         {
             DotToVecJob[] jobs = new DotToVecJob[SteeringBehaviours.Length];
@@ -41,14 +58,18 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
             return jobs;
         }
-
+        
         protected virtual void Awake()
         {
+            outputVector = steeringParameters.InitialVector;
+
             SteeringBehaviours = gameObject.GetComponentsInChildren<PlanarSteeringBehaviour>();
-            if (SteeringBehaviours is not null)
+
+            if (SteeringBehaviours != null)
             {
                 foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
                 {
+                    Debug.Log($"Controller init -> {behaviour.BehaviourName}");
                     behaviour.InstantiateContextMap(steeringParameters);
                 }
             }
@@ -56,7 +77,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
             SteeringMasks = gameObject.GetComponentsInChildren<PlanarSteeringMask>();
 
-            if (SteeringMasks is not null)
+            if (SteeringMasks != null)
             {
                 foreach (PlanarSteeringMask mask in SteeringMasks)
                 {
