@@ -4,7 +4,6 @@ using Unity.Jobs;
 using Unity.Burst;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
-using Friedforfun.SteeringBehaviours.Core2D;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -19,7 +18,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         public SelfSchedulingPlanarController()
         {
             ContextCombinator = new BasicContextCombinator();
-            DirectionDecider = new BasicDirectionPicker(true, steeringParameters);
+            DirectionDecider = new BasicPlanarDirectionPicker(true, steeringParameters);
         }
 
         protected override void Awake()

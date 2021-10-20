@@ -1,4 +1,5 @@
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.PlanarMovement;
 
 namespace Friedforfun.SteeringBehaviours.Core2D
 {
@@ -11,7 +12,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D
         public Basic2dSteering()
         {
             ContextCombinator = new BasicContextCombinator();
-            DirectionDecider = new BasicDirectionPicker(AllowVectorZero, null);
+            DirectionDecider = new BasicPlanarDirectionPicker(AllowVectorZero, null);
         }
     }
 

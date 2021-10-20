@@ -126,7 +126,6 @@ public class DotToVecJobTests
 
     }
 
-
     [Test]
     public void RangeYAxis()
     {

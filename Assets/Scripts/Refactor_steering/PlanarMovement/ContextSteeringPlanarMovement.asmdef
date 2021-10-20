@@ -1,0 +1,17 @@
+{
+    "name": "ContextSteeringPlanarMovement",
+    "rootNamespace": "",
+    "references": [
+        "GUID:98bf1b536cd9004439501625ee607523",
+        "GUID:ee973d23ef9b4ff4ebd026e86e90317a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

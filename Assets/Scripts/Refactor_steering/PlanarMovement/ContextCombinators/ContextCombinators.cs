@@ -1,7 +1,7 @@
 using System.Linq;
 using Friedforfun.SteeringBehaviours.Core;
 
-namespace Friedforfun.SteeringBehaviours.Core2D
+namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     /// <summary>
     /// Zeros out all directions with more than the least danger + a threshold

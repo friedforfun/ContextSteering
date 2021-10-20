@@ -1,4 +1,5 @@
 using UnityEngine;
+using Friedforfun.SteeringBehaviours.PlanarMovement;
 
 namespace Friedforfun.SteeringBehaviours.Core2D
 {
@@ -12,7 +13,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D
         public Basic2dSteeringSmooth()
         {
             ContextCombinator = new BasicContextCombinator();
-            DirectionDecider = new DirectionSimpleSmoothing(DotChangeThreshold);
+            DirectionDecider = new PlanarDirectionSimpleSmoothing(DotChangeThreshold);
         }
     }
 
