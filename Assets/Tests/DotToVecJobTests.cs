@@ -25,9 +25,10 @@ public class DotToVecJobTests
 
     SteerDirection direction = SteerDirection.ATTRACT;
 
-    void SetDefaults()
+    [SetUp]
+    public void Setup()
     {
-        targets = new Vector3[]{ new Vector3(0, 0, 10) };
+        targets = new Vector3[] { new Vector3(0, 0, 10) };
 
         scaled = false;
         position = new Vector3(0, 0, 0);
@@ -38,7 +39,7 @@ public class DotToVecJobTests
 
         axis = RotationAxis.YAxis;
 
-        _weights = new float[]{ 0f, 0f, 0f, 0f };
+        _weights = new float[] { 0f, 0f, 0f, 0f };
 
         direction = SteerDirection.ATTRACT;
     }
@@ -46,8 +47,6 @@ public class DotToVecJobTests
     [Test]
     public void StandardMapYAxis()
     {
-        // create a very simple job
-        SetDefaults();
         NativeArray<Vector3> targetPositions = new NativeArray<Vector3>(targets, Allocator.Temp);
         NativeArray<float> Weights = new NativeArray<float>(_weights, Allocator.Temp);
 
@@ -86,9 +85,6 @@ public class DotToVecJobTests
     [Test]
     public void WeightedYAxis()
     {
-        // create a very simple job
-        SetDefaults();
-
         weight = 0.2f;
 
         NativeArray<Vector3> targetPositions = new NativeArray<Vector3>(targets, Allocator.Temp);
@@ -131,7 +127,6 @@ public class DotToVecJobTests
     {
 
         // ------------------- Out of Range -------------------
-        SetDefaults();
         range = 10;
         targets = new Vector3[] { new Vector3(0, 0, 15) };
 
@@ -208,9 +203,6 @@ public class DotToVecJobTests
     [Test]
     public void ScaledMapYAxis()
     {
-        SetDefaults();
-        // create a very simple job
-
         scaled = true;
         range = 20;
 
@@ -251,9 +243,6 @@ public class DotToVecJobTests
     [Test]
     public void InverseScaledMapYAxis()
     {
-        SetDefaults();
-        // create a very simple job
-
         range = 20;
         targets = new Vector3[]{ new Vector3(0, 0, 15) };
         scaled = true;
@@ -297,8 +286,6 @@ public class DotToVecJobTests
     [Test]
     public void ZAxis()
     {
-        SetDefaults();
-        // create a very simple job
         axis = RotationAxis.ZAxis;
         targets = new Vector3[]{ new Vector3(0, 10, 0) };
 
@@ -341,8 +328,6 @@ public class DotToVecJobTests
     [Test]
     public void XAxis()
     {
-        SetDefaults();
-        // create a very simple job
         axis = RotationAxis.XAxis;
 
         NativeArray<Vector3> targetPositions = new NativeArray<Vector3>(targets, Allocator.Temp);
@@ -383,9 +368,6 @@ public class DotToVecJobTests
     [Test]
     public void TargetPositionsDisposed()
     {
-        SetDefaults();
-        // create a very simple job
-
         NativeArray<Vector3> targetPositions = new NativeArray<Vector3>(targets, Allocator.Temp);
         NativeArray<float> Weights = new NativeArray<float>(_weights, Allocator.Temp);
 

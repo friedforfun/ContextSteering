@@ -20,6 +20,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             {
                 m_contextMapResolution = value;
                 ResolutionAngle = 360 / (float) m_contextMapResolution;
+                OnResolutionChange();
             }
         }
 
@@ -37,7 +38,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         public delegate void OnResolutionChangeDelegate();
 
         [HideInInspector]
-        public event OnResolutionChangeDelegate OnResolutionChange;
+        public event OnResolutionChangeDelegate OnResolutionChange = delegate { };
               
 
     }

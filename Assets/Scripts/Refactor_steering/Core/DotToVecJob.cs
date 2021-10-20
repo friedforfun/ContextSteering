@@ -11,7 +11,6 @@ namespace Friedforfun.SteeringBehaviours.Core
     public struct DotToVecJob : IJob
     {
         [ReadOnly]
-        [DeallocateOnJobCompletion]
         public NativeArray<Vector3> targets;
 
         public bool scaled;

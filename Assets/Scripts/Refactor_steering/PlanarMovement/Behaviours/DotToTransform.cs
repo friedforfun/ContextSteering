@@ -6,14 +6,14 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     public class DotToTransform : PlanarSteeringBehaviour
     {
-        [SerializeField] Transform[] Positions;
+        [SerializeField] public Transform[] Positions;
 
         private NativeArray<float> nextMap;
         private NativeArray<Vector3> targetPositions;
 
         public override void Swap()
         {
-            //targetPositions.Dispose();
+            targetPositions.Dispose();
             float[] next = new float[steeringParameters.ContextMapResolution];
             for (int i = 0; i < nextMap.Length; i++)
             {
@@ -45,6 +45,8 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         {
             if (nextMap.IsCreated)
                 nextMap.Dispose();
+            if (targetPositions.IsCreated)
+                targetPositions.Dispose();
         }
 
         public override DotToVecJob GetJob()

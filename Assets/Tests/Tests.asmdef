@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "ContextSteeringCore",
-        "ContextSteeringUtilities"
+        "ContextSteeringUtilities",
+        "ContextSteeringPlanarMovement"
     ],
     "includePlatforms": [
         "Editor"
