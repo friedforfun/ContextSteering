@@ -84,6 +84,129 @@ public class DotToVecJobTests
     }
 
     [Test]
+    public void WeightedYAxis()
+    {
+        // create a very simple job
+        SetDefaults();
+
+        weight = 0.2f;
+
+        NativeArray<Vector3> targetPositions = new NativeArray<Vector3>(targets, Allocator.Temp);
+        NativeArray<float> Weights = new NativeArray<float>(_weights, Allocator.Temp);
+
+        DotToVecJob job = new DotToVecJob()
+        {
+            targets = targetPositions,
+            scaled = scaled,
+            my_position = position,
+            range = range,
+            weight = weight,
+            angle = angle,
+            invertScale = invertScale,
+            axis = axis,
+            Weights = Weights,
+            direction = direction
+        };
+
+        // compute
+        job.Execute();
+
+        // check result
+        float[] expected = { 0.2f, 0f, -0.2f, 0f };
+
+        float tolerance = 0.000001f;
+
+        Assert.AreEqual(true, CmpTol(expected[0], Weights[0], tolerance));
+        Assert.AreEqual(true, CmpTol(expected[1], Weights[1], tolerance));
+        Assert.AreEqual(true, CmpTol(expected[2], Weights[2], tolerance));
+        Assert.AreEqual(true, CmpTol(expected[3], Weights[3], tolerance));
+
+        targetPositions.Dispose();
+        Weights.Dispose();
+
+    }
+
+
+    [Test]
+    public void RangeYAxis()
+    {
+
+        // ------------------- Out of Range -------------------
+        SetDefaults();
+        range = 10;
+        targets = new Vector3[] { new Vector3(0, 0, 15) };
+
+        NativeArray<Vector3> targetPositions = new NativeArray<Vector3>(targets, Allocator.Temp);
+        NativeArray<float> Weights = new NativeArray<float>(_weights, Allocator.Temp);
+
+        DotToVecJob job = new DotToVecJob()
+        {
+            targets = targetPositions,
+            scaled = scaled,
+            my_position = position,
+            range = range,
+            weight = weight,
+            angle = angle,
+            invertScale = invertScale,
+            axis = axis,
+            Weights = Weights,
+            direction = direction
+        };
+
+        // compute
+        job.Execute();
+
+        // check result
+        float[] expected = { 0f, 0f, 0f, 0f };
+
+        float tolerance = 0.000001f;
+
+        Assert.AreEqual(true, CmpTol(expected[0], Weights[0], tolerance));
+        Assert.AreEqual(true, CmpTol(expected[1], Weights[1], tolerance));
+        Assert.AreEqual(true, CmpTol(expected[2], Weights[2], tolerance));
+        Assert.AreEqual(true, CmpTol(expected[3], Weights[3], tolerance));
+
+
+
+        targetPositions.Dispose();
+
+        // ------------------- In Range -------------------
+        targets = new Vector3[] { new Vector3(0, 0, 8) };
+
+        NativeArray<Vector3> newTargetPositions = new NativeArray<Vector3>(targets, Allocator.Temp);
+
+        job = new DotToVecJob()
+        {
+            targets = newTargetPositions,
+            scaled = scaled,
+            my_position = position,
+            range = range,
+            weight = weight,
+            angle = angle,
+            invertScale = invertScale,
+            axis = axis,
+            Weights = Weights,
+            direction = direction
+        };
+
+        // compute
+        job.Execute();
+
+        // check result
+        expected = new float[] { 1f, 0f, -1f, 0f };
+
+
+        //Assert.AreEqual(true, CmpTol(expected[0], Weights[0], tolerance));
+        Assert.AreEqual(expected[0], Weights[0]);
+        Assert.AreEqual(true, CmpTol(expected[1], Weights[1], tolerance));
+        Assert.AreEqual(true, CmpTol(expected[2], Weights[2], tolerance));
+        Assert.AreEqual(true, CmpTol(expected[3], Weights[3], tolerance));
+
+        newTargetPositions.Dispose();
+        Weights.Dispose();
+    }
+
+    [Test]
     public void ScaledMapYAxis()
     {
         SetDefaults();
