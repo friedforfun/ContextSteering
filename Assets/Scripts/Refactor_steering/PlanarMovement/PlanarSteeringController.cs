@@ -32,7 +32,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return mergeMaps(contextMaps);
         }
 
-        protected void UpdateOutput()
+        public void UpdateOutput()
         {
             // --------------- Until masks are implemented ---------------
             //contextMap = ContextCombinator.CombineContext(MergeSteeringBehaviours(), new float[steeringParameters.ContextMapResolution]);
@@ -59,7 +59,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return jobs;
         }
         
-        protected virtual void Awake()
+        public virtual void Awake()
         {
             outputVector = steeringParameters.InitialVector;
 
@@ -84,6 +84,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
                     mask.InstantiateMaskMap(steeringParameters);
                 }
             }
+            contextMap = new float[steeringParameters.ContextMapResolution];
 
         }
 

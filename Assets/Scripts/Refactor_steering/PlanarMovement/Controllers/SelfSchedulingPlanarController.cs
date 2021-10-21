@@ -21,7 +21,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             DirectionDecider = new BasicPlanarDirectionPicker(true, steeringParameters);
         }
 
-        protected override void Awake()
+        public override void Awake()
         {
             base.Awake();
             //jobHandles = new NativeArray<DotToVecJob>(SteeringBehaviours.Length, Allocator.Persistent);
