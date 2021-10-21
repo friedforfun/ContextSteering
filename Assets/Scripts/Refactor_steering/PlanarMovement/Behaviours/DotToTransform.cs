@@ -34,14 +34,14 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         }
 
         //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        protected virtual void Start()
+        public virtual void Start()
         {
             //steeringMap = new float[steeringParameters.ContextMapResolution];
-            Debug.Log($"Behaviour Init -> {BehaviourName}");
+            //Debug.Log($"Behaviour Init -> {BehaviourName}");
             nextMap = new NativeArray<float>(steeringParameters.ContextMapResolution, Allocator.Persistent);
         }
 
-        protected virtual void OnDisable()
+        public virtual void OnDisable()
         {
             if (nextMap.IsCreated)
                 nextMap.Dispose();

@@ -13,7 +13,7 @@ namespace Friedforfun.SteeringBehaviours.Core
     {
         [Header("Behaviour Properties")]
         [Tooltip("Range at which the behaviour has an effect.")]
-        [SerializeField] protected float Range;
+        [SerializeField] protected float Range = 10f;
         
         protected Vector3 InitialVector;
 

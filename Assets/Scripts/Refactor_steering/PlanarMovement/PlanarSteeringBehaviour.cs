@@ -39,7 +39,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         }
 
         /// <summary>
-        /// Return a context map where the index of the float defines the direction we wish to move, the size of the scalar defines how much we want to move in a direction
+        /// Return a context map where the index of the float defines the direction whose value is being inspected, the size of the scalar defines how much we want to move in a direction
         /// </summary>
         /// <returns></returns>
         public virtual float[] GetContextMap()
