@@ -16,7 +16,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         [SerializeField] public Color DebugColor = Color.red;
     }
 
-    public class MapVisualiserPlanar 
+    public static class MapVisualiserPlanar 
     {
 
 
@@ -24,7 +24,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         /// <summary>
         /// Call this inside OnDrawGizmos in the steering behaviour or mask you wish to visualise.
         /// </summary>
-        public void InDrawGizmos(PlanarMapVisualiserParameters MapParams, float[] contextMap, float range, float resolutionAngle, Transform transform)
+        public static void InDrawGizmos(PlanarMapVisualiserParameters MapParams, float[] contextMap, float range, float resolutionAngle, Transform transform)
         {
             bool ShowDebug = MapParams.ShowDebug;
             float MapSize = MapParams.MapSize;
@@ -40,6 +40,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
 
             position = new Vector3(position.x, position.y + 0.1f, position.z);
             Vector3 direction = Vector3.forward;
+
 
             foreach (float weight in MapOperations.NormaliseMap(contextMap, MapSize))
             {

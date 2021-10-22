@@ -13,8 +13,6 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected RotationAxis ContextMapAxis;
 
         [SerializeField] public PlanarMapVisualiserParameters MapDebugger;
-        private MapVisualiserPlanar MapDebugVis = new MapVisualiserPlanar();
-
 
         /// <summary>
         /// Build a mask map where the index of the float defines the direction we wish to move, the size of the scalar defines how much we want to move in a direction
@@ -40,7 +38,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            MapDebugVis.InDrawGizmos(MapDebugger, maskMap, Range, resolutionAngle, transform);
+            MapVisualiserPlanar.InDrawGizmos(MapDebugger, maskMap, Range, resolutionAngle, transform);
         }
 #endif
     }

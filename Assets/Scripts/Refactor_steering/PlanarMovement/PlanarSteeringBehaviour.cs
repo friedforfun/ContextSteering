@@ -17,7 +17,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected PlanarSteeringParameters steeringParameters;
 
         [SerializeField] public PlanarMapVisualiserParameters MapDebugger;
-        private MapVisualiserPlanar MapDebugVis = new MapVisualiserPlanar();
+        //private MapVisualiserPlanar MapDebugVis = new MapVisualiserPlanar();
 
         /// <summary>
         /// Instantiates the context map weights and computes the angle between each direction
@@ -67,8 +67,12 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 #if UNITY_EDITOR
         protected virtual void OnDrawGizmos()
         {
+
             if (steeringMap != null && MapDebugger != null)
-                MapDebugVis.InDrawGizmos(MapDebugger, steeringMap, Range, steeringParameters.ResolutionAngle, transform);
+            {
+                MapVisualiserPlanar.InDrawGizmos(MapDebugger, steeringMap, Range, steeringParameters.ResolutionAngle, transform);
+            }
+
         }
 #endif
 
