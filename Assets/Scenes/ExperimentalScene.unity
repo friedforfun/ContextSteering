@@ -408,12 +408,40 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
+      propertyPath: jumpPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
       propertyPath: jumpPoints.Array.data[0].z
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
       propertyPath: jumpPoints.Array.data[1].z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
+      propertyPath: jumpPoints.Array.data[2].x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
+      propertyPath: jumpPoints.Array.data[2].y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
+      propertyPath: jumpPoints.Array.data[2].z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
+      propertyPath: jumpPoints.Array.data[3].x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
+      propertyPath: jumpPoints.Array.data[3].y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429121152966211850, guid: e6034146db945824c94f5e759d6462fa, type: 3}
+      propertyPath: jumpPoints.Array.data[3].z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5429121152966211892, guid: e6034146db945824c94f5e759d6462fa, type: 3}
       propertyPath: m_Name
@@ -569,18 +597,34 @@ PrefabInstance:
       propertyPath: TicksPerSecond
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1794831708527745234, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
+      propertyPath: steeringParameters.ContextMapRotationAxis
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1794831708527745235, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
       propertyPath: BehaviourName
       value: Script A
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794831708527745235, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
+      propertyPath: MapDebugger.ShowDebug
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1794831708527745235, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
       propertyPath: Positions.Array.data[0]
       value: 
       objectReference: {fileID: 1991473228}
     - target: {fileID: 1794831708527745236, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
+      propertyPath: Speed
+      value: 1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794831708527745236, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
       propertyPath: LookTarget
       value: 
       objectReference: {fileID: 1991473227}
+    - target: {fileID: 4406560339306209757, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
+      propertyPath: m_TagString
+      value: Agent
+      objectReference: {fileID: 0}
     - target: {fileID: 4406560339523773044, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
       propertyPath: m_Name
       value: TestAgent

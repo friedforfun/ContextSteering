@@ -4,6 +4,7 @@ using Unity.Jobs;
 using Unity.Burst;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
+using System;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -24,17 +25,19 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         public override void Awake()
         {
             base.Awake();
-            //jobHandles = new NativeArray<DotToVecJob>(SteeringBehaviours.Length, Allocator.Persistent);
             StartCoroutine(CycleWork());
         }
+
 
 
         private void ScheduleWork()
         {
             Handles = new JobHandle[SteeringBehaviours.Length];
-            for (int i = 0; i < SteeringBehaviours.Length; i++)
+
+            var jobs = GetJobs();
+            for (int i = 0; i < jobs.Length; i++)
             {
-                Handles[i] = SteeringBehaviours[i].GetJob().Schedule();
+                Handles[i] = jobs[i].Schedule();
             }
         }
 
@@ -60,7 +63,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
                 yield return new WaitForSeconds(1 / TicksPerSecond);
                 ScheduleWork();
 
-                //yield return new WaitUntil(() => Schedulerhandle.IsCompleted);
+                yield return new WaitUntil(() => Array.TrueForAll(Handles, value => value.IsCompleted));
                 CompleteWork();
                 UpdateOutput();
 

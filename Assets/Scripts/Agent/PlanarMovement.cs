@@ -23,7 +23,8 @@ namespace Friedforfun.SteeringBehaviours.Demo
             control.SimpleMove(steer.MoveDirection() * Speed);
 
             // Look towards target
-            transform.rotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, LookTarget).normalized);
+            Vector3 newRotation = Quaternion.LookRotation(MapOperations.VectorToTarget(gameObject, LookTarget).normalized).eulerAngles;
+            transform.rotation = Quaternion.Euler(0, newRotation.y, 0);
         }
 
 

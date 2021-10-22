@@ -40,7 +40,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             //contextMap = ContextCombinator.CombineContext(MergeSteeringBehaviours(), new float[steeringParameters.ContextMapResolution]);
             contextMap = MergeSteeringBehaviours();
             // -----------------------------------------------------------
-   
+
             outputVector = DirectionDecider.GetDirection(contextMap, outputVector);
         }
 
@@ -69,7 +69,6 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             {
                 foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
                 {
-                    //Debug.Log($"Controller init -> {behaviour.BehaviourName}");
                     behaviour.InstantiateContextMap(steeringParameters);
                 }
             }
