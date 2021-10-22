@@ -87,10 +87,38 @@ public class DotToTransformTests
         behaviour.Swap();
         var result = behaviour.GetContextMap();
         var expectedAfter = new float[] { 1f, 0f, -1f, 0f };
-        Assert.AreEqual(expectedAfter[0], result[0], 0.000001f);
-        Assert.AreEqual(expectedAfter[1], result[1], 0.000001f);
-        Assert.AreEqual(expectedAfter[2], result[2], 0.000001f);
-        Assert.AreEqual(expectedAfter[3], result[3], 0.000001f);
+        Assert.AreEqual(expectedAfter[0], result[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedAfter[1], result[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedAfter[2], result[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedAfter[3], result[3], TestUtilities.DOTPRODTOLERANCE);
+    }
+
+    [Test] 
+    public void TargetMoves()
+    {
+        var job = behaviour.GetJob();
+        job.Execute();
+
+        behaviour.Swap();
+        var result = behaviour.GetContextMap();
+        var expectedAfter = new float[] { 1f, 0f, -1f, 0f };
+        Assert.AreEqual(expectedAfter[0], result[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedAfter[1], result[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedAfter[2], result[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedAfter[3], result[3], TestUtilities.DOTPRODTOLERANCE);
+
+        target.transform.position = new Vector3(5f, 0, 0);
+
+        job = behaviour.GetJob();
+        job.Execute();
+        behaviour.Swap();
+
+        result = behaviour.GetContextMap();
+        var expectedFinal = new float[] { 0f, 1f, 0f, -1f };
+        Assert.AreEqual(expectedFinal[0], result[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedFinal[1], result[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedFinal[2], result[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expectedFinal[3], result[3], TestUtilities.DOTPRODTOLERANCE);
     }
 
 }

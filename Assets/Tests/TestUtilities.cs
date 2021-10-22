@@ -7,6 +7,8 @@ using UnityEngine.TestTools;
 
 public static class TestUtilities
 {
+    public static float DOTPRODTOLERANCE = 0.000001f;
+
     // source: Kkica - https://stackoverflow.com/questions/60067717/privateobject-in-visual-studio
     public static T CallNonPublicMethod<T>(this object o, string methodName, params object[] args)
     {

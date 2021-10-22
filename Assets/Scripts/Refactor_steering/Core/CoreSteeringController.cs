@@ -14,9 +14,17 @@ namespace Friedforfun.SteeringBehaviours.Core
 
         [Tooltip("A strategy for combining steering and mask maps.")]
         protected ICombineContext ContextCombinator;
+        protected ICombineContext SetContextCombinator(ICombineContext newCombinator) 
+        {
+            ContextCombinator = newCombinator; return ContextCombinator; 
+        }
 
         [Tooltip("A strategy for selecting the final output direction from the context map.")]
         protected IDecideDirection DirectionDecider;
+        protected IDecideDirection SetDirectionDecider(IDecideDirection newDirectionDecider) 
+        {
+            DirectionDecider = newDirectionDecider; return DirectionDecider; 
+        }
 
         protected Vector3 outputVector; // The vector output. Update this value when a new movement direction has been calculated.
 

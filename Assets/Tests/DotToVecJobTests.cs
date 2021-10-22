@@ -70,12 +70,10 @@ public class DotToVecJobTests
         // check result
         float[] expected = { 1f, 0f, -1f, 0f };
 
-        float tolerance = 0.000001f;
-
-        Assert.AreEqual(expected[0], Weights[0], tolerance);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         targetPositions.Dispose();
         Weights.Dispose();
@@ -109,12 +107,10 @@ public class DotToVecJobTests
         // check result
         float[] expected = { 0f, 0f, 0f, 0f };
 
-        float tolerance = 0.000001f;
-
-        Assert.AreEqual(expected[0], Weights[0], tolerance);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         targetPositions.Dispose();
         Weights.Dispose();
@@ -148,12 +144,10 @@ public class DotToVecJobTests
         // check result
         float[] expected = { 0.2f, 0f, -0.2f, 0f };
 
-        float tolerance = 0.000001f;
-
-        Assert.AreEqual(expected[0], Weights[0], tolerance);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         targetPositions.Dispose();
         Weights.Dispose();
@@ -191,14 +185,10 @@ public class DotToVecJobTests
         // check result
         float[] expected = { 0f, 0f, 0f, 0f };
 
-        float tolerance = 0.000001f;
-
-        Assert.AreEqual(expected[0], Weights[0], tolerance);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
-
-
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         targetPositions.Dispose();
 
@@ -228,11 +218,11 @@ public class DotToVecJobTests
         expected = new float[] { 1f, 0f, -1f, 0f };
 
 
-        //Assert.AreEqual(expected[0], Weights[0], tolerance));
+        //Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE));
         Assert.AreEqual(expected[0], Weights[0]);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         newTargetPositions.Dispose();
         Weights.Dispose();
@@ -267,12 +257,10 @@ public class DotToVecJobTests
         // check result
         float[] expected = { 0.5f, 0f, -0.5f, 0f };
 
-        float tolerance = 0.000001f;
-
-        Assert.AreEqual(expected[0], Weights[0], tolerance);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         targetPositions.Dispose();
         Weights.Dispose();
@@ -310,12 +298,10 @@ public class DotToVecJobTests
         // check result
         float[] expected = { 0.25f, 0f, -0.25f, 0f };
 
-        float tolerance = 0.000001f;
-
-        Assert.AreEqual(expected[0], Weights[0], tolerance);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         targetPositions.Dispose();
         Weights.Dispose();
@@ -352,12 +338,10 @@ public class DotToVecJobTests
         // check result
         float[] expected = { 1f, 0f, -1f, 0f };
 
-        float tolerance = 0.000001f;
-
-        Assert.AreEqual(expected[0], Weights[0], tolerance);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         targetPositions.Dispose();
         Weights.Dispose();
@@ -391,12 +375,10 @@ public class DotToVecJobTests
         // check result
         float[] expected = { 1f, 0f, -1f, 0f };
 
-        float tolerance = 0.000001f;
-
-        Assert.AreEqual(expected[0], Weights[0], tolerance);
-        Assert.AreEqual(expected[1], Weights[1], tolerance);
-        Assert.AreEqual(expected[2], Weights[2], tolerance);
-        Assert.AreEqual(expected[3], Weights[3], tolerance);
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
         targetPositions.Dispose();
         Weights.Dispose();

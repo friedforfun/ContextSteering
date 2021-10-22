@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -13,16 +14,17 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         //[Tooltip("Attractor and Repulsor strategies (directions in which we will move towards or away from.)")]
         protected PlanarSteeringBehaviour[] SteeringBehaviours;
+        private PlanarSteeringBehaviour[] GetBehaviours() => SteeringBehaviours;
 
         //[Tooltip("Masking strategies (directions in which to block movement).")]
         protected PlanarSteeringMask[] SteeringMasks;
 
         protected float[] contextMap; // The weights of each direction in the context map itself
-
+        private float[] GetContextMap() => contextMap;
 
         protected float[] MergeSteeringBehaviours()
         {
-            ConcurrentBag<float[]> contextMaps = new ConcurrentBag<float[]>();
+            List<float[]> contextMaps = new List<float[]>();
 
             foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
             {
@@ -38,10 +40,8 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             //contextMap = ContextCombinator.CombineContext(MergeSteeringBehaviours(), new float[steeringParameters.ContextMapResolution]);
             contextMap = MergeSteeringBehaviours();
             // -----------------------------------------------------------
-            Debug.Log("Updating Output");
-            Debug.Log($"Vec before: {outputVector}");
+   
             outputVector = DirectionDecider.GetDirection(contextMap, outputVector);
-            Debug.Log($"Vec after: {outputVector}");
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             {
                 foreach (PlanarSteeringBehaviour behaviour in SteeringBehaviours)
                 {
-                    Debug.Log($"Controller init -> {behaviour.BehaviourName}");
+                    //Debug.Log($"Controller init -> {behaviour.BehaviourName}");
                     behaviour.InstantiateContextMap(steeringParameters);
                 }
             }
@@ -94,7 +94,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         /// </summary>
         /// <param name="maps"></param>
         /// <returns></returns>
-        protected float[] mergeMaps(ConcurrentBag<float[]> maps)
+        protected float[] mergeMaps(List<float[]> maps)
         {
             float[] contextMap = new float[steeringParameters.ContextMapResolution];
             for (int i = 0; i < steeringParameters.ContextMapResolution; i++)
