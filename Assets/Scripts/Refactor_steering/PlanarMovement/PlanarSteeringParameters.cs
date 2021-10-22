@@ -12,14 +12,14 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         [Tooltip("Number of directions the context map represents, higher values result in more overhead but allow more complex movement.")]
         [Range(4, 64)]
-        private int m_contextMapResolution = 12;
+        private int _contextMapResolution = 12;
         public int ContextMapResolution
         {
-            get { return m_contextMapResolution; }
+            get { return _contextMapResolution; }
             set
             {
-                m_contextMapResolution = value;
-                ResolutionAngle = 360 / (float) m_contextMapResolution;
+                _contextMapResolution = value;
+                updateResolutionAngle();
                 OnResolutionChange();
             }
         }
@@ -32,13 +32,33 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         public Vector3 InitialVector;
 
         [HideInInspector]
-        public float ResolutionAngle;
+        public float ResolutionAngle
+        {
+            get 
+            {
+                if (_resolutionAngle == 0)
+                    updateResolutionAngle();
+                return _resolutionAngle;
+            }
+            set
+            {
+                _resolutionAngle = value;
+            }
+        }
+
+        private float _resolutionAngle;
+
+        private void updateResolutionAngle()
+        {
+            _resolutionAngle = 360 / (float)_contextMapResolution;
+        }
 
         [HideInInspector]
         public delegate void OnResolutionChangeDelegate();
 
         [HideInInspector]
         public event OnResolutionChangeDelegate OnResolutionChange = delegate { };
+
               
 
     }
