@@ -6,6 +6,7 @@ using UnityEngine.TestTools;
 using Friedforfun.SteeringBehaviours.Core;
 using Friedforfun.SteeringBehaviours.Utilities;
 using Unity.Collections;
+using Unity.Jobs;
 
 public class DotToVecJobTests
 {
@@ -66,6 +67,44 @@ public class DotToVecJobTests
 
         // compute
         job.Execute();
+
+        // check result
+        float[] expected = { 1f, 0f, -1f, 0f };
+
+        Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+        Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
+
+        targetPositions.Dispose();
+        Weights.Dispose();
+
+    }
+
+    [Test]
+    public void StandardMapYAxisScheduled()
+    {
+        NativeArray<Vector3> targetPositions = new NativeArray<Vector3>(targets, Allocator.TempJob);
+        NativeArray<float> Weights = new NativeArray<float>(_weights, Allocator.TempJob);
+
+        DotToVecJob job = new DotToVecJob()
+        {
+            targets = targetPositions,
+            scaled = scaled,
+            my_position = position,
+            range = range,
+            weight = weight,
+            angle = angle,
+            invertScale = invertScale,
+            axis = axis,
+            Weights = Weights,
+            direction = direction
+        };
+
+        // compute
+        JobHandle handle = job.Schedule();
+
+        handle.Complete();
 
         // check result
         float[] expected = { 1f, 0f, -1f, 0f };
