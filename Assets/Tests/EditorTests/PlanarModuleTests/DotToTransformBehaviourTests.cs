@@ -33,8 +33,6 @@ namespace Friedforfun.SteeringBehaviours.Tests
             target.transform.position = new Vector3(0, 0, 5);
 
             behaviour.Positions = new Transform[] { target.transform };
-
-            behaviour.Start();
         }
 
         [TearDown]

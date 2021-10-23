@@ -40,7 +40,6 @@ namespace Friedforfun.SteeringBehaviours.Tests
             behaviour.Positions = new Transform[] { target.transform };
 
             controller.Awake();
-            behaviour.Start();
         }
 
         [TearDown]

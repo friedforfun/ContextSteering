@@ -1,6 +1,7 @@
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
 using Friedforfun.SteeringBehaviours.Utilities;
+using Unity.Collections;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -17,7 +18,9 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected PlanarSteeringParameters steeringParameters;
 
         [SerializeField] public PlanarMapVisualiserParameters MapDebugger;
-        //private MapVisualiserPlanar MapDebugVis = new MapVisualiserPlanar();
+
+        private NativeArray<float> nextMap;
+        private NativeArray<Vector3> targetPositions;
 
         /// <summary>
         /// Instantiates the context map weights and computes the angle between each direction
@@ -28,6 +31,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             this.steeringParameters = steeringParameters;
             this.steeringParameters.OnResolutionChange += MapResolutionChangeHandler;
             steeringMap = new float[steeringParameters.ContextMapResolution];
+            nextMap = new NativeArray<float>(steeringParameters.ContextMapResolution, Allocator.Persistent);
         }
 
         /// <summary>
@@ -51,17 +55,61 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         /// Get the job required to update the steering map, to be scheduled
         /// </summary>
         /// <returns>DotToVecJob ready to be scheduled</returns>
-        public abstract DotToVecJob GetJob();
+        public DotToVecJob GetJob()
+        {
+            Vector3[] targetArr = getPositionVectors();
+
+            targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.Persistent);
+
+            for (int i = 0; i < targetArr.Length; i++)
+            {
+                targetPositions[i] = targetArr[i];
+            }
+
+            return new DotToVecJob()
+            {
+                targets = targetPositions,
+                my_position = transform.position,
+                range = Range,
+                weight = Weight,
+                angle = steeringParameters.ResolutionAngle,
+                Weights = nextMap,
+                direction = Direction,
+                scaled = ScaleOnDistance,
+                invertScale = invertScalef,
+                axis = steeringParameters.ContextMapRotationAxis
+            };
+        }
 
         /// <summary>
         /// swaps the completed job data into the steering map, run this when the jobs are complete before scheduling the next job
         /// </summary>
-        public abstract void Swap();
+        public void Swap()
+        {
+            targetPositions.Dispose();
+            float[] next = new float[steeringParameters.ContextMapResolution];
+            for (int i = 0; i < nextMap.Length; i++)
+            {
+                next[i] = nextMap[i];
+            }
+
+            steeringMap = next;
+        }
+
+        protected abstract Vector3[] getPositionVectors();
 
 
         protected virtual void OnDestroy()
         {
             steeringParameters.OnResolutionChange -= MapResolutionChangeHandler;
+        }
+
+        public virtual void OnDisable()
+        {
+            if (nextMap.IsCreated)
+                nextMap.Dispose();
+            if (targetPositions.IsCreated)
+                targetPositions.Dispose();
         }
 
 #if UNITY_EDITOR
