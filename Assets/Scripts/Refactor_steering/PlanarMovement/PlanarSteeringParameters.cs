@@ -40,7 +40,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
                     updateResolutionAngle();
                 return _resolutionAngle;
             }
-            set
+            private set
             {
                 _resolutionAngle = value;
             }
