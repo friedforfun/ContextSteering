@@ -10,7 +10,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
     public class DotToLayer : PlanarSteeringBehaviour
     {
 
-        [SerializeField] LayerMask Layers;
+        [SerializeField] public LayerMask Layers;
 
         protected override Vector3[] getPositionVectors()
         {

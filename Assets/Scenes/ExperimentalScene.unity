@@ -132,8 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 289248341}
-  - component: {fileID: 289248340}
   - component: {fileID: 289248342}
+  - component: {fileID: 289248340}
   m_Layer: 0
   m_Name: Ref
   m_TagString: Untagged
