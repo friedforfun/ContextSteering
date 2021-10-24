@@ -6,11 +6,13 @@ using Unity.Collections;
 
 namespace Friedforfun.SteeringBehaviours.Tests
 {
-    public class DotToTransformTests
+    public class PlanarSteeringBehaviourTests
     {
 
         GameObject agent;
         GameObject target;
+
+        // Select one concrete behaviour
         DotToTransform behaviour;
 
         PlanarSteeringParameters planarParameters = new PlanarSteeringParameters();
