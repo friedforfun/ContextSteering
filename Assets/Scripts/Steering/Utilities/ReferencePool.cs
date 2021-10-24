@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 namespace Friedforfun.SteeringBehaviours.Utilities
@@ -45,7 +46,6 @@ namespace Friedforfun.SteeringBehaviours.Utilities
             List<GameObject> go_list = null;
             if (!registeredTags.TryGetValue(tag, out go_list))
             {
-                Debug.Log("(Remove this from ReferencePool.cs) No gameobjects found for this tag");
                 go_list = new List<GameObject>();
             }
 
@@ -92,14 +92,8 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         public static Vector3[] GetVector3sByTag(string tag, GameObject self)
         {
             Vector3[] pos_arr = GetVector3sByTag(tag);
-            Vector3[] cleanArr = new Vector3[pos_arr.Length - 1];
             Vector3 selfLoc = self.transform.position;
-
-            for (int i = 0; i < pos_arr.Length; i++)
-            {
-                if (MapOperations.VectorToTarget(selfLoc, pos_arr[i]).magnitude > 0.05f)
-                    cleanArr[i] = pos_arr[i];// array index mismatch when skip one element
-            }
+            Vector3[] cleanArr = pos_arr.Where(value => value != selfLoc).ToArray();
 
             return cleanArr;
         }
