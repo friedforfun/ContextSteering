@@ -15,6 +15,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         public int TicksPerSecond = 10;
 
         JobHandle[] Handles;
+        bool JobRunning = false;
 
         public SelfSchedulingPlanarController()
         {
@@ -28,10 +29,16 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             StartCoroutine(CycleWork());
         }
 
+        public void OnDisable()
+        {
+            if (JobRunning)
+                CompleteWork();
+        }
 
 
         private void ScheduleWork()
         {
+            JobRunning = true;
             Handles = new JobHandle[SteeringBehaviours.Length];
 
             var jobs = GetJobs();
@@ -43,6 +50,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         private void CompleteWork()
         {
+            JobRunning = false;
             foreach (JobHandle h in Handles)
             {
                 h.Complete();
@@ -52,7 +60,6 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             {
                 psb.Swap();
             }
-
         }
 
         private IEnumerator CycleWork()

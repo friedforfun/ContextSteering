@@ -2,6 +2,7 @@ using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
 using Friedforfun.SteeringBehaviours.Utilities;
 using Unity.Collections;
+using Unity.Jobs;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -108,6 +109,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         {
             if (nextMap.IsCreated)
                 nextMap.Dispose();
+                
             if (targetPositions.IsCreated)
                 targetPositions.Dispose();
         }

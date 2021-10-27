@@ -61,9 +61,9 @@ namespace Friedforfun.SteeringBehaviours.Tests
             behaviour.OnDisable();
             ReferencePool.ClearCache();
 
-            ReferencePool.DeRegister(targetOne);
-            ReferencePool.DeRegister(targetTwo);
-            ReferencePool.DeRegister(targetThree);
+            //ReferencePool.DeRegister(targetOne);
+            //ReferencePool.DeRegister(targetTwo);
+            //ReferencePool.DeRegister(targetThree);
         }
          
         [Test]
