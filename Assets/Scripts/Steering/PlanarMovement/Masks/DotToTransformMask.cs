@@ -3,15 +3,14 @@ using Friedforfun.SteeringBehaviours.Core;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
-    public class DotToTag : PlanarSteeringBehaviour
-    { 
-        [SerializeField] public string[] Tags;
-
+    public class DotToTransformMask : PlanarSteeringMask
+    {
+        [SerializeField]
+        Transform[] Positions;
         protected override Vector3[] getPositionVectors()
         {
-            return VectorsFromTagArray.GetVectors(Tags);
+            return VectorsFromTransformArray.GetVectors(Positions);
         }
-
     }
-
 }
+
