@@ -1,12 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 using Friedforfun.SteeringBehaviours.PlanarMovement;
-using Friedforfun.SteeringBehaviours.Utilities;
-using Unity.Collections;
-using Unity.Jobs;
 using System;
 
 namespace Friedforfun.SteeringBehaviours.Tests
@@ -32,7 +25,7 @@ namespace Friedforfun.SteeringBehaviours.Tests
 
         }
 
-        [Test]
+        //[Test]
         public void OnChangeResolutionEventTest()
         {
             bool eventFired = false;
