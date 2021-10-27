@@ -54,6 +54,11 @@ namespace Friedforfun.SteeringBehaviours.Utilities
 
         private void LateUpdate()
         {
+            ClearCache();
+        }
+
+        public static void ClearCache()
+        {
             positionCache.Clear();
         }
 
