@@ -7,6 +7,7 @@ using Friedforfun.SteeringBehaviours.PlanarMovement;
 using Friedforfun.SteeringBehaviours.Utilities;
 using Unity.Collections;
 using Unity.Jobs;
+using System;
 
 namespace Friedforfun.SteeringBehaviours.Tests
 {
@@ -36,7 +37,7 @@ namespace Friedforfun.SteeringBehaviours.Tests
         {
             bool eventFired = false;
 
-            planarParams.OnResolutionChange += delegate () { eventFired = true; };
+            planarParams.OnResolutionChange += delegate (object sender, EventArgs e) { eventFired = true; };
 
             planarParams.ContextMapResolution = 24;
 

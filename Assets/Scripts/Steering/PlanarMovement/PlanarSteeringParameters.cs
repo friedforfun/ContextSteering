@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
 using Friedforfun.SteeringBehaviours.Utilities;
+using System;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     [System.Serializable]
     public class PlanarSteeringParameters: CoreSteeringParameters
     {
-
+        [SerializeField]
         [Tooltip("Number of directions the context map represents, higher values result in more overhead but allow more complex movement.")]
         [Range(4, 64)]
         private int _contextMapResolution = 12;
+
         public int ContextMapResolution
         {
             get { return _contextMapResolution; }
@@ -20,7 +22,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             {
                 _contextMapResolution = value;
                 updateResolutionAngle();
-                OnResolutionChange();
+                //OnResolutionChange?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -54,10 +56,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         }
 
         [HideInInspector]
-        public delegate void OnResolutionChangeDelegate();
-
-        [HideInInspector]
-        public event OnResolutionChangeDelegate OnResolutionChange = delegate { };
+        public event EventHandler OnResolutionChange;
 
               
 

@@ -41,10 +41,9 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             JobRunning = true;
             Handles = new JobHandle[SteeringBehaviours.Length];
 
-            var jobs = GetJobs();
-            for (int i = 0; i < jobs.Length; i++)
+            for (int i = 0; i < SteeringBehaviours.Length; i++)
             {
-                Handles[i] = jobs[i].Schedule();
+                Handles[i] = SteeringBehaviours[i].GetJob().Schedule();
             }
         }
 

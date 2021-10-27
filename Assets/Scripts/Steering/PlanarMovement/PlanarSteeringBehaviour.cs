@@ -3,6 +3,7 @@ using Friedforfun.SteeringBehaviours.Core;
 using Friedforfun.SteeringBehaviours.Utilities;
 using Unity.Collections;
 using Unity.Jobs;
+using System;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -22,6 +23,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         private NativeArray<float> nextMap;
         private NativeArray<Vector3> targetPositions;
+        //private bool rebuildMap = false;
 
         /// <summary>
         /// Instantiates the context map weights and computes the angle between each direction
@@ -30,7 +32,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         public override void InstantiateContextMap(PlanarSteeringParameters steeringParameters)
         {
             this.steeringParameters = steeringParameters;
-            this.steeringParameters.OnResolutionChange += MapResolutionChangeHandler;
+            //this.steeringParameters.OnResolutionChange += MapResolutionChangeHandler;
             steeringMap = new float[steeringParameters.ContextMapResolution];
             nextMap = new NativeArray<float>(steeringParameters.ContextMapResolution, Allocator.Persistent);
         }
@@ -38,9 +40,10 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         /// <summary>
         /// Runs when the context map resolution is changed at runtime
         /// </summary>
-        private void MapResolutionChangeHandler()
+        private void MapResolutionChangeHandler(object sender, EventArgs e)
         {
-            steeringMap = new float[steeringParameters.ContextMapResolution];
+            //rebuildMap = true;
+            Debug.Log("Resolution change");
         }
 
         /// <summary>
@@ -58,6 +61,12 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         /// <returns>DotToVecJob ready to be scheduled</returns>
         public DotToVecJob GetJob()
         {
+            //if (rebuildMap)
+            //{
+            //   rebuildMap = false;
+            //    nextMap = new NativeArray<float>(steeringParameters.ContextMapResolution, Allocator.Persistent);
+            //}
+
             Vector3[] targetArr = getPositionVectors();
 
             targetPositions = new NativeArray<Vector3>(targetArr.Length, Allocator.Persistent);
@@ -88,7 +97,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         public void Swap()
         {
             targetPositions.Dispose();
-            float[] next = new float[steeringParameters.ContextMapResolution];
+            float[] next = new float[nextMap.Length];
             for (int i = 0; i < nextMap.Length; i++)
             {
                 next[i] = nextMap[i];
@@ -100,10 +109,10 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected abstract Vector3[] getPositionVectors();
 
 
-        protected virtual void OnDestroy()
+        /*protected virtual void OnDestroy()
         {
             steeringParameters.OnResolutionChange -= MapResolutionChangeHandler;
-        }
+        }*/
 
         public virtual void OnDisable()
         {

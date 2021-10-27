@@ -59,7 +59,7 @@ namespace Friedforfun.SteeringBehaviours.Tests
         {
             TagHelper.RemoveTag("Test");
             behaviour.OnDisable();
-            ReferencePool.ClearCache();
+            //ReferencePool.ClearCache();
 
             //ReferencePool.DeRegister(targetOne);
             //ReferencePool.DeRegister(targetTwo);
