@@ -62,6 +62,12 @@ namespace Friedforfun.SteeringBehaviours.Utilities
             positionCache.Clear();
         }
 
+        public static void ClearAll()
+        {
+            positionCache.Clear();
+            registeredTags.Clear();
+        }
+
         /// <summary>
         /// Get position vectors for all GameObjects of this tag, caches result for this frame.
         /// </summary>
