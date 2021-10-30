@@ -15,6 +15,8 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         private static Dictionary<string, List<GameObject>> registeredTags = new Dictionary<string, List<GameObject>>();
         private static Dictionary<string, Vector3[]> positionCache = new Dictionary<string, Vector3[]>();
 
+        private static bool isGameObject = false;
+
         public static void Register(GameObject go)
         {
             List<GameObject> go_list = null;
@@ -57,11 +59,17 @@ namespace Friedforfun.SteeringBehaviours.Utilities
             ClearCache();
         }
 
+        /// <summary>
+        /// Clears all positions stored in the position cache
+        /// </summary>
         public static void ClearCache()
         {
             positionCache.Clear();
         }
 
+        /// <summary>
+        /// Clears all registered tags and position cache
+        /// </summary>
         public static void ClearAll()
         {
             positionCache.Clear();
@@ -75,6 +83,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         /// <returns></returns>
         public static Vector3[] GetVector3sByTag(string tag)
         {
+            CheckIfInScene();
             Vector3[] pos_arr = null;
             if (!positionCache.TryGetValue(tag, out pos_arr))
             {
@@ -102,11 +111,62 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         /// <returns></returns>
         public static Vector3[] GetVector3sByTag(string tag, GameObject self)
         {
+            CheckIfInScene();
             Vector3[] pos_arr = GetVector3sByTag(tag);
             Vector3 selfLoc = self.transform.position;
             Vector3[] cleanArr = pos_arr.Where(value => value != selfLoc).ToArray();
 
             return cleanArr;
+        }
+
+        /// <summary>
+        /// Same as GetVector3sByTag but without caching the result this frame.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public static Vector3[] GetVector3sByTagNoCache(string tag)
+        {
+            GameObject[] tempTargets = GetGameObjectsByTag(tag);
+
+            Vector3[] pos_arr = new Vector3[tempTargets.Length];
+
+            for (int i = 0; i < pos_arr.Length; i++)
+            {
+                pos_arr[i] = tempTargets[i].transform.position;
+            }
+
+            return pos_arr;
+        }
+
+        /// <summary>
+        /// Same as GetVector3sByTag but without caching the result this frame.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static Vector3[] GetVector3sByTagNoCache(string tag, GameObject self)
+        {
+            Vector3[] pos_arr = GetVector3sByTagNoCache(tag);
+            Vector3 selfLoc = self.transform.position;
+            Vector3[] cleanArr = pos_arr.Where(value => value != selfLoc).ToArray();
+
+            return cleanArr;
+        }
+
+        private static void CheckIfInScene()
+        {
+            if (isGameObject)
+                return;
+
+            GameObject me = FindObjectOfType<ReferencePool>().gameObject;
+            if (me != null)
+            {
+                isGameObject = true;
+                return;
+            }
+
+            Debug.LogWarning("No ReferencePool found in scene, Cached position Vector3s will not be cleared.");
+
         }
 
     }
