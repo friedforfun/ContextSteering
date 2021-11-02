@@ -4,7 +4,7 @@ using Friedforfun.SteeringBehaviours.Core;
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     /// <summary>
-    /// Zeros out all directions with more than the least danger + a threshold
+    /// Masks out all directions with more than the least danger + a threshold
     /// </summary>
     public class BasicContextCombinator : ICombineContext
     {
