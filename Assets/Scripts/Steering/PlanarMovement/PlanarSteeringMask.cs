@@ -8,8 +8,11 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     public abstract class PlanarSteeringMask : CoreSteeringMask<PlanarSteeringParameters>
     {
+        [Tooltip("How influential this mask is")]
         [SerializeField] protected float Weight = 1f;
+        [Tooltip("Does the Mask consider how far away the targets are.")]
         [SerializeField] protected bool ScaleOnDistance = false;
+        [Tooltip("If using scaling, set to true to make more distant targets less important, false makes distant targets more important.")]
         [SerializeField] bool InvertScale = true;
 
         protected float invertScalef { get { return InvertScale ? 1f : 0f; } }
