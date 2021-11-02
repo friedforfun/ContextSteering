@@ -38,7 +38,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D
         public Vector3 MoveDirection()
         {
             contextMap = ContextCombinator.CombineContext(buildSteeringBehaviours(), buildSteeringMasks());
-            lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
+            lastVector = DirectionDecider.GetDirection(contextMap);
             return lastVector.normalized;
         }
 
@@ -50,7 +50,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D
         public Vector3 MoveVector()
         {
             contextMap = ContextCombinator.CombineContext(buildSteeringBehaviours(), buildSteeringMasks());
-            lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
+            lastVector = DirectionDecider.GetDirection(contextMap);
             return lastVector;
         }
 

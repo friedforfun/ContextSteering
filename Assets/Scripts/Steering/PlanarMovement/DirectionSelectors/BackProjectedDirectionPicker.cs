@@ -5,7 +5,9 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     public class BackProjectedDirectionPicker : IDecideDirection
     {
-        public Vector3 GetDirection(float[] contextMap, Vector3 lastVector)
+        private Vector3 lastVector = Vector3.zero;
+
+        public Vector3 GetDirection(float[] contextMap)
         {
             float resolutionAngle = 360 / (float)contextMap.Length;
 

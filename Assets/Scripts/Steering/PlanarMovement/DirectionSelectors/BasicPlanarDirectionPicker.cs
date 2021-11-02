@@ -11,6 +11,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
     {
         private bool allowVectorZero = true;
         private PlanarSteeringParameters steeringParams;
+        private Vector3 lastVector = Vector3.zero;
 
         public BasicPlanarDirectionPicker(bool allowZero, PlanarSteeringParameters steeringParameters)
         {
@@ -18,9 +19,9 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             steeringParams = steeringParameters;
         }
 
-        public Vector3 GetDirection(float[] contextMap, Vector3 lastVector)
+        public Vector3 GetDirection(float[] contextMap)
         {
-            float resolutionAngle = 360 / (float)contextMap.Length;
+            float resolutionAngle = steeringParams.ResolutionAngle;
 
             float maxValue = 0f;
             int maxIndex = 0;
@@ -41,13 +42,15 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
                 if (allowVectorZero)
                     return Vector3.zero;
 
-                return lastVector; // Keep last direction if no better direction is found
+                return lastVector; // return last direction if no better direction is found
             }
 
             if (steeringParams == null)
-                return Quaternion.Euler(0, resolutionAngle * maxIndex, 0) * direction;
-
-            return MapOperations.RotateAroundAxis(steeringParams.ContextMapRotationAxis, resolutionAngle * maxIndex) * direction;
+                throw new UnassignedReferenceException("The direction selection algorithm does not know what axis to use, check constructor (PlanarSteeringParameters).");
+            
+            // Update cache & return new direction.
+            lastVector = MapOperations.RotateAroundAxis(steeringParams.ContextMapRotationAxis, resolutionAngle * maxIndex) * direction;
+            return lastVector;
         }
     }
 }

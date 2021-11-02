@@ -10,13 +10,13 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
     public class PlanarDirectionSimpleSmoothing : IDecideDirection
     {
         private float MaxDot;
-
+        private Vector3 lastVector = Vector3.zero;
         public PlanarDirectionSimpleSmoothing(float MaxDot)
         {
             this.MaxDot = Mathf.Clamp(MaxDot, -1, 1);
         }
 
-        public Vector3 GetDirection(float[] contextMap, Vector3 lastVector)
+        public Vector3 GetDirection(float[] contextMap)
         {
             float resolutionAngle = 360 / (float)contextMap.Length;
 
@@ -48,7 +48,8 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
             float desiredAngleRad = Mathf.Acos(MaxDot);
 
-            return Vector3.RotateTowards(lastVector.normalized, nextVector.normalized, desiredAngleRad, 1);
+            lastVector = Vector3.RotateTowards(lastVector.normalized, nextVector.normalized, desiredAngleRad, 1);
+            return lastVector;
         }
     }
 }

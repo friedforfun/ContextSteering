@@ -41,7 +41,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             contextMap = MergeSteeringBehaviours();
             // -----------------------------------------------------------
 
-            outputVector = DirectionDecider.GetDirection(contextMap, outputVector);
+            outputVector = DirectionDecider.GetDirection(contextMap);
         }
 
         /// <summary>

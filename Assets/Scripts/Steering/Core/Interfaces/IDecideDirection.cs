@@ -4,6 +4,6 @@ namespace Friedforfun.SteeringBehaviours.Core
 {
     public interface IDecideDirection
     {
-        Vector3 GetDirection(float[] contextMap, Vector3 lastVector);
+        Vector3 GetDirection(float[] contextMap);
     }
 }

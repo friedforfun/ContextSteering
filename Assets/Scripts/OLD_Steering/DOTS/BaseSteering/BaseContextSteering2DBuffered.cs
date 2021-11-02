@@ -104,7 +104,7 @@ namespace Friedforfun.SteeringBehaviours.Core2D.Buffered
 
             nextContextMap = ContextCombinator.CombineContext(steeringMap, maskMap);
             swap();
-            lastVector = DirectionDecider.GetDirection(contextMap, lastVector);
+            lastVector = DirectionDecider.GetDirection(contextMap);
 
         
         }
