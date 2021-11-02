@@ -107,15 +107,16 @@ GameObject:
   - component: {fileID: 9118685762301980295}
   - component: {fileID: 9118685762301980315}
   - component: {fileID: 7164804104516909935}
-  - component: {fileID: 269120970280420190}
-  - component: {fileID: 9130712809095325372}
-  - component: {fileID: 7663127309317368701}
-  - component: {fileID: 6808892635466277565}
-  - component: {fileID: 3681680149742742503}
-  - component: {fileID: -3354671705114166014}
-  - component: {fileID: 3019051023686194971}
+  - component: {fileID: 7628710748917585861}
+  - component: {fileID: 4121207508804205930}
+  - component: {fileID: 9118685762301980313}
+  - component: {fileID: 9118685762301980316}
+  - component: {fileID: 242089566551712363}
+  - component: {fileID: 2887461485239648358}
+  - component: {fileID: 1425279832}
+  - component: {fileID: 8152059374414848115}
   m_Layer: 0
-  m_Name: AgentSwarmBuffered
+  m_Name: _OLD_AgentSwarm
   m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +171,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &269120970280420190
+--- !u!114 &7628710748917585861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   childRenderer: {fileID: 9118685761035116511}
   impactMaterial: {fileID: 2100000, guid: 5bd05608cc22ebe46a3c370361b74ec9, type: 2}
---- !u!114 &9130712809095325372
+--- !u!114 &4121207508804205930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,14 +194,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02caec1f6467a946aefcfb37afc5ba2, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b6bb475e27cb8b47bf2111b1e41573e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steer: {fileID: 7663127309317368701}
+  steer: {fileID: 9118685762301980313}
   control: {fileID: 9118685762301980315}
   target: {fileID: 0}
-  Speed: 8
---- !u!114 &7663127309317368701
+  Speed: 1
+--- !u!114 &9118685762301980313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,7 +210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d586611b5d0bd24599383a6ff1736b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aaa0a7c45286f148b9d73d57e3c44e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   steeringParameters:
@@ -217,13 +218,14 @@ MonoBehaviour:
     ContextMapRotationAxis: 1
     InitialVector: {x: 0, y: 0, z: 1}
   SteeringBehaviours:
-  - {fileID: 6808892635466277565}
-  - {fileID: 3019051023686194971}
-  - {fileID: -3354671705114166014}
-  - {fileID: 3681680149742742503}
-  SteeringMasks: []
+  - {fileID: 8152059374414848115}
+  - {fileID: 2887461485239648358}
+  - {fileID: 1425279832}
+  SteeringMasks:
+  - {fileID: 9118685762301980316}
+  - {fileID: 242089566551712363}
   AllowVectorZero: 1
---- !u!114 &6808892635466277565
+--- !u!114 &9118685762301980316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,18 +234,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94f611b28df039347ba1ad72d464c9e6, type: 3}
+  m_Script: {fileID: 11500000, guid: c174b0d281b8a4e45bfb5be20d62e29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 21
+  Range: 2
   ShowDebug: 0
   MapSize: 2
-  DebugColor: {r: 0, g: 1, b: 0, a: 1}
-  Tags:
-  - Target
-  direction: 0
-  Weight: 1
---- !u!114 &3681680149742742503
+  DebugColor: {r: 1, g: 0, b: 0, a: 1}
+  LayersForSteeringMask:
+    serializedVersion: 2
+    m_Bits: 64
+  weight: 1
+--- !u!114 &242089566551712363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,17 +254,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c67ddb594cf1c94888b5d9c1803adaa, type: 3}
+  m_Script: {fileID: 11500000, guid: 27b8b4ab2b7b0d34b9cc46ef98046a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 40
+  Range: 2
   ShowDebug: 0
-  MapSize: 10
-  DebugColor: {r: 0.94135094, g: 0, b: 1, a: 1}
-  direction: 0
-  Weight: 1
-  Positions: []
---- !u!114 &-3354671705114166014
+  MapSize: 2
+  DebugColor: {r: 0.3962264, g: 0.19624421, b: 0.19624421, a: 1}
+  Tags:
+  - Projectile
+  - Agent
+  weight: 1
+--- !u!114 &2887461485239648358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,19 +274,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8cf9ce00da8b4541947e102280688ab, type: 3}
+  m_Script: {fileID: 11500000, guid: a1366303eafd14043a9d75399ca7bdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 4
+  ShowDebug: 0
+  MapSize: 4
+  DebugColor: {r: 0, g: 0.7911868, b: 1, a: 1}
+  direction: 1
+  InvertScale: 1
+  weight: 2
+  Tags:
+  - Projectile
+  - Agent
+--- !u!114 &1425279832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9118685762301980294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac60a3d4dfde884dbcd14cc656c3824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 1.5
   ShowDebug: 0
   MapSize: 2
-  DebugColor: {r: 1, g: 0.41159213, b: 0, a: 1}
+  DebugColor: {r: 0, g: 1, b: 0, a: 1}
   direction: 1
-  Weight: 1
   Layers:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &3019051023686194971
+  weight: 1
+--- !u!114 &8152059374414848115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,16 +317,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 9118685762301980294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ec830ead9ad3d45b1ace544a2f8e91, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d6a8a09c0ed02f4c977c5eb4030b845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 4
+  Range: 40
   ShowDebug: 0
   MapSize: 2
-  DebugColor: {r: 0, g: 0.8367305, b: 1, a: 1}
-  Tags:
-  - Agent
-  - Projectile
-  direction: 1
-  InvertScale: 1
-  Weight: 2
+  DebugColor: {r: 0, g: 1, b: 0, a: 1}
+  direction: 0
+  weight: 1
+  positions: []

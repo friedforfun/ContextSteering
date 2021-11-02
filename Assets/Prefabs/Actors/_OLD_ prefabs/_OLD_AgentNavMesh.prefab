@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 3263295177990252488}
   - component: {fileID: 7782792274703227068}
   m_Layer: 0
-  m_Name: AgentNavMesh
+  m_Name: _OLD_AgentNavMesh
   m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

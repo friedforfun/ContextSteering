@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 4856436710971694190}
   - component: {fileID: 7275322634719325906}
   m_Layer: 0
-  m_Name: AgentNavmeshBuffered
+  m_Name: _OLD_AgentNavmeshBuffered
   m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
