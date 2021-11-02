@@ -104,7 +104,6 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         }
 
         /// <summary>
-        /// 
         /// Get position vectors for all GameObjects of this tag, caches result for this frame. Self is excluded in result array of Vector3s
         /// </summary>
         /// <param name="tag"></param>
@@ -158,14 +157,14 @@ namespace Friedforfun.SteeringBehaviours.Utilities
             if (isGameObject)
                 return;
 
-            GameObject me = FindObjectOfType<ReferencePool>().gameObject;
+            ReferencePool me = FindObjectOfType<ReferencePool>();
             if (me != null)
             {
                 isGameObject = true;
                 return;
             }
 
-            Debug.LogWarning("No ReferencePool found in scene, Cached position Vector3s will not be cleared.");
+            Debug.LogWarning("No ReferencePool found in scene, Cached position Vector3s will not be cleared each frame.");
 
         }
 
