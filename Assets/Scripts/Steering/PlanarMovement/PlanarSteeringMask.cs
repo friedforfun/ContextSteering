@@ -36,7 +36,14 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             //rebuildMap = true;
         }
 
-        protected abstract Vector3[] getPositionVectors();
+        /// <summary>
+        /// Return a context map where the index of the float defines the direction whose value is being inspected, the size of the scalar defines how much we want to move in a direction
+        /// </summary>
+        /// <returns></returns>
+        public virtual float[] GetMaskMap()
+        {
+            return maskMap;
+        }
 
         public DotToVecJob GetJob()
         {
@@ -70,6 +77,29 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             };
         }
 
+        public void Swap()
+        {
+            targetPositions.Dispose();
+            float[] next = new float[nextMap.Length];
+            for (int i = 0; i < nextMap.Length; i++)
+            {
+                next[i] = nextMap[i];
+            }
+
+            maskMap = next;
+        }
+
+        public virtual void OnDisable()
+        {
+            if (nextMap.IsCreated)
+                nextMap.Dispose();
+
+            if (targetPositions.IsCreated)
+                targetPositions.Dispose();
+        }
+
+        protected abstract Vector3[] getPositionVectors();
+
         protected Quaternion rotateAroundAxis(float resolutionAngle)
         {
             return MapOperations.RotateAroundAxis(steeringParameters.ContextMapRotationAxis, resolutionAngle);
@@ -84,7 +114,10 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            MapVisualiserPlanar.InDrawGizmos(MapDebugger, maskMap, Range, steeringParameters.ResolutionAngle, transform);
+            if (maskMap != null && MapDebugger != null)
+            {
+                MapVisualiserPlanar.InDrawGizmos(MapDebugger, maskMap, Range, steeringParameters.ResolutionAngle, transform);
+            }
         }
 #endif
     }
