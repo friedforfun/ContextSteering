@@ -6,7 +6,7 @@ namespace Friedforfun.SteeringBehaviours.Core
     {
         [Header("Mask Properties")]
         [Tooltip("Range at which the mask has an effect.")]
-        [SerializeField] protected float Range;
+        [SerializeField] protected float Range = 10f;
 
         public string MaskName;
 
