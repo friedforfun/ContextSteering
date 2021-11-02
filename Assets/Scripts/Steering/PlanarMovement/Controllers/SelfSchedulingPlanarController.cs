@@ -17,15 +17,11 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         JobHandle[] Handles;
         bool JobRunning = false;
 
-        public SelfSchedulingPlanarController()
-        {
-            ContextCombinator = new BasicContextCombinator();
-            DirectionDecider = new BasicPlanarDirectionPicker(true, steeringParameters);
-        }
-
         public override void Awake()
         {
             base.Awake();
+            ContextCombinator = new BasicContextCombinator();
+            DirectionDecider = new BasicPlanarDirectionPicker(true, steeringParameters);
             StartCoroutine(CycleWork());
         }
 
@@ -39,11 +35,12 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         private void ScheduleWork()
         {
             JobRunning = true;
-            Handles = new JobHandle[SteeringBehaviours.Length];
+            var jobs = GetJobs();
+            Handles = new JobHandle[jobs.Length];
 
-            for (int i = 0; i < SteeringBehaviours.Length; i++)
+            for (int i = 0; i < Handles.Length; i++)
             {
-                Handles[i] = SteeringBehaviours[i].GetJob().Schedule();
+                Handles[i] = jobs[i].Schedule();
             }
         }
 
@@ -58,6 +55,11 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             foreach (PlanarSteeringBehaviour psb in SteeringBehaviours)
             {
                 psb.Swap();
+            }
+
+            foreach (PlanarSteeringMask psm in SteeringMasks)
+            {
+                psm.Swap();
             }
         }
 

@@ -70,7 +70,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
                 weight = Weight,
                 angle = steeringParameters.ResolutionAngle,
                 Weights = nextMap,
-                direction = SteerDirection.ATTRACT, // Always attract because a mask represents the directions we want most to avoid
+                direction = SteerDirection.ATTRACT, // Always attract because a mask points toward danger and masks out the highest danger
                 scaled = ScaleOnDistance,
                 invertScale = invertScalef,
                 axis = steeringParameters.ContextMapRotationAxis
@@ -79,7 +79,11 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         public void Swap()
         {
-            targetPositions.Dispose();
+            if (targetPositions.IsCreated)
+            {
+                targetPositions.Dispose();
+            }
+
             float[] next = new float[nextMap.Length];
             for (int i = 0; i < nextMap.Length; i++)
             {
@@ -91,6 +95,8 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         public virtual void OnDisable()
         {
+
+
             if (nextMap.IsCreated)
                 nextMap.Dispose();
 

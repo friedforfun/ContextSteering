@@ -34,12 +34,21 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return mergeMaps(contextMaps);
         }
 
+        protected float[] MergeMasks()
+        {
+            List<float[]> masks = new List<float[]>();
+
+            foreach (PlanarSteeringMask mask in SteeringMasks)
+            {
+                masks.Add(mask.GetMaskMap());
+            }
+
+            return mergeMaps(masks);
+        }
+
         public void UpdateOutput()
         {
-            // --------------- Until masks are implemented ---------------
-            //contextMap = ContextCombinator.CombineContext(MergeSteeringBehaviours(), new float[steeringParameters.ContextMapResolution]);
-            contextMap = MergeSteeringBehaviours();
-            // -----------------------------------------------------------
+            contextMap = ContextCombinator.CombineContext(MergeSteeringBehaviours(), MergeMasks());
 
             outputVector = DirectionDecider.GetDirection(contextMap);
         }
@@ -50,11 +59,15 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         /// <returns></returns>
         public DotToVecJob[] GetJobs()
         {
-            DotToVecJob[] jobs = new DotToVecJob[SteeringBehaviours.Length];
+            DotToVecJob[] jobs = new DotToVecJob[SteeringBehaviours.Length + SteeringMasks.Length];
             for (int i = 0; i < SteeringBehaviours.Length; i++)
             {
                 jobs[i] = SteeringBehaviours[i].GetJob();
-            }
+            } 
+            for ( int i = SteeringBehaviours.Length; i < SteeringBehaviours.Length + SteeringMasks.Length; i++)
+            {
+                jobs[i] = SteeringMasks[i - SteeringBehaviours.Length].GetJob();
+            } 
 
             return jobs;
         }
@@ -96,10 +109,6 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected float[] mergeMaps(List<float[]> maps)
         {
             float[] contextMap = new float[steeringParameters.ContextMapResolution];
-            for (int i = 0; i < steeringParameters.ContextMapResolution; i++)
-            {
-                contextMap[i] = 0f;
-            }
 
             foreach (float[] map in maps)
             {
