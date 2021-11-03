@@ -12,6 +12,8 @@ namespace Friedforfun.SteeringBehaviours.Demo
         [SerializeField] private Spawner spawner;
     
         private GameObject[] targetPlates;
+
+        // List of avaliable indices in targetPlates
         private List<int> indexPool;
 
         private void Awake()
@@ -20,24 +22,29 @@ namespace Friedforfun.SteeringBehaviours.Demo
             indexPool = Enumerable.Range(0, targetPlates.Length).ToList();
             indexPool = Shuffle<int>.Fisher_Yates_CardDeck_Shuffle(indexPool);
             spawner.Spawn();
-
-            StartCoroutine(rebuildDelay());
         }
 
-
-        private IEnumerator rebuildDelay()
-        {
-            yield return new WaitForSeconds(2f);
-            SteeringScheduler.RepopulateSteerers();
-        }
-
+        /// <summary>
+        /// Gets the next avaliable target plate
+        /// </summary>
+        /// <returns></returns>
         public GameObject GetTarget()
         {
-            int index = indexPool[0];
-            indexPool.RemoveAt(0);
-            return targetPlates[index];
+            if (indexPool.Count > 0)
+            {
+                int index = indexPool[0];
+                indexPool.RemoveAt(0);
+                return targetPlates[index];
+            }
+            else
+                return null;
+
         }
 
+        /// <summary>
+        /// Returns the target plate to pool and adds 
+        /// </summary>
+        /// <param name="go"></param>
         public void ReturnToPool(GameObject go)
         {
             int index = targetPlates.ToList().IndexOf(go);

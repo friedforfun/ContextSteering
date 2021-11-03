@@ -196,6 +196,7 @@ MonoBehaviour:
   control: {fileID: 4406560339523773054}
   LookTarget: {fileID: 0}
   Speed: 1
+  ConfidenceThreshold: 0.1
 --- !u!114 &1794831708527745234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steeringParameters:
-    _contextMapResolution: 12
+    _contextMapResolution: 45
     ContextMapRotationAxis: 1
     InitialVector: {x: 0, y: 0, z: 1}
   TicksPerSecond: 10

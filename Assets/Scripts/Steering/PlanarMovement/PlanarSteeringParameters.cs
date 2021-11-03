@@ -12,7 +12,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
     {
         [SerializeField]
         [Tooltip("Number of directions the context map represents, higher values result in more overhead but allow more complex movement.")]
-        [Range(4, 64)]
+        [Range(4, 360)]
         private int _contextMapResolution = 12;
 
         public int ContextMapResolution

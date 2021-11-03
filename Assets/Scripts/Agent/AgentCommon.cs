@@ -5,6 +5,9 @@ using Friedforfun.SteeringBehaviours.Core2D.Buffered;
 
 namespace Friedforfun.SteeringBehaviours.Demo
 {
+    /// <summary>
+    /// Common functionality between demo agents, registering to tag cache, and handling collision indicators.
+    /// </summary>
     [SelectionBase]
     public class AgentCommon : MonoBehaviour
     {
