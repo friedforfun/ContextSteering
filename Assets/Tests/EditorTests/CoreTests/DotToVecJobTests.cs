@@ -266,6 +266,34 @@ namespace Friedforfun.SteeringBehaviours.Tests
             Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
 
             newTargetPositions.Dispose();
+
+            // ------------------- Same Position -------------------
+            targets = new Vector3[] { new Vector3(0, 0, 0) };
+            NativeArray<Vector3> targetOnMe = new NativeArray<Vector3>(targets, Allocator.Temp);
+
+            job = new DotToVecJob()
+            {
+                targets = targetOnMe,
+                scaled = scaled,
+                my_position = position,
+                range = range,
+                weight = weight,
+                angle = angle,
+                invertScale = invertScale,
+                axis = axis,
+                Weights = Weights,
+                direction = direction
+            };
+
+            job.Execute();
+            
+            expected = new float[] { 0, 0, 0, 0 };
+            Assert.AreEqual(expected[0], Weights[0], TestUtilities.DOTPRODTOLERANCE);
+            Assert.AreEqual(expected[1], Weights[1], TestUtilities.DOTPRODTOLERANCE);
+            Assert.AreEqual(expected[2], Weights[2], TestUtilities.DOTPRODTOLERANCE);
+            Assert.AreEqual(expected[3], Weights[3], TestUtilities.DOTPRODTOLERANCE);
+
+            targetOnMe.Dispose();
             Weights.Dispose();
         }
 
