@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
-using Friedforfun.SteeringBehaviours.Core2D.Buffered;
 
 namespace Friedforfun.SteeringBehaviours.Demo
 {

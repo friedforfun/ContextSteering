@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Friedforfun.SteeringBehaviours.Core2D;
 
 namespace Friedforfun.SteeringBehaviours.Demo
 {
     public class NavmeshMovement : MonoBehaviour
     {
-        [SerializeField] private BaseContextSteering2D steer;
         [SerializeField] private CharacterController control;
 
         [Range(0.1f, 20f)]
