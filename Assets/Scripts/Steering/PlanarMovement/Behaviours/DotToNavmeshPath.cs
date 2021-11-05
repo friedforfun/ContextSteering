@@ -27,12 +27,6 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             }
         }
 
-        private void Update()
-        {
-            for (int i = 0; i < path.corners.Length - 1; i++)
-                Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
-        }
-
         /// <summary>
         /// Compute a path to the target destination on the navmesh
         /// </summary>
@@ -79,6 +73,17 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         }
 
+#if UNITY_EDITOR
+        protected override void OnDrawGizmos()
+        {
+            base.OnDrawGizmos();
+            if (hasPath && MapDebugger != null)
+                if (MapDebugger.ShowDebug)
+                    for (int i = 0; i < path.corners.Length - 1; i++)
+                        Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+
+        }
+#endif
     }
 
 }

@@ -25,7 +25,7 @@ MonoBehaviour:
   serializedTarget: 0
   TargetDestination: {x: 58.72, y: 0.25, z: 9.22}
   AreaMask: -1
-  SqrWaypointRadius: 0.1
+  SqrWaypointRadius: 0.2
 --- !u!114 &523457307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,6 +88,54 @@ MonoBehaviour:
   Layers:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1666348292744351255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652569215654541939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d658c9b6d84875b47907a4fca8f13c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 1.75
+  BehaviourName: 
+  Direction: 1
+  Weight: 3
+  ScaleOnDistance: 0
+  InvertScale: 1
+  MapDebugger:
+    ShowDebug: 1
+    MapSize: 2
+    DebugColor: {r: 1, g: 0, b: 0, a: 1}
+  Tags:
+  - Projectile
+--- !u!114 &2249163168447239013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652569215654541939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d658c9b6d84875b47907a4fca8f13c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 6.37
+  BehaviourName: 
+  Direction: 1
+  Weight: 0.74
+  ScaleOnDistance: 1
+  InvertScale: 1
+  MapDebugger:
+    ShowDebug: 0
+    MapSize: 5
+    DebugColor: {r: 0.52475166, g: 0, b: 1, a: 1}
+  Tags:
+  - Projectile
 --- !u!1001 &4986371627835070471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95,6 +143,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1794831708527745234, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
+      propertyPath: MaxRotationDotPerTick
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1794831708527745236, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
       propertyPath: Speed
       value: 8
