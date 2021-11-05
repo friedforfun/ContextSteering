@@ -14,6 +14,9 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         [Range(1, 100)]
         public int TicksPerSecond = 10;
 
+        [SerializeField]
+        float MaxRotationDotPerTick = 0.3f;
+
         JobHandle[] Handles;
         bool JobRunning = false;
 
@@ -21,7 +24,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         {
             base.Awake();
             ContextCombinator = new BasicContextCombinator();
-            DirectionDecider = new BasicPlanarDirectionPicker(true, steeringParameters);
+            DirectionDecider = new PlanarDirectionSimpleSmoothing(MaxRotationDotPerTick, steeringParameters);
             StartCoroutine(CycleWork());
         }
 
@@ -68,7 +71,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             yield return new WaitForEndOfFrame();
             for (; ; )
             {
-                yield return new WaitForSeconds(1 / TicksPerSecond);
+                yield return new WaitForSecondsRealtime(1f / TicksPerSecond);
                 ScheduleWork();
 
                 yield return new WaitUntil(() => Array.TrueForAll(Handles, value => value.IsCompleted));

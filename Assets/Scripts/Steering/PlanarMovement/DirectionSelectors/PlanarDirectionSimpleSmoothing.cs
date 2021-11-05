@@ -1,5 +1,6 @@
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Core;
+using Friedforfun.SteeringBehaviours.Utilities;
 
 namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
@@ -11,14 +12,16 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
     {
         private float MaxDot;
         private Vector3 lastVector = Vector3.zero;
-        public PlanarDirectionSimpleSmoothing(float MaxDot)
+        private PlanarSteeringParameters steeringParams;
+        public PlanarDirectionSimpleSmoothing(float MaxDot, PlanarSteeringParameters steeringParameters)
         {
             this.MaxDot = Mathf.Clamp(MaxDot, -1, 1);
+            steeringParams = steeringParameters;
         }
 
         public Vector3 GetDirection(float[] contextMap)
         {
-            float resolutionAngle = 360 / (float)contextMap.Length;
+            float resolutionAngle = steeringParams.ResolutionAngle;
 
             float maxValue = 0f;
             int maxIndex = 0;
@@ -39,16 +42,20 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
                 return lastVector; // Keep last direction if no better direction is found
             }
 
-            Vector3 nextVector = Quaternion.Euler(0, resolutionAngle * maxIndex, 0) * direction;
+            Vector3 nextVector = MapOperations.RotateAroundAxis(steeringParams.ContextMapRotationAxis, resolutionAngle * maxIndex) * direction;
             float dot = Mathf.Clamp(Vector3.Dot(lastVector.normalized, nextVector.normalized), -1f, 1f);
 
             // next direction is within direction change
-            if (dot < MaxDot)
-                return nextVector;
+            if (dot > MaxDot)
+            {
+                lastVector = nextVector;
+                return lastVector;
+            }
+
 
             float desiredAngleRad = Mathf.Acos(MaxDot);
 
-            lastVector = Vector3.RotateTowards(lastVector.normalized, nextVector.normalized, desiredAngleRad, 1);
+            lastVector = Vector3.RotateTowards(lastVector, nextVector, desiredAngleRad, 1);
             return lastVector;
         }
     }

@@ -48,6 +48,30 @@ MonoBehaviour:
   Tags:
   - Agent
   - Projectile
+--- !u!114 &3008998962094467111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4523430657455630298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d658c9b6d84875b47907a4fca8f13c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 1.1
+  BehaviourName: 
+  Direction: 1
+  Weight: 3
+  ScaleOnDistance: 0
+  InvertScale: 1
+  MapDebugger:
+    ShowDebug: 0
+    MapSize: 2
+    DebugColor: {r: 1, g: 0, b: 0, a: 1}
+  Tags:
+  - Agent
 --- !u!114 &3013207670067369895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +165,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1794831708527745234, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
+      propertyPath: TicksPerSecond
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794831708527745234, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
+      propertyPath: MaxRotationDotPerTick
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794831708527745234, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
+      propertyPath: MaxRotationFactorPerTick
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 1794831708527745234, guid: 6590de670e2a67d439d37efba2b98254, type: 3}
       propertyPath: steeringParameters._contextMapResolution
       value: 45
