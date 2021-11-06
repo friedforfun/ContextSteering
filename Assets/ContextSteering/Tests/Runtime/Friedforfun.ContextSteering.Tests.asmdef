@@ -1,5 +1,5 @@
 {
-    "name": "PlayModeTests",
+    "name": "Friedforfun.ContextSteering.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

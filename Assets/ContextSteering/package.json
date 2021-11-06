@@ -1,0 +1,20 @@
+{
+    "name": "com.friedforfun.contextsteering",
+    "version": "0.0.1",
+    "displayName": "Context Steering",
+    "description": "A tool to add simple steering behaviours to your game.",
+    "unity": "2020.3",
+    "dependencies": {
+        "com.unity.burst": "1.4.11"
+     },
+   "keywords": [
+      "steering",
+      "navigation",
+      "ai"
+    ],
+    "author": {
+      "name": "Friedforfun",
+      "email": "friedforfun@hotmail.co.uk",
+      "url": "https://github.com/friedforfun"
+    }
+  }

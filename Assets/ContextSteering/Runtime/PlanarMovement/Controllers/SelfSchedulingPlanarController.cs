@@ -69,9 +69,10 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         private IEnumerator CycleWork()
         {
             yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.5f));
             for (; ; )
             {
-                yield return new WaitForSecondsRealtime(1f / TicksPerSecond);
+                yield return new WaitForSeconds(1f / TicksPerSecond);
                 ScheduleWork();
 
                 yield return new WaitUntil(() => Array.TrueForAll(Handles, value => value.IsCompleted));
