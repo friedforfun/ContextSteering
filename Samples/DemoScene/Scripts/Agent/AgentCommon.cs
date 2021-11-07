@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.Utilities;
 
@@ -13,12 +14,23 @@ namespace Friedforfun.SteeringBehaviours.Demo
 
         [SerializeField] private Renderer childRenderer;
         [SerializeField] private Material impactMaterial;
+        [SerializeField] public string DemoID = null;
 
         private Material baseMaterial;
         private bool blockCollision = true;
+        private DemoCollisionTracker dct;
 
         private void Start()
         {
+            if (DemoID != null)
+            {
+                var dctArr = FindObjectsOfType<DemoCollisionTracker>();
+                dct = dctArr.Where(colTracker => colTracker.DemoID == DemoID).First();
+            }
+  
+
+
+
             baseMaterial = childRenderer.material;
             StartCoroutine(collisionDelay());
         }
@@ -39,10 +51,16 @@ namespace Friedforfun.SteeringBehaviours.Demo
             if (blockCollision)
                 return;
 
+            blockCollision = true;
+            StartCoroutine(collisionDelay());
+
             if (collision.gameObject.tag != "Floor")
             {
                 childRenderer.material = impactMaterial;
-                //Debug.Log($"Collided with: {collision.gameObject.name}");
+                if (dct != null)
+                {
+                    dct.CollisionOccured();
+                }
             }
 
         }
