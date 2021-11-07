@@ -5,7 +5,8 @@
     "description": "A tool to add simple steering behaviours to your game.",
     "unity": "2020.3",
     "dependencies": {
-        "com.unity.burst": "1.4.11"
+        "com.unity.burst": "1.4.11",
+        "com.unity.textmeshpro": "3.0.6"
      },
    "keywords": [
       "steering",
@@ -16,5 +17,10 @@
       "name": "Friedforfun",
       "email": "friedforfun@hotmail.co.uk",
       "url": "https://github.com/friedforfun"
-    }
+    },
+    "samples": [{
+      "displayName": "Demo Scene",
+      "description": "A scene showing basic functionality of this tool",
+      "path": "Samples~/DemoScene"
+    }]
   }
