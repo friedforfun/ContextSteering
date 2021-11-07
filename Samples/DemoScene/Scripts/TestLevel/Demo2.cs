@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Utilities;
 
 
 namespace Friedforfun.SteeringBehaviours.Demo

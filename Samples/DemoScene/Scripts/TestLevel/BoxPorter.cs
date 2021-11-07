@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using Friedforfun.SteeringBehaviours.Utilities;
 
 namespace Friedforfun.SteeringBehaviours.Demo
@@ -6,12 +7,24 @@ namespace Friedforfun.SteeringBehaviours.Demo
     public class BoxPorter : MonoBehaviour
     {
         [SerializeField] private Vector3[] jumpPoints;
+
+        private string DemoID = null;
+        private DemoCollisionTracker dct;
         private int jumpIndex = 0;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Agent"))
             {
+                if (DemoID == null)
+                {
+                    DemoID = other.gameObject.GetComponent<AgentCommon>()?.DemoID;
+                    dct = FindObjectsOfType<DemoCollisionTracker>().Where(colTracker => colTracker.DemoID == DemoID).First();
+                }
+
+                dct?.GoalAchieved();
+
+
                 if (jumpIndex == jumpPoints.Length)
                 {
                     jumpIndex = 0;
@@ -25,13 +38,13 @@ namespace Friedforfun.SteeringBehaviours.Demo
         {
             //Debug.Log($"Registered Box under tag: {gameObject.tag}, at position: {transform.position}");
 
-            ReferencePool.Register(gameObject);
+            TagCache.Register(gameObject);
         }
 
 
         private void OnDisable()
         {
-            ReferencePool.DeRegister(gameObject);
+            TagCache.DeRegister(gameObject);
         }
 
     }

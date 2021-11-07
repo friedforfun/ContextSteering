@@ -9,7 +9,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
     /// Singleton registry of gameobjects, use instead of FindObjectByTag
     /// GameObjects need to register themselves
     /// </summary>
-    public class ReferencePool : Singleton<ReferencePool>
+    public class TagCache : Singleton<TagCache>
     {
 
         private static Dictionary<string, List<GameObject>> registeredTags = new Dictionary<string, List<GameObject>>();
@@ -39,7 +39,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
             }
             else
             {
-                Debug.LogWarning($"{go.name} attempted to deregister itself, but it is not in the ReferencePool");
+                Debug.LogWarning($"{go.name} attempted to deregister itself, but it is not in the TagCache");
             }
         }
 
@@ -157,14 +157,14 @@ namespace Friedforfun.SteeringBehaviours.Utilities
             if (isGameObject)
                 return;
 
-            ReferencePool me = FindObjectOfType<ReferencePool>();
+            TagCache me = FindObjectOfType<TagCache>();
             if (me != null)
             {
                 isGameObject = true;
                 return;
             }
 
-            Debug.LogWarning("No ReferencePool found in scene, Cached position Vector3s will not be cleared each frame.");
+            Debug.LogWarning("No TagCache found in scene, Cached position Vector3s will not be cleared each frame.");
 
         }
 

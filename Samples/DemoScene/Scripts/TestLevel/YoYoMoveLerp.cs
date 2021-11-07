@@ -14,13 +14,13 @@ namespace Friedforfun.SteeringBehaviours.Demo
 
         private void Awake()
         {
-            ReferencePool.Register(gameObject);
+            TagCache.Register(gameObject);
         }
 
 
         private void OnDisable()
         {
-            ReferencePool.DeRegister(gameObject);
+            TagCache.DeRegister(gameObject);
         }
 
         void Update()
