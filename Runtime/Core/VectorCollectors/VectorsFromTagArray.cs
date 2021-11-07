@@ -12,7 +12,7 @@ namespace Friedforfun.SteeringBehaviours.Core
             Vector3[] targets = null;
             foreach (string tag in Tags)
             {
-                Vector3[] tempTargets = ReferencePool.GetVector3sByTag(tag);
+                Vector3[] tempTargets = TagCache.GetVector3sByTag(tag);
 
                 if (targets == null)
                 {

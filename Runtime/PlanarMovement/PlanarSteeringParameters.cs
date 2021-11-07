@@ -54,12 +54,6 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         {
             _resolutionAngle = 360 / (float)_contextMapResolution;
         }
-
-        [HideInInspector]
-        public event EventHandler OnResolutionChange;
-
-              
-
     }
 }
 

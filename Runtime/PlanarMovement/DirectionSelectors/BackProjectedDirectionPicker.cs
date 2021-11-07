@@ -26,7 +26,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             // need to handle array out of bounds issue (maxIndex is 0 || maxIndex is array length)
             int secondaryIndex = contextMap[maxIndex - 1] > contextMap[maxIndex + 1] ? maxIndex - 1 : maxIndex + 1;
 
-            throw new System.NotImplementedException();
+ 
             if (secondaryIndex > maxIndex)
             {
                 // Compute the gradient of the line between secondaryIndex and its next weight,
@@ -51,14 +51,14 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
                 return lastVector; // Keep last direction if no better direction is found
             }
 
-
-            return Quaternion.Euler(0, resolutionAngle * maxIndex, 0) * direction;
+            throw new System.NotImplementedException();
+            //return Quaternion.Euler(0, resolutionAngle * maxIndex, 0) * direction;
         }
 
         private float GetGradient(float a, float b)
         {
             throw new System.NotImplementedException();
-            return 0f;
+            //return 0f;
         }
     }
 

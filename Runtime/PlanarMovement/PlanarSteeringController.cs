@@ -22,6 +22,10 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         protected float[] contextMap; // The weights of each direction in the context map itself
         private float[] GetContextMap() => contextMap;
 
+        /// <summary>
+        /// Combines all steering behaviours into a single weight array, summing them point wise. 
+        /// </summary>
+        /// <returns></returns>
         protected float[] MergeSteeringBehaviours()
         {
             List<float[]> contextMaps = new List<float[]>();
@@ -34,6 +38,10 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return mergeMaps(contextMaps);
         }
 
+        /// <summary>
+        /// Combines all masks into a single weight array, by summing them point wise.
+        /// </summary>
+        /// <returns></returns>
         protected float[] MergeMasks()
         {
             List<float[]> masks = new List<float[]>();
@@ -46,6 +54,9 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             return mergeMaps(masks);
         }
 
+        /// <summary>
+        /// Updates the output vector computed by evaluating all behaviours and masks.
+        /// </summary>
         public void UpdateOutput()
         {
             contextMap = ContextCombinator.CombineContext(MergeSteeringBehaviours(), MergeMasks());
@@ -54,7 +65,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         }
 
         /// <summary>
-        /// Get all the jobs from the steering behaviours
+        /// Get all the jobs from the steering behaviours, includes both behaviours and masks.
         /// </summary>
         /// <returns></returns>
         public DotToVecJob[] GetJobs()
