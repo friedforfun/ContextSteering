@@ -10,12 +10,12 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
     ///</Summary>
     public class PlanarDirectionSimpleSmoothing : IDecideDirection
     {
-        private float MaxDot;
+        private float MinDot;
         private Vector3 lastVector = Vector3.zero;
         private PlanarSteeringParameters steeringParams;
-        public PlanarDirectionSimpleSmoothing(float MaxDot, PlanarSteeringParameters steeringParameters)
+        public PlanarDirectionSimpleSmoothing(float MinDot, PlanarSteeringParameters steeringParameters)
         {
-            this.MaxDot = Mathf.Clamp(MaxDot, -1, 1);
+            this.MinDot = Mathf.Clamp(MinDot, -1, 1);
             steeringParams = steeringParameters;
         }
 
@@ -46,14 +46,14 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             float dot = Mathf.Clamp(Vector3.Dot(lastVector.normalized, nextVector.normalized), -1f, 1f);
 
             // next direction is within direction change
-            if (dot > MaxDot)
+            if (dot > MinDot)
             {
                 lastVector = nextVector;
                 return lastVector;
             }
 
 
-            float desiredAngleRad = Mathf.Acos(MaxDot);
+            float desiredAngleRad = Mathf.Acos(MinDot);
 
             lastVector = Vector3.RotateTowards(lastVector, nextVector, desiredAngleRad, 1);
             return lastVector;

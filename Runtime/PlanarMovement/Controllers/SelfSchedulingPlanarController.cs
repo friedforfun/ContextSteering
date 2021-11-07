@@ -14,17 +14,41 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         [Range(1, 100)]
         public int TicksPerSecond = 10;
 
+        [Tooltip("The direction selection algorithm")]
         [SerializeField]
-        float MaxRotationDotPerTick = 0.3f;
+        DirectionSelectorTypes directionSelector = DirectionSelectorTypes.BASIC;
+
+        [Tooltip("The minimal acceptable dot product between the last tick direction and this one.")]
+        [Range(-1f, 1f)]
+        [SerializeField]
+        float MinDotPerTick = 0.3f;
+
 
         JobHandle[] Handles;
         bool JobRunning = false;
+
+        /// <summary>
+        /// Choose and instantiate direction selection algorithm
+        /// </summary>
+        private void SelectDirection()
+        {
+            switch(directionSelector)
+            {
+                case DirectionSelectorTypes.BASIC:
+                    DirectionDecider = new BasicPlanarDirectionPicker(true, steeringParameters);
+                    break;
+
+                case DirectionSelectorTypes.WITH_INERTIA:
+                    DirectionDecider = new PlanarDirectionSimpleSmoothing(MinDotPerTick, steeringParameters);
+                    break;
+            }
+        }
 
         public override void Awake()
         {
             base.Awake();
             ContextCombinator = new BasicContextCombinator();
-            DirectionDecider = new PlanarDirectionSimpleSmoothing(MaxRotationDotPerTick, steeringParameters);
+            SelectDirection();
             StartCoroutine(CycleWork());
         }
 
@@ -33,7 +57,6 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             if (JobRunning)
                 CompleteWork();
         }
-
 
         private void ScheduleWork()
         {
