@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5429121152966211849}
   - component: {fileID: 5429121152966211848}
   - component: {fileID: 5429121152966211851}
-  - component: {fileID: 5429121152966211850}
   - component: {fileID: 5429121152966211854}
+  - component: {fileID: 4485555014026202761}
   m_Layer: 0
   m_Name: Target
   m_TagString: Target
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 637f39d7355fb3146a5c286f0578db1a, type: 2}
+  - {fileID: 2100000, guid: 9c75e3dbbe695b5499bb9f25a62b1695, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,21 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5429121152966211850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5429121152966211892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b910180595b72a043945f00478ac6ab7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpPoints:
-  - {x: 0, y: 0.5, z: 0}
-  - {x: 0, y: 0.5, z: 20}
 --- !u!65 &5429121152966211854
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -125,3 +110,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4485555014026202761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5429121152966211892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5659d8be563b4448aaae698cc46e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpPoints: []

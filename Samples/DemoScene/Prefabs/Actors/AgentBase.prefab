@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6eaa1e73c0208444ba056f8d21dc1ace, type: 2}
+  - {fileID: 2100000, guid: 2e152db2df6f8ad499f5552983472abc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,11 +175,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4406560339523773044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f67f176d49b2799428aefe80d1ac24bd, type: 3}
+  m_Script: {fileID: 11500000, guid: ddeadd4b3fe3c564ab1fe5a39f2d61c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   childRenderer: {fileID: 4406560339306209754}
-  impactMaterial: {fileID: 2100000, guid: 5bd05608cc22ebe46a3c370361b74ec9, type: 2}
+  impactMaterial: {fileID: 2100000, guid: 86ac1dd2cad32a94abd8f797b3d8b417, type: 2}
+  DemoID: 
 --- !u!114 &1794831708527745236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,13 +190,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4406560339523773044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7555215f5c811643b3e355af58ce5f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 58c18c16f204b2544a0c1ca576f163a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   steer: {fileID: 1794831708527745234}
   control: {fileID: 4406560339523773054}
   LookTarget: {fileID: 0}
-  Speed: 1
+  Speed: 8
   ConfidenceThreshold: 0.1
 --- !u!114 &1794831708527745234
 MonoBehaviour:
@@ -214,3 +215,5 @@ MonoBehaviour:
     ContextMapRotationAxis: 1
     InitialVector: {x: 0, y: 0, z: 1}
   TicksPerSecond: 10
+  directionSelector: 0
+  MinDotPerTick: 0.3

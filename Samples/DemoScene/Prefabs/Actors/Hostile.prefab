@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1343984885632613719}
   m_Layer: 0
   m_Name: Hostile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1f6db90ab9fcdf248888bdba4b4c1d81, type: 2}
+  - {fileID: 2100000, guid: d282add6080ada246a585a63b43f6fe7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,9 +105,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1343984885632613717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7334b8be5b6356043a64d64ce8052f0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3368d4a23ef3c75418bc62d4cd7f72cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPos: {x: 2, y: 0.5, z: 4}
-  EndPos: {x: -2, y: 0.5, z: 4}
-  frequency: 0.1
+  StartPos: {x: 0, y: 0, z: 0}
+  EndPos: {x: 0, y: 0, z: 0}
+  frequency: 1
