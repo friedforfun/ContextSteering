@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8735698899060582772}
   - component: {fileID: 5953405697351809592}
   - component: {fileID: 5771141010243614739}
-  - component: {fileID: 4718198110334294386}
+  - component: {fileID: 4280067516757936764}
   m_Layer: 0
   m_Name: TargetPlate
   m_TagString: TargetPlate
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 637f39d7355fb3146a5c286f0578db1a, type: 2}
+  - {fileID: 2100000, guid: 9c75e3dbbe695b5499bb9f25a62b1695, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 508.48, z: -0.00000008940697}
---- !u!114 &4718198110334294386
+--- !u!114 &4280067516757936764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,6 +106,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695467977291109116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3053ad89e6ab44248adb3a1818076826, type: 3}
+  m_Script: {fileID: 11500000, guid: 51382a75d7f1f2944b078161a69f7d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

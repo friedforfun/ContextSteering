@@ -14,6 +14,7 @@ namespace Friedforfun.SteeringBehaviours.Demo
         [Range(1, 100)]
         [SerializeField] private int spawnAreaSize = 1;
         [SerializeField] private GameObject minion;
+        [SerializeField] private LayerMask ignoreLayers;
 
 
         [SerializeField] private float minionOffset;
@@ -49,7 +50,7 @@ namespace Friedforfun.SteeringBehaviours.Demo
             {
                 Vector2 spawnPositionRaw = Random.insideUnitCircle * spawnAreaSize;
                 spawnPosition = new Vector3(spawnPosition.x + spawnPositionRaw.x, minionOffset, spawnPosition.z + spawnPositionRaw.y);
-                test = !Physics.CheckSphere(spawnPosition, 0.75f);
+                test = !Physics.CheckSphere(spawnPosition, 0.75f, ignoreLayers);
                 if (Time.realtimeSinceStartup - startTime > 0.5f)
                 {
                     Debug.Log("Time out placing Minion!");
