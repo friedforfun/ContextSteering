@@ -6,13 +6,17 @@ namespace Friedforfun.SteeringBehaviours.Core
     {
         public static Vector3[] GetVectors(Transform[] Positions)
         {
-
-            Vector3[] targets = new Vector3[Positions.Length];
-            for (int i = 0; i < Positions.Length; i++)
+            if (Positions != null)
             {
-                targets[i] = Positions[i].position;
+                Vector3[] targets = new Vector3[Positions.Length];
+                for (int i = 0; i < Positions.Length; i++)
+                {
+                    targets[i] = Positions[i].position;
+                }
+                return targets;
             }
-            return targets;
+            return new Vector3[0];
+
         }
     }
 }

@@ -9,7 +9,10 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         protected override Vector3[] getPositionVectors()
         {
-            return VectorsFromTagArray.GetVectors(Tags);
+            if (Tags != null)
+                return VectorsFromTagArray.GetVectors(Tags);
+
+            return new Vector3[0];
         }
 
     }
