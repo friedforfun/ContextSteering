@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.PlanarMovement;
 using Friedforfun.SteeringBehaviours.Utilities;
@@ -12,6 +10,7 @@ namespace Friedforfun.SteeringBehaviours.Demo
         [SerializeField] private PlanarSteeringController steer;
         [SerializeField] private CharacterController control;
         [SerializeField] public GameObject LookTarget;
+
 
         [Tooltip("Movement speed of the agent.")]
         [Range(0.1f, 20f)]

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2019433740
+--- !u!114 &2019433738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,21 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5675852008238204295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b19b9a3e797cfc45be4b3d053e64990, type: 3}
+  m_Script: {fileID: 11500000, guid: acd24b51270bfba4cb1c23ea07dd1bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 1.5
-  MaskName: Wall mask
-  Weight: 10
+  Range: 40
+  BehaviourName: Target
+  Direction: 0
+  Weight: 1
   ScaleOnDistance: 0
   InvertScale: 1
   MapDebugger:
-    ShowDebug: 1
-    MapSize: 1.5
+    ShowDebug: 0
+    MapSize: 2
     DebugColor: {r: 1, g: 0, b: 0, a: 1}
-  Layers:
-    serializedVersion: 2
-    m_Bits: 2147483648
+  Positions: []
 --- !u!114 &2019433739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,7 +47,7 @@ MonoBehaviour:
     DebugColor: {r: 1, g: 0, b: 0.9358797, a: 1}
   Tags:
   - Agent
---- !u!114 &2019433738
+--- !u!114 &2019433740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,20 +56,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5675852008238204295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd24b51270bfba4cb1c23ea07dd1bf0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b19b9a3e797cfc45be4b3d053e64990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 20
-  BehaviourName: Target
-  Direction: 0
-  Weight: 1
+  Range: 1.5
+  MaskName: Wall mask
+  Weight: 10
   ScaleOnDistance: 0
   InvertScale: 1
   MapDebugger:
-    ShowDebug: 0
-    MapSize: 2
+    ShowDebug: 1
+    MapSize: 1.5
     DebugColor: {r: 1, g: 0, b: 0, a: 1}
-  Positions: []
+  Layers:
+    serializedVersion: 2
+    m_Bits: 2147483648
 --- !u!114 &5124855040086727093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406560339523773044, guid: e4e0198057426444eb09fd3e8e7eb1b9, type: 3}
       propertyPath: m_Name
-      value: Demo2Agent
+      value: Demo2Agent Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4406560339523773055, guid: e4e0198057426444eb09fd3e8e7eb1b9, type: 3}
       propertyPath: m_RootOrder
