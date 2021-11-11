@@ -15,15 +15,15 @@ Context steering involves defining multiple behaviours on an entity (aka. GameOb
 ### Installation
 1. Open the Package Manager (under Window -> Package Manager).  
 
-    ![OpenPackage](Documentation~/images/installation/openpackagemanager.png)  
+    ![OpenPackage](Documentation~/images/Installation/openpackagemanager.png)  
 
 2. Click the "+" icon, and select "Add package from disk...".  
 
-    ![PlusIcon](Documentation~/images/installation/addpackagefromdisk.png)  
+    ![PlusIcon](Documentation~/images/Installation/addpackagefromdisk.png)  
 
 3. Browse to the directory this package is installed at and open the package.json file.  
 
-    ![SelectPackageJSON](Documentation~/images/installation/SelectPackageJson.png)
+    ![SelectPackageJSON](Documentation~/images/Installation/SelectPackageJson.png)
 
 ---
 
