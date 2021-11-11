@@ -14,13 +14,13 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         //[Tooltip("Attractor and Repulsor strategies (directions in which we will move towards or away from.)")]
         protected PlanarSteeringBehaviour[] SteeringBehaviours;
-        private PlanarSteeringBehaviour[] GetBehaviours() => SteeringBehaviours;
+        private PlanarSteeringBehaviour[] GetBehaviours() => SteeringBehaviours; // Used for unit tests
 
         //[Tooltip("Masking strategies (directions in which to block movement).")]
         protected PlanarSteeringMask[] SteeringMasks;
 
         protected float[] contextMap; // The weights of each direction in the context map itself
-        private float[] GetContextMap() => contextMap;
+        private float[] GetContextMap() => contextMap; // Used for unit tests
 
         /// <summary>
         /// Combines all steering behaviours into a single weight array, summing them point wise. 
@@ -85,7 +85,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         
         public virtual void Awake()
         {
-            outputVector = steeringParameters.InitialVector;
+            outputVector = Vector3.zero;
 
             SteeringBehaviours = gameObject.GetComponentsInChildren<PlanarSteeringBehaviour>();
 

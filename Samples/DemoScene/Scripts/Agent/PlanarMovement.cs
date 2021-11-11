@@ -5,6 +5,9 @@ using UnityEditor;
 
 namespace Friedforfun.SteeringBehaviours.Demo
 {
+    /// <summary>
+    /// This demo movement script shows obtaining data from the PlanarSteeringController and using it to move, you will want to do something similar in your own project.
+    /// </summary>
     public class PlanarMovement : MonoBehaviour
     {
         [SerializeField] private PlanarSteeringController steer;
@@ -16,20 +19,24 @@ namespace Friedforfun.SteeringBehaviours.Demo
         [Range(0.1f, 20f)]
         [SerializeField] private float Speed = 1f;
 
-        [Tooltip("Minimum sqrMagnitute of direction vector to allow movement, higher values can reduce jittery movement.")]
+        [Tooltip("Minimum sqrMagnitute of direction vector to allow movement, higher values can reduce jittery movement but may also stop the agent moving when you might want it to.")]
         [Range(0.001f, 0.5f)]
         [SerializeField] private float ConfidenceThreshold = 0.1f;
 
         void Update()
         {
+            // --------------------- Example for using this package ----------------------------
 
-            Vector3 moveVec = steer.MoveVector();
+            Vector3 moveVec = steer.MoveVector(); // In this case we look at the Movement Vector so we can evaluate how close to 0 it is and ocasionally remove some jitter, this evaluation is not always needed.
+
             if (moveVec.sqrMagnitude > ConfidenceThreshold)
-                control.SimpleMove(steer.MoveDirection() * Speed);
+                control.SimpleMove(steer.MoveDirection() * Speed); // This line gets the movement vector from the Context steering controller.
             else
                 control.SimpleMove(Vector3.zero);
+            // -------------------------------------------------------------------------------------
 
-            // Look towards target
+
+            // This just handles rotating the gameObject
             Vector3 newRotation;
             if (LookTarget != null)
             {

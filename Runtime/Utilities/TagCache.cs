@@ -6,7 +6,7 @@ using System.Linq;
 namespace Friedforfun.SteeringBehaviours.Utilities
 {
     /// <summary>
-    /// Singleton registry of gameobjects, use instead of FindObjectByTag
+    /// Singleton registry of gameobjects, use instead of FindObjectByTag, this also caches requested position Vectors each frame
     /// GameObjects need to register themselves
     /// </summary>
     public class TagCache : Singleton<TagCache>
@@ -17,6 +17,10 @@ namespace Friedforfun.SteeringBehaviours.Utilities
 
         private static bool isGameObject = false;
 
+        /// <summary>
+        /// Register GameObject in the pool of registered tag->GameObjects. Usually register on Awake()/Enable()/Start()
+        /// </summary>
+        /// <param name="go">The GameObject being registered</param>
         public static void Register(GameObject go)
         {
             List<GameObject> go_list = null;
@@ -30,6 +34,10 @@ namespace Friedforfun.SteeringBehaviours.Utilities
                 go_list.Add(go);
         }
 
+        /// <summary>
+        /// Remove this GameObject from the pool. Usually Use this in OnDisable()/OnDestroy()
+        /// </summary>
+        /// <param name="go">The GameObject being removed</param>
         public static void DeRegister(GameObject go)
         {
             List<GameObject> go_list = null;
@@ -43,6 +51,11 @@ namespace Friedforfun.SteeringBehaviours.Utilities
             }
         }
 
+        /// <summary>
+        /// Gets an array of GameObjects by providing a tag, this will only check for GameObjects that have been Registered to the TagCache class.
+        /// </summary>
+        /// <param name="tag">The tag we are checking</param>
+        /// <returns>All GameObjects with the corresponding tag within the TagCache</returns>
         public static GameObject[] GetGameObjectsByTag(string tag)
         {
             List<GameObject> go_list = null;
@@ -77,10 +90,10 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         }
 
         /// <summary>
-        /// Get position vectors for all GameObjects of this tag, caches result for this frame.
+        /// Get position vectors for all GameObjects of this tag that have been registered in the TagCache, caches result for this frame.
         /// </summary>
         /// <param name="tag"></param>
-        /// <returns></returns>
+        /// <returns>The positions of all registered GameObjects with the matching tags</returns>
         public static Vector3[] GetVector3sByTag(string tag)
         {
             CheckIfInScene();
@@ -106,8 +119,9 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         /// <summary>
         /// Get position vectors for all GameObjects of this tag, caches result for this frame. Self is excluded in result array of Vector3s
         /// </summary>
-        /// <param name="tag"></param>
-        /// <returns></returns>
+        /// <param name="tag">The tag we are checking</param>
+        /// <param name="self">The GameObject calling this method, the position of self will be excluded from the result.</param>
+        /// <returns>The positions of all registered GameObjects with the matching tags excluding self.transform.position</returns>
         public static Vector3[] GetVector3sByTag(string tag, GameObject self)
         {
             CheckIfInScene();
@@ -119,10 +133,10 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         }
 
         /// <summary>
-        /// Same as GetVector3sByTag but without caching the result this frame.
+        /// Same as GetVector3sByTag but without caching the result.
         /// </summary>
-        /// <param name="tag"></param>
-        /// <returns></returns>
+        /// <param name="tag">The tag we are checking</param>
+        /// <returns>The positions of all registered GameObjects with the matching tags.</returns>
         public static Vector3[] GetVector3sByTagNoCache(string tag)
         {
             GameObject[] tempTargets = GetGameObjectsByTag(tag);
@@ -140,9 +154,9 @@ namespace Friedforfun.SteeringBehaviours.Utilities
         /// <summary>
         /// Same as GetVector3sByTag but without caching the result this frame.
         /// </summary>
-        /// <param name="tag"></param>
-        /// <param name="self"></param>
-        /// <returns></returns>
+        /// <param name="tag">The tag we are checking</param>
+        /// <param name="self">The GameObject calling this method, the position of self will be excluded from the result.</param>
+        /// <returns>The positions of all registered GameObjects with the matching tags excluding self.transform.position</returns>
         public static Vector3[] GetVector3sByTagNoCache(string tag, GameObject self)
         {
             Vector3[] pos_arr = GetVector3sByTagNoCache(tag);
@@ -164,7 +178,7 @@ namespace Friedforfun.SteeringBehaviours.Utilities
                 return;
             }
 
-            Debug.LogWarning("No TagCache found in scene, Cached position Vector3s will not be cleared each frame.");
+            Debug.LogWarning("No TagCache found in scene, Cached position Vector3s will not be cleared each frame. If you dont wish to use the TagCache consider creating a custom DotToTag script.");
 
         }
 
