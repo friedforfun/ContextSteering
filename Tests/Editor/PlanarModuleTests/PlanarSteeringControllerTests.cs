@@ -28,7 +28,6 @@ namespace Friedforfun.SteeringBehaviours.Tests
             controller.steeringParameters = new PlanarSteeringParameters();
             controller.steeringParameters.ContextMapResolution = 4;
             controller.steeringParameters.ContextMapRotationAxis = RotationAxis.YAxis;
-            controller.steeringParameters.InitialVector = Vector3.forward;
 
             TestUtilities.CallNonPublicMethod<ICombineContext>(controller, "SetContextCombinator", new BasicContextCombinator());
             TestUtilities.CallNonPublicMethod<IDecideDirection>(controller, "SetDirectionDecider", new BasicPlanarDirectionPicker(true, controller.steeringParameters));
@@ -101,7 +100,7 @@ namespace Friedforfun.SteeringBehaviours.Tests
         [Test]
         public void UpdateOutputTest()
         {
-            Assert.AreEqual(Vector3.forward, controller.MoveVector());
+            Assert.AreEqual(Vector3.zero, controller.MoveVector());
 
             target.transform.position = new Vector3(5f, 0, 0);
 

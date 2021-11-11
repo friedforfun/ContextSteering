@@ -25,11 +25,10 @@ namespace Friedforfun.SteeringBehaviours.Tests
 
             agent = new GameObject();
             behaviour = agent.AddComponent<DotToTag>();
-            agent.AddComponent<ReferencePool>();
+            agent.AddComponent<TagCache>();
             agent.transform.position = new Vector3(0, 0, 0);
 
             planarParameters.ContextMapRotationAxis = RotationAxis.YAxis;
-            planarParameters.InitialVector = new Vector3(0, 0, 1);
             planarParameters.ContextMapResolution = 4;
             behaviour.BehaviourName = "Test behaviour";
 
@@ -38,17 +37,17 @@ namespace Friedforfun.SteeringBehaviours.Tests
             targetOne = new GameObject();
             targetOne.transform.position = new Vector3(0, 0, 5);
             targetOne.tag = "Test";
-            ReferencePool.Register(targetOne);
+            TagCache.Register(targetOne);
 
             targetTwo = new GameObject();
             targetTwo.transform.position = new Vector3(5, 0, 0);
             targetTwo.tag = "Test";
-            ReferencePool.Register(targetTwo);
+            TagCache.Register(targetTwo);
 
             targetThree = new GameObject();
             targetThree.transform.position = new Vector3(0, 0, 0);
             targetThree.tag = "Test";
-            ReferencePool.Register(targetThree);
+            TagCache.Register(targetThree);
 
 
 
@@ -61,7 +60,7 @@ namespace Friedforfun.SteeringBehaviours.Tests
             TagHelper.RemoveTag("Test");
             behaviour.OnDisable();
 
-            ReferencePool.ClearAll();
+            TagCache.ClearAll();
         }
          
         [Test]

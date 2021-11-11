@@ -25,7 +25,6 @@ namespace Friedforfun.SteeringBehaviours.Tests
             agent.transform.position = new Vector3(0, 0, 0);
 
             planarParameters.ContextMapRotationAxis = RotationAxis.YAxis;
-            planarParameters.InitialVector = new Vector3(0, 0, 1);
             planarParameters.ContextMapResolution = 4;
             behaviour.BehaviourName = "Test behaviour";
 

@@ -30,7 +30,7 @@ namespace Friedforfun.SteeringBehaviours.Tests
         {
             bool eventFired = false;
 
-            planarParams.OnResolutionChange += delegate (object sender, EventArgs e) { eventFired = true; };
+            //planarParams.OnResolutionChange += delegate (object sender, EventArgs e) { eventFired = true; };
 
             planarParams.ContextMapResolution = 24;
 
