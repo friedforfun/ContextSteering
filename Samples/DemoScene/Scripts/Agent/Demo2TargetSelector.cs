@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Friedforfun.SteeringBehaviours.PlanarMovement;
 
@@ -13,9 +13,10 @@ namespace Friedforfun.SteeringBehaviours.Demo
         [SerializeField]
         private PlanarMovement mov;
 
-        private GameObject target;
+        public GameObject target;
         private Demo2 demoController;
-        
+        private DemoCollisionTracker dct;
+
 
         void Start()
         {
@@ -29,6 +30,41 @@ namespace Friedforfun.SteeringBehaviours.Demo
             }
 
 
+            AgentCommon ac = null;
+
+            if (!TryGetComponent(out ac))
+            {
+                ac = gameObject.GetComponentInParent<AgentCommon>();
+            }
+
+            if (ac == null)
+            {
+                ac = gameObject.GetComponentInChildren<AgentCommon>();
+            }
+
+            if (ac != null)
+            {
+                dct = FindObjectsOfType<DemoCollisionTracker>().Where(colTracker => colTracker.DemoID == ac.DemoID).First();
+            }
+            else
+            {
+                Debug.LogWarning("Could not find a valid AgentCommon Component in colliding game object.");
+            }
+            
+
+
+        }
+
+        /// <summary>
+        /// Clears the target from behaviour moving this object towards target.
+        /// </summary>
+        /// <param name="caller"></param>
+        public void ClearTargetFromBehaviour(GameObject caller)
+        {
+            if (caller.Equals(target))
+            {
+                transformBehaviour.Positions = null;
+            }
         }
         
         /// <summary>
@@ -51,6 +87,8 @@ namespace Friedforfun.SteeringBehaviours.Demo
                     transformBehaviour.Positions = positions;
                     mov.LookTarget = target;
                 }
+
+                dct?.GoalAchieved();
 
             }
         }
