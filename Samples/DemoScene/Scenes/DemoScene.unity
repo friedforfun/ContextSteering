@@ -1024,7 +1024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1343984885632613716, guid: d95842e591457e8469b76e7e5674a0b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1343984885632613716, guid: d95842e591457e8469b76e7e5674a0b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3110,7 +3110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1343984885632613716, guid: d95842e591457e8469b76e7e5674a0b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1343984885632613716, guid: d95842e591457e8469b76e7e5674a0b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5266,7 +5266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1343984885632613716, guid: d95842e591457e8469b76e7e5674a0b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1343984885632613716, guid: d95842e591457e8469b76e7e5674a0b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5571,7 +5571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1343984885632613716, guid: d95842e591457e8469b76e7e5674a0b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1343984885632613716, guid: d95842e591457e8469b76e7e5674a0b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7342,7 +7342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db84157a136c00a429f5e38089d01f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 4
+  spawnCount: 30
   spawnAreaSize: 12
   minion: {fileID: 5675852008238204295, guid: 2b2a49704e815fc4ba23727b8d0da2e9, type: 3}
   ignoreLayers:
