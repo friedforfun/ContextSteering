@@ -33,7 +33,7 @@ A demo scene has been included that displays some basic usage of this tool. When
 
 This scene provides some examples showing how you might use this package, Cyan cylinders represent agents which are using steering behaviours, Orange spheres are projectiles or obstacles to avoid, and mauve objects represent targets the agents will try to reach.
 
-![BasicAgent](Documentation~\images\DemoGuide\BasicAgent.png)
+![BasicAgent](Documentation~/images/DemoGuide/BasicAgent.png)
 
 ---
 
