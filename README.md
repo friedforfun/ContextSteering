@@ -31,9 +31,21 @@ Context steering involves defining multiple behaviours on an entity (aka. GameOb
 
 A demo scene has been included that displays some basic usage of this tool. When importing the package into your project you should see a tick box to include the sample scene. The scene is stored at: **Samples/DemoScene/Scenes/DemoScene.unity**
 
-This scene provides some examples showing how you might use this package, Cyan cylinders represent agents which are using steering behaviours, Orange spheres are projectiles or obstacles to avoid, and mauve objects represent targets the agents will try to reach.
+This scene provides some examples showing how you might use this package. Cyan cylinders represent *agents* which are using steering behaviours, Orange spheres are *projectiles* or obstacles to avoid, and Mauve objects represent *targets* the agents will try to reach.
+
+Taking a look at an agent (depicted below) there are a few scripts to pay particular attention to: 
+
+- **SelfSchedulingPlanarController:** This is a type of **PlanarController**, it is required for each agent that has any behaviours. It is the compenent that we use to get our output vector for movement, and in which we define the parameters that are shared to all behaviours.
+
+- **DotToTransform/DotToTag:** These are examples of simple **Behaviours**, they all have an effective **Range**, name, and cruicially a **Direction** of effect. Behaviours that **ATTRACT** will weight the output vector towards their targets, **REPULSE** will weight the output vector away from the targets. The Position/Tag arrays on these components are how we select the targets of the behaviours.
+
+- **DotToLayerMask:** This is a **Mask**, these behave very similarly to behaviours, but rather than attract or repulse, they block (or mask out) a direction from being selected
 
 ![BasicAgent](Documentation~/images/DemoGuide/BasicAgent.png)
+
+*Also note the **PlanarMovement** script, when using this package you would likely create a similar script yourself to decide how to use the output vector in your game.*
+
+Each demo includes some basic metrics; total collisions, collisions in the last n seconds, average collisions per n seconds, and number of goals achieved (contact with correct Mauve objects). Play with the PlanarController, Behaviour, and Mask parameters to see how they each effect the movement, collisions, and goals for each demo.
 
 ---
 
