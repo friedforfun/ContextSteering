@@ -54,7 +54,7 @@ namespace Friedforfun.SteeringBehaviours.Demo
             blockCollision = true;
             StartCoroutine(collisionDelay());
 
-            if (collision.gameObject.tag != "Floor")
+            if (collision.gameObject.tag != "Floor" || collision.gameObject.tag != "TargetPlate")
             {
                 childRenderer.material = impactMaterial;
                 if (dct != null)
