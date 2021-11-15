@@ -7,13 +7,15 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 {
     public class DotToNavmeshPath : PlanarSteeringBehaviour
     {
-        [SerializeField] bool serializedTarget = false;
-        [SerializeField] private Vector3 TargetDestination;
-        [SerializeField] public int AreaMask = NavMesh.AllAreas;
-
         [Tooltip("Min distance Squared from each target location to move to the next corner in the path.")]
         [SerializeField] public float SqrWaypointRadius = 0.01f;
 
+        [Tooltip("Enable defining a custom target, useful for testing.")]
+        [SerializeField] bool serializedTarget = false;
+        [Tooltip("Custom target destination, will generate a navmesh path for this target.")]
+        [SerializeField] private Vector3 TargetDestination;
+        [Tooltip("Navmesh area mask, used to determine which navmesh areas we have avaliable.")]
+        [SerializeField] public int AreaMask = NavMesh.AllAreas;
 
         private bool hasPath = false;
         private NavMeshPath path;
@@ -28,7 +30,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
         }
 
         /// <summary>
-        /// Compute a path to the target destination on the navmesh
+        /// Attempt to compute a path to the target destination on the navmesh
         /// </summary>
         /// <param name="targetDestination"></param>
         /// <returns>True if either a complete or partial path is found</returns>
@@ -73,6 +75,9 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
 
         }
 
+        /// <summary>
+        /// Custom Debug view of path.
+        /// </summary>
 #if UNITY_EDITOR
         protected override void OnDrawGizmos()
         {
@@ -80,7 +85,7 @@ namespace Friedforfun.SteeringBehaviours.PlanarMovement
             if (hasPath && MapDebugger != null)
                 if (MapDebugger.ShowDebug)
                     for (int i = 0; i < path.corners.Length - 1; i++)
-                        Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+                        Debug.DrawLine(path.corners[i], path.corners[i + 1], MapDebugger.DebugColor);
 
         }
 #endif
