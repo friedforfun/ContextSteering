@@ -84,7 +84,7 @@ Inclued in this package are 4 Behaviour classes; **DotToTag, DotToTransform, Dot
 - *Invert scale* - Only applies when *Scale on distance* is enabled. Set to **true** to increase the importance of targets as they approach, **false** makes distant targets more important (and reduces their importance as they approach).
 
 
-### [Masks]
+### [Masks](https://github.com/friedforfun/ContextSteering/tree/master/Runtime/PlanarMovement/Masks)
 
 There are 3 Mask classes; **DotToTagMask, DotToTransformMask, and DotToLayerMask**. Masks are very similar to behaviours but instead of attracting or repulsing they block (or mask out) a direction entirely. They can be useful in conjunction with a scale on distance Repulse behaviours to create a lower band on distance to an object (like a wall). Masks do not guarentee that an agent will not move into something masked out, but they do reduce the probability.
 
