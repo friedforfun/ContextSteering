@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using Friedforfun.SteeringBehaviours.Core;
-using Friedforfun.SteeringBehaviours.Utilities;
-using Friedforfun.SteeringBehaviours.PlanarMovement;
+using Friedforfun.ContextSteering.Core;
+using Friedforfun.ContextSteering.Utilities;
+using Friedforfun.ContextSteering.PlanarMovement;
 using Unity.Collections;
 
-namespace Friedforfun.SteeringBehaviours.Tests
+namespace Friedforfun.ContextSteering.Tests
 {
 
     public class PlanarSteeringControllerTests

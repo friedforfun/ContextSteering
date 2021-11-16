@@ -1,7 +1,7 @@
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
+using Friedforfun.ContextSteering.Core;
 
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     public class DotToTransform : PlanarSteeringBehaviour
     {

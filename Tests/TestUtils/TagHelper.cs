@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace Friedforfun.SteeringBehaviours.Tests
+namespace Friedforfun.ContextSteering.Tests
 {
     public static class TagHelper
     {

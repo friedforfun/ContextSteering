@@ -1,5 +1,5 @@
 {
-    "name": "TestUtilities",
+    "name": "Friedforfun.ContextSteering.Tests.TestUtils",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

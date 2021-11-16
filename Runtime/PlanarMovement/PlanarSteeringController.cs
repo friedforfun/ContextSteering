@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
+using Friedforfun.ContextSteering.Core;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     public class PlanarSteeringController : CoreSteeringController
     {

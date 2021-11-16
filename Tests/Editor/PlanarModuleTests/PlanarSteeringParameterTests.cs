@@ -1,8 +1,8 @@
 using NUnit.Framework;
-using Friedforfun.SteeringBehaviours.PlanarMovement;
+using Friedforfun.ContextSteering.PlanarMovement;
 using System;
 
-namespace Friedforfun.SteeringBehaviours.Tests
+namespace Friedforfun.ContextSteering.Tests
 {
     public class PlanarSteeringParameterTests
     {

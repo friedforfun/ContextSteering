@@ -1,4 +1,4 @@
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     public enum DirectionSelectorTypes
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Core;
+using Friedforfun.ContextSteering.Utilities;
 
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     ///<Summary>
     /// This strategy picks a direction, that direction is limited by the maximum change in direction each time the method is called.

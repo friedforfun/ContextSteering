@@ -1,9 +1,6 @@
-
-using System.Collections.Generic;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Utilities;
 
-namespace Friedforfun.SteeringBehaviours.Core
+namespace Friedforfun.ContextSteering.Core
 {
     /// <summary>
     /// Core steering behaviour controller, all behaviours are managed by this component.

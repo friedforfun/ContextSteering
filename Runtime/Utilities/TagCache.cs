@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Linq;
 
 
-namespace Friedforfun.SteeringBehaviours.Utilities
+namespace Friedforfun.ContextSteering.Utilities
 {
     /// <summary>
     /// Singleton registry of gameobjects, use instead of FindObjectByTag, this also caches requested position Vectors each frame

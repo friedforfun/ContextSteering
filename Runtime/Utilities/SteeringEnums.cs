@@ -1,6 +1,6 @@
 
 
-namespace Friedforfun.SteeringBehaviours.Utilities
+namespace Friedforfun.ContextSteering.Utilities
 {
     public enum SteerDirection
     {

@@ -2,7 +2,7 @@ using System.Linq;
 using Unity.Collections;
 using UnityEngine;
 
-namespace Friedforfun.SteeringBehaviours.Utilities
+namespace Friedforfun.ContextSteering.Utilities
 {
     /// <summary>
     /// Convienience operations for context maps

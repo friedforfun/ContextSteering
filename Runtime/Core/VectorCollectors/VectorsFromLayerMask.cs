@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Friedforfun.SteeringBehaviours.Core
+namespace Friedforfun.ContextSteering.Core
 {
     public static class VectorsFromLayerMask 
     {

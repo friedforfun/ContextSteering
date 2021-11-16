@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Friedforfun.SteeringBehaviours.Core
+namespace Friedforfun.ContextSteering.Core
 {
     public abstract class CoreSteeringMask<T> : MonoBehaviour where T: CoreSteeringParameters
     {

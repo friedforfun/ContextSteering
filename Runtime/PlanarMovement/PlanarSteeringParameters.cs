@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Core;
+using Friedforfun.ContextSteering.Utilities;
 using System;
 
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     [System.Serializable]
     public class PlanarSteeringParameters: CoreSteeringParameters

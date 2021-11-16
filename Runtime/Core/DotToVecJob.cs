@@ -2,9 +2,9 @@ using Unity.Jobs;
 using Unity.Burst;
 using UnityEngine;
 using Unity.Collections;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Utilities;
 
-namespace Friedforfun.SteeringBehaviours.Core
+namespace Friedforfun.ContextSteering.Core
 {
 
     [BurstCompile]

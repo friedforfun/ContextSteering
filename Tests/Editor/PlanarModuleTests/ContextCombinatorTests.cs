@@ -1,10 +1,10 @@
 using NUnit.Framework;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
-using Friedforfun.SteeringBehaviours.PlanarMovement;
+using Friedforfun.ContextSteering.Core;
+using Friedforfun.ContextSteering.PlanarMovement;
 
 
-namespace Friedforfun.SteeringBehaviours.Tests
+namespace Friedforfun.ContextSteering.Tests
 {
     public class ContextCombinatorTests
     {

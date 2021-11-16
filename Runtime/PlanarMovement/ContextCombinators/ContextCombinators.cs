@@ -1,7 +1,7 @@
 using System.Linq;
-using Friedforfun.SteeringBehaviours.Core;
+using Friedforfun.ContextSteering.Core;
 
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     /// <summary>
     /// Masks out all directions with more than the least danger + a threshold

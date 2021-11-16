@@ -4,10 +4,10 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "ContextSteeringCore",
-        "ContextSteeringUtilities",
-        "ContextSteeringPlanarMovement",
-        "TestUtilities"
+        "Friedforfun.ContextSteering.Utilities",
+        "Friedforfun.ContextSteering.Core",
+        "Friedforfun.ContextSteering.PlanarMovement",
+        "Friedforfun.ContextSteering.Tests.TestUtils"
     ],
     "includePlatforms": [
         "Editor"

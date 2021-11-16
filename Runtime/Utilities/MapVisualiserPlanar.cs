@@ -3,7 +3,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace Friedforfun.SteeringBehaviours.Utilities
+namespace Friedforfun.ContextSteering.Utilities
 {
     [System.Serializable]
     public class PlanarMapVisualiserParameters

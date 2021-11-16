@@ -1,11 +1,11 @@
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Core;
+using Friedforfun.ContextSteering.Utilities;
 using Unity.Collections;
 using Unity.Jobs;
 using System;
 
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     public abstract class PlanarSteeringBehaviour : CoreSteeringBehaviour<PlanarSteeringParameters>
     {

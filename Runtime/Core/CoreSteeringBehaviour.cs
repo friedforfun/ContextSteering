@@ -1,10 +1,10 @@
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Utilities;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace Friedforfun.SteeringBehaviours.Core
+namespace Friedforfun.ContextSteering.Core
 {
     /// <summary>
     /// All steering behaviours should inherit from this base class. And implement either ICreateSteeringJob or IDefineSteering

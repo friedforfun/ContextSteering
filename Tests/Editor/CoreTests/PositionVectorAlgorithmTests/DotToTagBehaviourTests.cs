@@ -1,10 +1,10 @@
 using NUnit.Framework;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Utilities;
-using Friedforfun.SteeringBehaviours.PlanarMovement;
+using Friedforfun.ContextSteering.Utilities;
+using Friedforfun.ContextSteering.PlanarMovement;
 using System.Linq;
 
-namespace Friedforfun.SteeringBehaviours.Tests
+namespace Friedforfun.ContextSteering.Tests
 {
     public class DotToTagTests
     {

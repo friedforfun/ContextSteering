@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Utilities;
 
-namespace Friedforfun.SteeringBehaviours.Core
+namespace Friedforfun.ContextSteering.Core
 {
     public static class VectorsFromTagArray
     {

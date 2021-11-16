@@ -3,10 +3,10 @@ using System.Collections;
 using Unity.Jobs;
 using Unity.Burst;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
+using Friedforfun.ContextSteering.Core;
 using System;
 
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     public class SelfSchedulingPlanarController : PlanarSteeringController
     {

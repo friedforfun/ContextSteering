@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using Friedforfun.SteeringBehaviours.Core;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Core;
+using Friedforfun.ContextSteering.Utilities;
 using Unity.Collections;
 using Unity.Jobs;
 
-namespace Friedforfun.SteeringBehaviours.Tests
+namespace Friedforfun.ContextSteering.Tests
 {
     public class DotToVecJobTests
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Threading;
 
-namespace Friedforfun.SteeringBehaviours.Utilities
+namespace Friedforfun.ContextSteering.Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {

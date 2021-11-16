@@ -1,6 +1,6 @@
 using System;
 
-namespace Friedforfun.SteeringBehaviours.Tests
+namespace Friedforfun.ContextSteering.Tests
 {
     public static class TestUtilities
     {

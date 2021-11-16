@@ -1,8 +1,8 @@
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Core;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Core;
+using Friedforfun.ContextSteering.Utilities;
 
-namespace Friedforfun.SteeringBehaviours.PlanarMovement
+namespace Friedforfun.ContextSteering.PlanarMovement
 {
     ///<Summary>
     /// Most basic direction selection, pick the highest weighted direction.

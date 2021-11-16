@@ -1,4 +1,4 @@
-namespace Friedforfun.SteeringBehaviours.Core
+namespace Friedforfun.ContextSteering.Core
 {
     public interface ICalculateContextMap
     {
