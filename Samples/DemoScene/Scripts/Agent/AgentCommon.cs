@@ -65,6 +65,11 @@ namespace Friedforfun.SteeringBehaviours.Demo
 
         }
 
+        public void IncrementGoal()
+        {
+            dct.GoalAchieved();
+        }
+
         private void OnCollisionExit(Collision collision)
         {
             StartCoroutine(resetColour());

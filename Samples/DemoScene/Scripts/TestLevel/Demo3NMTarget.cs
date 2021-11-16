@@ -27,7 +27,7 @@ namespace Friedforfun.SteeringBehaviours.Demo
             IEnumerator buildPath(Demo3NavmeshBuilder dnmb)
             {
                 yield return new WaitForSeconds(0.1f);
-                dnmb.RecomputePath();
+                dnmb.HitGoal();
             }
 
         }

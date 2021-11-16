@@ -11,6 +11,7 @@ namespace Friedforfun.SteeringBehaviours.Demo
         [SerializeField] Transform Target;
 
         private DotToNavmeshPath behaviour;
+        private AgentCommon agentCommon;
 
         private float recomputePathThreshold = 2f;
         private Vector3 lastPosition;
@@ -18,12 +19,18 @@ namespace Friedforfun.SteeringBehaviours.Demo
         private void Start()
         {
             behaviour = GetComponent<DotToNavmeshPath>();
+            agentCommon = GetComponent<AgentCommon>();
             lastPosition = transform.position;
             RecomputePath();
             StartCoroutine(StuckCheck());
 
         }
 
+        public void HitGoal()
+        {
+            agentCommon.IncrementGoal();
+            RecomputePath();
+        }
 
         public void RecomputePath()
         {
