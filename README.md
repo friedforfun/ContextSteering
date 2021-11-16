@@ -3,6 +3,17 @@
 This is a Unity package to add context steering to a wide range of projects quickly and easily.  
 The inspiration for this project was due to a [Devlog](https://www.youtube.com/watch?v=6BrZryMz-ac) by [Game Endeavor](https://www.youtube.com/channel/UCLweX1UtQjRjj7rs_0XQ2Eg) and a subsequent read of the companion article [**Context Steering** Behavior-Driven Steering at the Macro Scale](http://www.gameaipro.com/GameAIPro2/GameAIPro2_Chapter18_Context_Steering_Behavior-Driven_Steering_at_the_Macro_Scale.pdf) by Andrew Fray.
 
+# Contents
+- [What is context steering?](#what-is-context-steering-)
+- [Getting Started](#getting-started)
+  * [Check out the Demo scene](#check-out-the-demo-scene)
+  * [Basic usage](#basic-usage)
+    + [Controllers](#controllers)
+    + [Behaviours](#behaviours)
+  * [Installation](#installation)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 # What is context steering?
 
 **It is not a replacement for pathfinding.** However it is relatively easy to use it in conjunction with a pathfinding system (like the Unity NavMesh).
