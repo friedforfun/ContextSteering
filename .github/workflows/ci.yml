@@ -6,17 +6,17 @@ on:
     branches:
     - master
 jobs:
-  split-upm:
-    name: split upm branch (force)
+  package-upm:
+    name: create upm branch (force)
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - name: split upm branch
+    - name: create upm branch
       run: |
         git branch -d upm &> /dev/null || echo upm branch not found
-        git subtree split -P "$PKG_ROOT" -b upm
+        git branch upm
         git checkout upm
         if [[ -d "Samples" ]]; then
           git mv Samples Samples~
@@ -26,5 +26,4 @@ jobs:
           git commit -am "fix: Samples => Samples~"
         fi
         git push -f -u origin upm
-      env:
-        PKG_ROOT: .
+
