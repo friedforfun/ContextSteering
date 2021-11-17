@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     public class DemoCollisionTracker : MonoBehaviour
     {

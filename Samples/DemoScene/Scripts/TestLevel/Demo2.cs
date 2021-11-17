@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     public class Demo2 : MonoBehaviour
     {

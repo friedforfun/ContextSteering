@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     public static class Shuffle<T>
     {

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Utilities;
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     /// <summary>
     /// Common functionality between demo agents, registering to tag cache, and handling collision indicators.

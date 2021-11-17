@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.PlanarMovement;
+using Friedforfun.ContextSteering.PlanarMovement;
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     public class Demo2TargetSelector : MonoBehaviour
     {

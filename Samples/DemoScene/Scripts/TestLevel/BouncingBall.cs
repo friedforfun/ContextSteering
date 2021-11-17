@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Utilities;
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     public class BouncingBall : MonoBehaviour
     {

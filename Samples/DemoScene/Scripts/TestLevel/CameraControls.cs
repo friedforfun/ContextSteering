@@ -2,57 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControls : MonoBehaviour
+namespace Friedforfun.ContextSteering.Demo
 {
-
-    [SerializeField]
-    private Transform[] DemoTransforms;
-
-    private Transform targetTransform;
-    private float transitionTime = 0f;
-    private Vector3 StartPosition;
-    private bool inputDiverted = true;
-
-
-    private void SelectDemoView(int numKeyPress)
+    public class CameraControls : MonoBehaviour
     {
-        inputDiverted = false;
-        transitionTime = 0f;
-        StartPosition = transform.position;
 
-        if (DemoTransforms == null)
-            return;
+        [SerializeField]
+        private Transform[] DemoTransforms;
 
-        if (numKeyPress > DemoTransforms.Length || numKeyPress == 0)
-            return;
+        private Transform targetTransform;
+        private float transitionTime = 0f;
+        private Vector3 StartPosition;
+        private bool inputDiverted = true;
 
-        targetTransform = DemoTransforms[numKeyPress - 1];
-    }
 
-    private void LerpToTarget()
-    {
-        transform.position = Vector3.Lerp(StartPosition, targetTransform.position, transitionTime);
-        transform.rotation = Quaternion.Euler(Vector3.Lerp(transform.rotation.eulerAngles, targetTransform.rotation.eulerAngles, transitionTime));
-    }
+        private void SelectDemoView(int numKeyPress)
+        {
+            inputDiverted = false;
+            transitionTime = 0f;
+            StartPosition = transform.position;
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Num1"))
-            SelectDemoView(1);
+            if (DemoTransforms == null)
+                return;
 
-        if (Input.GetButtonDown("Num2"))
-            SelectDemoView(2);
+            if (numKeyPress > DemoTransforms.Length || numKeyPress == 0)
+                return;
 
-        if (Input.GetButtonDown("Num3"))
-            SelectDemoView(3);
+            targetTransform = DemoTransforms[numKeyPress - 1];
+        }
 
-        if (Input.GetButtonDown("Num4"))
-            SelectDemoView(4);
+        private void LerpToTarget()
+        {
+            transform.position = Vector3.Lerp(StartPosition, targetTransform.position, transitionTime);
+            transform.rotation = Quaternion.Euler(Vector3.Lerp(transform.rotation.eulerAngles, targetTransform.rotation.eulerAngles, transitionTime));
+        }
 
-        transitionTime += Time.deltaTime;
+        private void Update()
+        {
+            if (Input.GetButtonDown("Num1"))
+                SelectDemoView(1);
 
-        if (!inputDiverted)
-            LerpToTarget();
+            if (Input.GetButtonDown("Num2"))
+                SelectDemoView(2);
+
+            if (Input.GetButtonDown("Num3"))
+                SelectDemoView(3);
+
+            if (Input.GetButtonDown("Num4"))
+                SelectDemoView(4);
+
+            transitionTime += Time.deltaTime;
+
+            if (!inputDiverted)
+                LerpToTarget();
+        }
+
     }
 
 }

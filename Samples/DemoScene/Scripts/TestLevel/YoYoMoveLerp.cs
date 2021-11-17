@@ -1,7 +1,7 @@
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.Utilities;
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     public class YoYoMoveLerp : MonoBehaviour
     {

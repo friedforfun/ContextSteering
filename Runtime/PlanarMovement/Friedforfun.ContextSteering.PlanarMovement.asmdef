@@ -2,8 +2,8 @@
     "name": "Friedforfun.ContextSteering.PlanarMovement",
     "rootNamespace": "",
     "references": [
-        "GUID:d9268e6b47d1caa44858ef6b8e1e65d4",
-        "GUID:4bbd63b5da912e746bd94e81d6a387f7"
+        "GUID:d528fcf732696a8429e19311f3f76e84",
+        "GUID:2935bc94a7f4a4a43809b6d09d3e785a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

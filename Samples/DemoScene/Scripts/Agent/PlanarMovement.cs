@@ -1,9 +1,9 @@
 using UnityEngine;
-using Friedforfun.SteeringBehaviours.PlanarMovement;
-using Friedforfun.SteeringBehaviours.Utilities;
+using Friedforfun.ContextSteering.PlanarMovement;
+using Friedforfun.ContextSteering.Utilities;
 using UnityEditor;
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     /// <summary>
     /// This demo movement script shows obtaining data from the PlanarSteeringController and using it to move, you will want to do something similar in your own project.

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Friedforfun.SteeringBehaviours.Demo
+namespace Friedforfun.ContextSteering.Demo
 {
     public class TargetPlate : MonoBehaviour
     {
