@@ -95,6 +95,7 @@ See [behaviour](#behaviours) Parameters
 ---
 
 ## Installation
+Either download the latest [Release](https://github.com/friedforfun/ContextSteering/releases) .zip file, or change to the UPM branch and hit the green `Code` button and select `Download ZIP`.  
 1. Open the Package Manager (under Window -> Package Manager).  
 
     ![OpenPackage](Documentation~/images/Installation/openpackagemanager.png)  
