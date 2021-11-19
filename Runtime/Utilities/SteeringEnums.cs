@@ -10,8 +10,8 @@ namespace Friedforfun.ContextSteering.Utilities
 
     public enum RotationAxis
     {
-        XAxis,
         YAxis,
-        ZAxis
+        ZAxis,
+        XAxis
     }
 }
