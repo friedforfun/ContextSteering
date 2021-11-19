@@ -92,7 +92,7 @@ namespace Friedforfun.ContextSteering.PlanarMovement
         private IEnumerator CycleWork()
         {
             yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.5f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 1f));
             for (; ; )
             {
                 yield return new WaitForSeconds(1f / TicksPerSecond);
