@@ -107,5 +107,7 @@ Either download the latest [Release](https://github.com/friedforfun/ContextSteer
 3. Browse to the directory this package is installed at and open the package.json file.  
 
     ![SelectPackageJSON](Documentation~/images/Installation/SelectPackageJson.png)
+    
+Alternatively you can add the package using the Git URL (`Code` -> `HTTPS`).
 
 ---
