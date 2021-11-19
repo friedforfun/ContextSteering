@@ -16,6 +16,8 @@ namespace Friedforfun.ContextSteering.Demo
         [SerializeField] private Material impactMaterial;
         [SerializeField] public string DemoID = null;
 
+        public bool debug = false;
+
         private Material baseMaterial;
         private bool blockCollision = true;
         private DemoCollisionTracker dct;
@@ -54,8 +56,10 @@ namespace Friedforfun.ContextSteering.Demo
             blockCollision = true;
             StartCoroutine(collisionDelay());
 
-            if (collision.gameObject.tag != "Floor" || collision.gameObject.tag != "TargetPlate")
+            if (collision.gameObject.tag != "Floor" && collision.gameObject.tag != "TargetPlate")
             {
+                if (debug)
+                    Debug.Log($"Collided with: {collision.gameObject.name}");
                 childRenderer.material = impactMaterial;
                 if (dct != null)
                 {

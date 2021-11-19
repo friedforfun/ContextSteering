@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &4167826211775367871
+--- !u!114 &1519962772563827997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,21 +9,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 4455944629104221842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c836227e6467894bb4c3c563cec5768, type: 3}
+  m_Script: {fileID: 11500000, guid: 73731eb5bbc9399419b409ef6e942456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformBehaviour: {fileID: 4167826211775367842}
+  mov: {fileID: 1736428673677255730}
+  target: {fileID: 0}
+--- !u!114 &2310025075245352103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455944629104221842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119b67ec9dae6634e8544c505471d455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 2
-  BehaviourName: Really avoid projectiles
+  BehaviourName: move away from walls
   Direction: 1
-  Weight: 3
+  Weight: 1
   ScaleOnDistance: 1
   InvertScale: 1
   MapDebugger:
     ShowDebug: 0
     MapSize: 2
-    DebugColor: {r: 0.74792814, g: 0, b: 1, a: 1}
-  Tags:
-  - Agent
+    DebugColor: {r: 1, g: 0, b: 0, a: 1}
+  Layers:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &4167826211775367842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455944629104221842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f48baaef76e5b24381713b3ddc6852f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 50
+  BehaviourName: Move to target
+  Direction: 0
+  Weight: 1
+  ScaleOnDistance: 0
+  InvertScale: 1
+  MapDebugger:
+    ShowDebug: 0
+    MapSize: 20
+    DebugColor: {r: 0, g: 1, b: 0.058775187, a: 1}
+  Positions: []
 --- !u!114 &4167826211775367868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,7 +111,7 @@ MonoBehaviour:
     DebugColor: {r: 1, g: 0.52576256, b: 0, a: 1}
   Tags:
   - Agent
---- !u!114 &4167826211775367842
+--- !u!114 &4167826211775367871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,60 +120,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4455944629104221842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f48baaef76e5b24381713b3ddc6852f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Range: 50
-  BehaviourName: Move to target
-  Direction: 0
-  Weight: 1
-  ScaleOnDistance: 0
-  InvertScale: 1
-  MapDebugger:
-    ShowDebug: 0
-    MapSize: 20
-    DebugColor: {r: 0, g: 1, b: 0.058775187, a: 1}
-  Positions: []
---- !u!114 &2310025075245352103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4455944629104221842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119b67ec9dae6634e8544c505471d455, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c836227e6467894bb4c3c563cec5768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 2
-  BehaviourName: move away from walls
+  BehaviourName: Really avoid projectiles
   Direction: 1
-  Weight: 1
+  Weight: 3
   ScaleOnDistance: 1
   InvertScale: 1
   MapDebugger:
     ShowDebug: 0
     MapSize: 2
-    DebugColor: {r: 1, g: 0, b: 0, a: 1}
-  Layers:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &1519962772563827997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4455944629104221842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73731eb5bbc9399419b409ef6e942456, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformBehaviour: {fileID: 4167826211775367842}
-  mov: {fileID: 1736428673677255730}
-  target: {fileID: 0}
+    DebugColor: {r: 0.74792814, g: 0, b: 1, a: 1}
+  Tags:
+  - Agent
 --- !u!1001 &67990776246877414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 1794831708527745236, guid: 4e2d7ebdc9a614743a33b3fdc63099dc, type: 3}
       propertyPath: LookTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794831708527745236, guid: 4e2d7ebdc9a614743a33b3fdc63099dc, type: 3}
+      propertyPath: ConfidenceThreshold
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2231537710821356322, guid: 4e2d7ebdc9a614743a33b3fdc63099dc, type: 3}
       propertyPath: MinDotPerTick
