@@ -15,6 +15,8 @@ namespace Friedforfun.ContextSteering.Demo
         private Vector3 StartPosition;
         private bool inputDiverted = true;
 
+        private string[] buttonBindings = { "Num1", "Num2", "Num3", "Num4" };
+
 
         private void SelectDemoView(int numKeyPress)
         {
@@ -39,22 +41,35 @@ namespace Friedforfun.ContextSteering.Demo
 
         private void Update()
         {
-            if (Input.GetButtonDown("Num1"))
-                SelectDemoView(1);
-
-            if (Input.GetButtonDown("Num2"))
-                SelectDemoView(2);
-
-            if (Input.GetButtonDown("Num3"))
-                SelectDemoView(3);
-
-            if (Input.GetButtonDown("Num4"))
-                SelectDemoView(4);
+            checkButtons();
 
             transitionTime += Time.deltaTime;
 
             if (!inputDiverted)
                 LerpToTarget();
+        }
+
+        private void checkButtons()
+        {
+            for (int i = 0; i < buttonBindings.Length; i++)
+            {
+                if (buttonExists(buttonBindings[i]))
+                    if (Input.GetButtonDown(buttonBindings[i]))
+                        SelectDemoView(i + 1);
+            }
+        }
+
+        private bool buttonExists(string name)
+        {
+            try
+            {
+                Input.GetButton(name);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }
