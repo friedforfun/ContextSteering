@@ -13617,7 +13617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnCount: 100
   spawnAreaSize: 18
-  minion: {fileID: 7049318326146342519, guid: 307edec64398265429d840bbfca85da9, type: 3}
+  minion: {fileID: 7049318326146342519, guid: 8213e3c4f963c1d4d84707c7a59fc94e, type: 3}
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 0
