@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2e152db2df6f8ad499f5552983472abc, type: 2}
+  - {fileID: 2100000, guid: 6a60565767806d1468ad86fefc926628, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4406560339523773041}
   - component: {fileID: 4406560339523773040}
   - component: {fileID: 1794831708527745236}
-  - component: {fileID: 1794831708527745234}
+  - component: {fileID: 2231537710821356322}
   m_Layer: 0
   m_Name: AgentBase
   m_TagString: Agent
@@ -175,11 +175,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4406560339523773044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddeadd4b3fe3c564ab1fe5a39f2d61c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c21ec5952a3be2468a8b583df287f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   childRenderer: {fileID: 4406560339306209754}
-  impactMaterial: {fileID: 2100000, guid: 86ac1dd2cad32a94abd8f797b3d8b417, type: 2}
+  impactMaterial: {fileID: 2100000, guid: f5ba81c53d3d3704687351d8167ac8e3, type: 2}
   DemoID: 
 --- !u!114 &1794831708527745236
 MonoBehaviour:
@@ -190,15 +190,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4406560339523773044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c18c16f204b2544a0c1ca576f163a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 37389edbee6fc8241b82e43e0db14646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steer: {fileID: 1794831708527745234}
+  steer: {fileID: 2231537710821356322}
   control: {fileID: 4406560339523773054}
   LookTarget: {fileID: 0}
   Speed: 8
   ConfidenceThreshold: 0.1
---- !u!114 &1794831708527745234
+--- !u!114 &2231537710821356322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,13 +207,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4406560339523773044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fd96ed6ea0d73046bd744ade075d328, type: 3}
+  m_Script: {fileID: 11500000, guid: c9630c82429b433439fb7d5e1707df0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   steeringParameters:
     _contextMapResolution: 45
-    ContextMapRotationAxis: 1
-    InitialVector: {x: 0, y: 0, z: 1}
+    ContextMapRotationAxis: 0
   TicksPerSecond: 10
   directionSelector: 0
   MinDotPerTick: 0.3

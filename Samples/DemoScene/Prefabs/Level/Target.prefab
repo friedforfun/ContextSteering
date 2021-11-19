@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5429121152966211893}
   - component: {fileID: 5429121152966211849}
   - component: {fileID: 5429121152966211848}
-  - component: {fileID: 5429121152966211851}
   - component: {fileID: 5429121152966211854}
   - component: {fileID: 4485555014026202761}
   m_Layer: 0
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9c75e3dbbe695b5499bb9f25a62b1695, type: 2}
+  - {fileID: 2100000, guid: fe042f94e0ff9e949839a4a757646918, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5429121152966211851
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5429121152966211892}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &5429121152966211854
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -119,7 +105,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5429121152966211892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a5659d8be563b4448aaae698cc46e52, type: 3}
+  m_Script: {fileID: 11500000, guid: 229c927285b6b554d8b7cd05e3076776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPoints: []
